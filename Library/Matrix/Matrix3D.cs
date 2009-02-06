@@ -52,7 +52,7 @@ namespace Library.Matrix
 		/// Sets the matrix to a scale matrix
 		/// </summary>
 		/// <param name="factors">Vector of scaling factors</param>
-		public virtual void ToScale(Vector3D factors)
+		public void ToScale(Vector3D factors)
 		{
 			Cell[0, 0] = factors.X; Cell[0, 1] = 0f;		Cell[0, 2] = 0f;	
 			Cell[1, 0] = 0f;		Cell[1, 1] = factors.Y; Cell[1, 2] = 0f;	
@@ -65,7 +65,7 @@ namespace Library.Matrix
 		/// <param name="x">X factor</param>
 		/// <param name="y">Y factor</param>
 		/// <param name="z">Z factor</param>
-		public virtual void ToScale(double x, double y, double z)
+		public void ToScale(double x, double y, double z)
 		{
 			Cell[0, 0] = x;  Cell[0, 1] = 0f; Cell[0, 2] = 0f;
 			Cell[1, 0] = 0f; Cell[1, 1] = y;  Cell[1, 2] = 0f;

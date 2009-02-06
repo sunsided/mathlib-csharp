@@ -55,7 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BasicMatrix.cs" />
+    <Compile Include="Matrix\BaseMatrix.cs" />
     <Compile Include="Matrix\Matrix3D.cs" />
     <Compile Include="InverseKinematics\Bone.cs" />
     <Compile Include="InverseKinematics\Chain.cs" />
