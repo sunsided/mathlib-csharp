@@ -7,7 +7,7 @@ namespace Library.Matrix
 	/// <summary>
 	/// 4-dimensional row-major matrix
 	/// </summary>
-	public sealed class Matrix4D : BasicMatrix
+	public sealed class Matrix4D : BaseMatrix
 	{
 		/// <summary>
 		/// Gets the unit matrix

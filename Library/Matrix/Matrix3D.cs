@@ -6,7 +6,7 @@ namespace Library.Matrix
 	/// <summary>
 	/// 3-dimensional row-major matrix
 	/// </summary>
-	public class Matrix3D : BasicMatrix
+	public sealed class Matrix3D : BaseMatrix
 	{
 		/// <summary>
 		/// Gets the unit matrix

@@ -1,9 +1,9 @@
-namespace Library
+namespace Library.Matrix
 {
 	/// <summary>
 	/// A matrix base class
 	/// </summary>
-	public abstract class BasicMatrix
+	public abstract class BaseMatrix
 	{
 		/// <summary>
 		/// The cell array
