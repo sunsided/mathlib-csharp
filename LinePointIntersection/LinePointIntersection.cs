@@ -48,7 +48,7 @@ namespace LinePointIntersection
 			const float width = 6f;
 			
 			// Create point bounds
-			RectangleF pointBounds = new RectangleF(point.X - 0.5f * width, point.Y - 0.5f * width, width, width);
+			RectangleF pointBounds = new RectangleF((float)point.X - 0.5f * width, (float)point.Y - 0.5f * width, width, width);
 
 			// Create Pen
 			Brush brush = new SolidBrush(color);
@@ -67,8 +67,8 @@ namespace LinePointIntersection
 			Pen pen = new Pen(color, width);
 
 			// Create Drawing.Points
-			PointF pt1 = new PointF(start.X, start.Y);
-			PointF pt2 = new PointF(end.X, end.Y);
+			PointF pt1 = new PointF((float)start.X, (float)start.Y);
+			PointF pt2 = new PointF((float)end.X, (float)end.Y);
 
 			// Draw point
 			graphics.DrawLine(pen, pt1, pt2);
@@ -80,8 +80,8 @@ namespace LinePointIntersection
 			Pen pen = new Pen(color, width);
 
 			// Create Drawing.Points
-			PointF pt1 = new PointF(line.Start.X, line.Start.Y);
-			PointF pt2 = new PointF(line.End.X, line.End.Y);
+			PointF pt1 = new PointF((float)line.Start.X, (float)line.Start.Y);
+			PointF pt2 = new PointF((float)line.End.X, (float)line.End.Y);
 
 			// Draw point
 			graphics.DrawLine(pen, pt1, pt2);
@@ -98,8 +98,8 @@ namespace LinePointIntersection
 
 			// Create Drawing.Points
 			Vector3D endPoint = line.Origin + line.Direction * lineSegment3D.Length();
-			PointF pt1 = new PointF(line.Origin.X, line.Origin.Y);
-			PointF pt2 = new PointF(endPoint.X, endPoint.Y);
+			PointF pt1 = new PointF((float)line.Origin.X, (float)line.Origin.Y);
+			PointF pt2 = new PointF((float)endPoint.X, (float)endPoint.Y);
 
 			// Draw point
 			graphics.DrawLine(pen, pt1, pt2);

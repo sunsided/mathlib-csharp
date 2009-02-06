@@ -50,7 +50,7 @@ namespace LineLineIntersection2D
             const float width = 6f;
 
             // Create point bounds
-            RectangleF pointBounds = new RectangleF(point.X - 0.5f * width, point.Y - 0.5f * width, width, width);
+			RectangleF pointBounds = new RectangleF((float)point.X - 0.5f * width, (float)point.Y - 0.5f * width, width, width);
 
             // Create Pen
             Brush brush = new SolidBrush(color);
@@ -69,8 +69,8 @@ namespace LineLineIntersection2D
             Pen pen = new Pen(color, width);
 
             // Create Drawing.Points
-            PointF p1 = new PointF(point1.X, point1.Y);
-            PointF p2 = new PointF(point2.X, point2.Y);
+			PointF p1 = new PointF((float)point1.X, (float)point1.Y);
+			PointF p2 = new PointF((float)point2.X, (float)point2.Y);
 
             // Draw point
             graphics.DrawLine(pen, p1, p2);
@@ -111,9 +111,9 @@ namespace LineLineIntersection2D
             Color aColor = Color.LightGreen;
             Color bColor = Color.LightGreen;
             Color cColor = Color.LightGreen;
-            if (SnapToZero(aSeg.GetDistance(ad)) != 0.0f) aColor = Color.Crimson;
-            if (SnapToZero(bSeg.GetDistance(bd)) != 0.0f) bColor = Color.Crimson;
-            if (SnapToZero(cSeg.GetDistance(cd)) != 0.0f) cColor = Color.Crimson;
+			if (SnapToZero((float)aSeg.GetDistance(ad)) != 0.0f) aColor = Color.Crimson;
+			if (SnapToZero((float)bSeg.GetDistance(bd)) != 0.0f) bColor = Color.Crimson;
+			if (SnapToZero((float)cSeg.GetDistance(cd)) != 0.0f) cColor = Color.Crimson;
             
             // Draw Control Points
             DrawPoint(ad, e.Graphics, aColor);

@@ -40,7 +40,7 @@ namespace InverseKinematics
 			const float width = 6f;
 
 			// Create point bounds
-			RectangleF pointBounds = new RectangleF(point.X - 0.5f * width, point.Y - 0.5f * width, width, width);
+			RectangleF pointBounds = new RectangleF((float)point.X - 0.5f * width, (float)point.Y - 0.5f * width, width, width);
 
 			// Create Pen
 			Brush brush = new SolidBrush(color);
@@ -59,8 +59,8 @@ namespace InverseKinematics
 			Pen pen = new Pen(color, width);
 
 			// Create Drawing.Points
-			PointF pt1 = new PointF(point1.X, point1.Y);
-			PointF pt2 = new PointF(point2.X, point2.Y);
+			PointF pt1 = new PointF((float)point1.X, (float)point1.Y);
+			PointF pt2 = new PointF((float)point2.X, (float)point2.Y);
 
 			// Draw point
 			graphics.DrawLine(pen, pt1, pt2);
@@ -72,8 +72,8 @@ namespace InverseKinematics
 			Pen pen = new Pen(color, width);
 
 			// Create Drawing.Points
-			PointF pt1 = new PointF(line.Start.X, line.Start.Y);
-			PointF pt2 = new PointF(line.End.X, line.End.Y);
+			PointF pt1 = new PointF((float)line.Start.X, (float)line.Start.Y);
+			PointF pt2 = new PointF((float)line.End.X, (float)line.End.Y);
 
 			// Draw point
 			graphics.DrawLine(pen, pt1, pt2);

@@ -33,7 +33,7 @@ namespace EllipseCircleIntersection
 		#region Points
 
 		protected Ellipse3D ellipse;
-		protected Sphere3D testSphere;
+		protected Sphere3D testSphere = new Sphere3D(Vector3D.Zero, 40.0D);
 
 		#endregion
 
@@ -42,7 +42,7 @@ namespace EllipseCircleIntersection
 		protected void DrawEllipse(Ellipse3D ellipse, Graphics graphics, Color color)
 		{
 			// Create point bounds
-			RectangleF pointBounds = new RectangleF(ellipse.Center.X - ellipse.Radius.X, ellipse.Center.Y - ellipse.Radius.Y, 2f * ellipse.Radius.X, 2f * ellipse.Radius.Y);
+			RectangleF pointBounds = new RectangleF((float)ellipse.Center.X - (float)ellipse.Radius.X, (float)ellipse.Center.Y - (float)ellipse.Radius.Y, 2f * (float)ellipse.Radius.X, 2f * (float)ellipse.Radius.Y);
 
 			// Create Pen
 			Brush brush = new SolidBrush(color);
@@ -58,7 +58,7 @@ namespace EllipseCircleIntersection
 		protected void DrawSphere(Sphere3D sphere, Graphics graphics, Color color)
 		{
 			// Create point bounds
-			RectangleF pointBounds = new RectangleF(sphere.Center.X - sphere.Radius, sphere.Center.Y - sphere.Radius, 2f * sphere.Radius, 2f * sphere.Radius);
+			RectangleF pointBounds = new RectangleF((float)sphere.Center.X - (float)sphere.Radius, (float)sphere.Center.Y - (float)sphere.Radius, 2f * (float)sphere.Radius, 2f * (float)sphere.Radius);
 
 			// Create Pen
 			Brush brush = new SolidBrush(color);

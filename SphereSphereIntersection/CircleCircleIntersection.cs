@@ -40,7 +40,7 @@ namespace CircleCircleIntersection
 		protected void DrawSphere(Sphere3D sphere, Graphics graphics, Color color)
 		{
 			// Create point bounds
-			RectangleF pointBounds = new RectangleF(sphere.Center.X - sphere.Radius, sphere.Center.Y - sphere.Radius, 2f * sphere.Radius, 2f * sphere.Radius);
+			RectangleF pointBounds = new RectangleF((float)(sphere.Center.X - sphere.Radius), (float)(sphere.Center.Y - sphere.Radius), (float)(2.0D * sphere.Radius), (float)(2.0D * sphere.Radius));
 
 			// Create Pen
 			Brush brush = new SolidBrush(color);
