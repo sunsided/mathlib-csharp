@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Text;
 using Library.Vector;
 
-namespace Library
+namespace Library.Lines
 {
 	/// <summary>
 	/// Structure for a 2D line segment
 	/// </summary>
-	public class LineSegment2D
+	public struct LineSegment2D
 	{
 		public Vector2D Start, End;
 

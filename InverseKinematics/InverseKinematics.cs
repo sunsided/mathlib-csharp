@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using Library;
 using Library.InverseKinematics;
+using Library.Lines;
 using Library.Vector;
 
 namespace InverseKinematics

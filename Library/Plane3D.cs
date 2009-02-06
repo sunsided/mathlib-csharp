@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Library.Lines;
 using Library.Vector;
 
 namespace Library
@@ -8,7 +9,7 @@ namespace Library
 	/// <summary>
 	/// Structure for a 3D plane
 	/// </summary>
-	public class Plane3D
+	public struct Plane3D
 	{
         public Vector3D Normal;
 		public double D;
@@ -22,7 +23,8 @@ namespace Library
         /// <param name="d">distance to origin</param>
         public Plane3D(double x, double y, double z, double d)
 		{
-            Normal.X = x; Normal.Y = y; Normal.Z = z; this.D = d;
+			Normal = new Vector3D(x, y, z);
+            D = d;
 		}
 
         /// <summary>

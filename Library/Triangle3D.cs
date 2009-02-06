@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Library.Lines;
 using Library.Vector;
 
 namespace Library
@@ -8,7 +9,7 @@ namespace Library
 	/// <summary>
 	/// Structure for a 3D triangle
 	/// </summary>
-	public class Triangle3D
+	public struct Triangle3D
 	{
         public Vector3D v0, v1, v2;
 
