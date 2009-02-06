@@ -1,3 +1,5 @@
+using Library.Vector;
+
 namespace Library.InverseKinematics
 {
 	public interface IJoint
@@ -5,47 +7,47 @@ namespace Library.InverseKinematics
 		/// <summary>
 		/// The joint's angle.
 		/// </summary>
-		float UpAngle { get; }
+		double UpAngle { get; }
 
 		/// <summary>
 		/// The joint's sidewards angle.
 		/// </summary>
-		float SideAngle { get; }
+		double SideAngle { get; }
 
 		/// <summary>
 		/// The joint's torque.
 		/// </summary>
-		float Torque { get; }
+		double Torque { get; }
 
 		/// <summary>
 		/// The joint's minimum angle.
 		/// </summary>
-		float UpAngleMin { get; set; }
+		double UpAngleMin { get; set; }
 
 		/// <summary>
 		/// The joint's maximum angle.
 		/// </summary>
-		float UpAngleMax { get; set; }
+		double UpAngleMax { get; set; }
 
 		/// <summary>
 		/// The joint's minimum side angle.
 		/// </summary>
-		float SideAngleMin { get; set; }
+		double SideAngleMin { get; set; }
 
 		/// <summary>
 		/// The joint's maximum side angle.
 		/// </summary>
-		float SideAngleMax { get; set; }
+		double SideAngleMax { get; set; }
 
 		/// <summary>
 		/// The joint's minimum torque.
 		/// </summary>
-		float TorqueMin { get; set; }
+		double TorqueMin { get; set; }
 
 		/// <summary>
 		/// The joint's maximum torque.
 		/// </summary>
-		float TorqueMax { get; set; }
+		double TorqueMax { get; set; }
 
 		/// <summary>
 		/// Rotates the joint
@@ -54,7 +56,7 @@ namespace Library.InverseKinematics
 		/// <param name="side">Angle around the joint's Y axis</param>
 		/// <param name="torque">Angle around the joint's Z axis</param>
 		/// <returns></returns>
-		void Rotate(float up, float side, float torque);
+		void Rotate(double up, double side, double torque);
 
 		/// <summary>
 		/// Gets the direction vector

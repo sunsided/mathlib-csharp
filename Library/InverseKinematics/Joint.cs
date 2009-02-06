@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Library.Vector;
 
 namespace Library.InverseKinematics
 {
@@ -21,7 +22,7 @@ namespace Library.InverseKinematics
 		/// <param name="sideMax">Maximum sidewards angle</param>
 		/// <param name="torqueMin">Minimum torque</param>
 		/// <param name="torqueMax">Maximum torque</param>
-		public Joint( float upMin, float upMax, float sideMin, float sideMax, float torqueMin, float torqueMax)
+		public Joint( double upMin, double upMax, double sideMin, double sideMax, double torqueMin, double torqueMax)
 		{
 			upAngleMin = upMin;
 			upAngleMax = upMax;
@@ -36,47 +37,47 @@ namespace Library.InverseKinematics
 		/// <summary>
 		/// The joint's angle.
 		/// </summary>
-		protected float upAngle;
+		protected double upAngle;
 
 		/// <summary>
 		/// The joint's minimum angle.
 		/// </summary>
-		protected float upAngleMin;
+		protected double upAngleMin;
 
 		/// <summary>
 		/// The joint's maximum angle.
 		/// </summary>
-		protected float upAngleMax;
+		protected double upAngleMax;
 		
 		/// <summary>
 		/// The joint's sidewards angle.
 		/// </summary>
-		protected float sideAngle;
+		protected double sideAngle;
 
 		/// <summary>
 		/// The joint's minimum side angle.
 		/// </summary>
-		protected float sideAngleMin;
+		protected double sideAngleMin;
 
 		/// <summary>
 		/// The joint's maximum side angle.
 		/// </summary>
-		protected float sideAngleMax;
+		protected double sideAngleMax;
 		
 		/// <summary>
 		/// The joint's torque.
 		/// </summary>
-		protected float torque;
+		protected double torque;
 
 		/// <summary>
 		/// The joint's minimum torque.
 		/// </summary>
-		protected float torqueMin;
+		protected double torqueMin;
 
 		/// <summary>
 		/// The joint's maximum torque.
 		/// </summary>
-		protected float torqueMax;
+		protected double torqueMax;
 
 		#endregion 
 		
@@ -85,7 +86,7 @@ namespace Library.InverseKinematics
 		/// <summary>
 		/// The joint's angle.
 		/// </summary>
-		public float UpAngle
+		public double UpAngle
 		{
 			get { return upAngle; }
 		}
@@ -93,7 +94,7 @@ namespace Library.InverseKinematics
 		/// <summary>
 		/// The joint's sidewards angle.
 		/// </summary>
-		public float SideAngle
+		public double SideAngle
 		{
 			get { return sideAngle; }
 		}
@@ -101,7 +102,7 @@ namespace Library.InverseKinematics
 		/// <summary>
 		/// The joint's torque.
 		/// </summary>
-		public float Torque
+		public double Torque
 		{
 			get { return torque; }
 		}
@@ -109,7 +110,7 @@ namespace Library.InverseKinematics
 		/// <summary>
 		/// The joint's minimum angle.
 		/// </summary>
-		public float UpAngleMin
+		public double UpAngleMin
 		{
 			get { return upAngleMin; }
 			set { upAngleMin = value; }
@@ -118,7 +119,7 @@ namespace Library.InverseKinematics
 		/// <summary>
 		/// The joint's maximum angle.
 		/// </summary>
-		public float UpAngleMax
+		public double UpAngleMax
 		{
 			get { return upAngleMax; }
 			set { upAngleMax = value; }
@@ -127,7 +128,7 @@ namespace Library.InverseKinematics
 		/// <summary>
 		/// The joint's minimum side angle.
 		/// </summary>
-		public float SideAngleMin
+		public double SideAngleMin
 		{
 			get { return sideAngleMin; }
 			set { sideAngleMin = value; }
@@ -136,7 +137,7 @@ namespace Library.InverseKinematics
 		/// <summary>
 		/// The joint's maximum side angle.
 		/// </summary>
-		public float SideAngleMax
+		public double SideAngleMax
 		{
 			get { return sideAngleMax; }
 			set { sideAngleMax = value; }
@@ -145,7 +146,7 @@ namespace Library.InverseKinematics
 		/// <summary>
 		/// The joint's minimum torque.
 		/// </summary>
-		public float TorqueMin
+		public double TorqueMin
 		{
 			get { return torqueMin; }
 			set { torqueMin = value; }
@@ -154,7 +155,7 @@ namespace Library.InverseKinematics
 		/// <summary>
 		/// The joint's maximum torque.
 		/// </summary>
-		public float TorqueMax
+		public double TorqueMax
 		{
 			get { return torqueMax; }
 			set { torqueMax = value; }
@@ -169,7 +170,7 @@ namespace Library.InverseKinematics
 		/// <param name="pitch">Angle around the joint's Y (side) axis</param>
 		/// <param name="roll">Angle around the joint's Z (torque) axis</param>
 		/// <returns></returns>
-		public void Rotate( float yaw, float pitch, float roll )
+		public void Rotate( double yaw, double pitch, double roll )
 		{
 			upAngle += yaw;
 			sideAngle += pitch;

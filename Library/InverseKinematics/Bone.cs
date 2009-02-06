@@ -1,5 +1,6 @@
 using System;
 using Library;
+using Library.Vector;
 
 namespace Library.InverseKinematics
 {
@@ -17,7 +18,7 @@ namespace Library.InverseKinematics
 		/// <param name="sideMax">Maximum sidewards angle</param>
 		/// <param name="torqueMin">Minimum torque</param>
 		/// <param name="torqueMax">Maximum torque</param>
-		public Bone( Vector3D origin, Vector3D direction, float length, float upMin, float upMax, float sideMin, float sideMax, float torqueMin, float torqueMax)
+		public Bone( Vector3D origin, Vector3D direction, double length, double upMin, double upMax, double sideMin, double sideMax, double torqueMin, double torqueMax)
 		{
 			joint = new Joint(upMin, upMax, sideMin, sideMax, torqueMin, torqueMax);
 			this.length = length;
@@ -31,9 +32,9 @@ namespace Library.InverseKinematics
 		/// <param name="origin">The bone's origin</param>
 		/// <param name="direction">The bone's direction</param>
 		/// <param name="length">The bone's length</param>
-		public Bone(Vector3D origin, Vector3D direction, float length)
+		public Bone(Vector3D origin, Vector3D direction, double length)
 		{
-			float angle = 0.5f * (float) Math.PI;
+			double angle = 0.5f * (double) Math.PI;
 			joint = new Joint(-angle, angle, -angle, angle, -angle, angle);
 			this.length = length;
 			this.origin = origin;
@@ -51,7 +52,7 @@ namespace Library.InverseKinematics
 		/// <param name="sideMax">Maximum sidewards angle</param>
 		/// <param name="torqueMin">Minimum torque</param>
 		/// <param name="torqueMax">Maximum torque</param>
-		public Bone(Vector3D origin, Vector3D endpoint, float upMin, float upMax, float sideMin, float sideMax, float torqueMin, float torqueMax)
+		public Bone(Vector3D origin, Vector3D endpoint, double upMin, double upMax, double sideMin, double sideMax, double torqueMin, double torqueMax)
 		{
 			joint = new Joint(upMin, upMax, sideMin, sideMax, torqueMin, torqueMax);
 			this.origin = origin;
@@ -68,7 +69,7 @@ namespace Library.InverseKinematics
 		/// <param name="endpoint">The bone's endpoint</param>
 		public Bone(Vector3D origin, Vector3D endpoint)
 		{
-			float angle = 0.5f * (float)Math.PI;
+			double angle = 0.5f * (double)Math.PI;
 			joint = new Joint(-angle, angle, -angle, angle, -angle, angle);
 			this.origin = origin;
 			base_direction = endpoint - origin;
@@ -102,7 +103,7 @@ namespace Library.InverseKinematics
 		/// <summary>
 		/// Gets the Endpoint
 		/// </summary>
-		protected float length;
+		protected double length;
 
 		#endregion
 
@@ -134,7 +135,7 @@ namespace Library.InverseKinematics
 		/// <summary>
 		/// The length of the bone
 		/// </summary>
-    	public float Length
+    	public double Length
     	{
     		get { return length; }
     		set { length = value; }
@@ -184,22 +185,22 @@ namespace Library.InverseKinematics
 
 		#region IJoint Members
 
-		public float UpAngle
+		public double UpAngle
 		{
 			get { return joint.UpAngle; }
 		}
 
-		public float SideAngle
+		public double SideAngle
 		{
 			get { return joint.SideAngle; }
 		}
 
-		public float Torque
+		public double Torque
 		{
 			get { return joint.Torque; }
 		}
 
-		public float UpAngleMin
+		public double UpAngleMin
 		{
 			get
 			{
@@ -211,7 +212,7 @@ namespace Library.InverseKinematics
 			}
 		}
 
-		public float UpAngleMax
+		public double UpAngleMax
 		{
 			get
 			{
@@ -223,7 +224,7 @@ namespace Library.InverseKinematics
 			}
 		}
 
-		public float SideAngleMin
+		public double SideAngleMin
 		{
 			get
 			{
@@ -235,7 +236,7 @@ namespace Library.InverseKinematics
 			}
 		}
 
-		public float SideAngleMax
+		public double SideAngleMax
 		{
 			get
 			{
@@ -247,7 +248,7 @@ namespace Library.InverseKinematics
 			}
 		}
 
-		public float TorqueMin
+		public double TorqueMin
 		{
 			get
 			{
@@ -259,7 +260,7 @@ namespace Library.InverseKinematics
 			}
 		}
 
-		public float TorqueMax
+		public double TorqueMax
 		{
 			get
 			{
@@ -278,7 +279,7 @@ namespace Library.InverseKinematics
 		/// <param name="side">Angle around the joint's Y axis</param>
 		/// <param name="torque">Angle around the joint's Z axis</param>
 		/// <returns></returns>
-		public void Rotate(float up, float side, float torque)
+		public void Rotate(double up, double side, double torque)
 		{
 			joint.Rotate(up, side, torque);
 			direction_cached = joint.GetDirectionVector(base_direction);

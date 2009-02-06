@@ -1,3 +1,5 @@
+using Library.Vector;
+
 namespace Library.InverseKinematics
 {
 	public interface IBone : IJoint
@@ -15,7 +17,7 @@ namespace Library.InverseKinematics
 		/// <summary>
 		/// The length of the bone
 		/// </summary>
-		float Length { get; set; }
+		double Length { get; set; }
 
 		/// <summary>
 		/// Gets the current direction of the bone

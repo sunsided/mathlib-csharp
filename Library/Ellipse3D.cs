@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Library.Matrix;
+using Library.Vector;
 
 namespace Library
 {
@@ -43,7 +45,7 @@ namespace Library
 			Vector3D newPoint = final * point;
 
 			// Get distance to center
-			float distance = newPoint.GetDistance(center);
+			double distance = newPoint.GetDistance(center);
 			// If the distance is smaller than the transformed radius, we are cutting the edge
 			if (distance <= 1f) return true;
 			return false;
@@ -57,7 +59,7 @@ namespace Library
 		//public bool Intersects(Line3D line)
 		//{
 		//    // Get distance to center
-		//    float distance = line.GetDistance(Center);
+		//    double distance = line.GetDistance(Center);
 		//    // If the distance is smaller than the radius, we are cutting the edge
 		//    if (distance <= Radius) return true;
 		//    return false;
@@ -71,7 +73,7 @@ namespace Library
 		//public bool Intersects(LineSegment3D line)
 		//{
 		//    // Get distance to center
-		//    float distance = line.GetDistance(Center);
+		//    double distance = line.GetDistance(Center);
 		//    // If the distance is smaller than the radius, we are cutting the edge
 		//    if (distance <= Radius) return true;
 		//    return false;
@@ -81,13 +83,13 @@ namespace Library
 		///// Returns the distance to the given sphere
 		///// </summary>
 		///// <param name="sphere">The sphere to test</param>
-		///// <returns>Float</returns>
-		//public float GetDistance(Sphere3D sphere)
+		///// <returns>double</returns>
+		//public double GetDistance(Sphere3D sphere)
 		//{
 		//    // Get difference vector
 		//    Vector3D difference = sphere.Center - this.Center;
 		//    // Get value
-		//    float distance = difference.Magnitude() - sphere.Radius - this.Radius;
+		//    double distance = difference.Magnitude() - sphere.Radius - this.Radius;
 		//    // Return distance
 		//    if (distance < 0f) return 0f;
 		//    return distance;

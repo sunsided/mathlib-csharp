@@ -1,4 +1,6 @@
 ﻿using System;
+using Library.Matrix;
+using Library.Vector;
 
 namespace Library
 {
@@ -24,21 +26,21 @@ namespace Library
 		/// <summary>
 		/// Returns the length of the line
 		/// </summary>
-		/// <returns>Float</returns>
-		public float Length()
+		/// <returns>double</returns>
+		public double Length()
 		{
-			return float.PositiveInfinity;
+			return double.PositiveInfinity;
 		}
 
 		/// <summary>
 		/// Gets the distance of a point to the line
 		/// </summary>
 		/// <param name="point">The point</param>
-		/// <returns>Float</returns>
-		public float GetDistance(Vector3D point)
+		/// <returns>double</returns>
+		public double GetDistance(Vector3D point)
 		{
 			Vector3D difference = point - Origin;
-			float d = difference.Dot(Direction);
+			double d = difference.Dot(Direction);
 			// projected point
 			Vector3D shadow = Origin + d * Direction;
 			// line from projected to point
@@ -55,7 +57,7 @@ namespace Library
 		public Vector3D Project(Vector3D point)
 		{
 			Vector3D difference = point - Origin;
-			float d = difference.Dot(Direction);
+			double d = difference.Dot(Direction);
 			return Origin + Direction * d;
 		}
 
@@ -66,7 +68,7 @@ namespace Library
 		/// </summary>
 		/// <param name="theta">The rotation angle in radians</param>
 		/// <returns>Rotated vector</returns>
-		public void RotateX(float theta)
+		public void RotateX(double theta)
 		{
 			this.Direction = Matrix4D.GetRotationX(theta) * this.Direction;
 		}
@@ -76,7 +78,7 @@ namespace Library
 		/// </summary>
 		/// <param name="theta">The rotation angle in radians</param>
 		/// <returns>Rotated vector</returns>
-		public void RotateY(float theta)
+		public void RotateY(double theta)
 		{
 			this.Direction = Matrix4D.GetRotationY(theta) * this.Direction;
 		}
@@ -86,7 +88,7 @@ namespace Library
 		/// </summary>
 		/// <param name="theta">The rotation angle in radians</param>
 		/// <returns>Rotated vector</returns>
-		public void RotateZ(float theta)
+		public void RotateZ(double theta)
 		{
 			this.Direction = Matrix4D.GetRotationY(theta) * this.Direction;
 		}
@@ -97,7 +99,7 @@ namespace Library
 		/// <param name="axis">Rotation axis</param>
 		/// <param name="theta">The rotation angle in radians</param>
 		/// <returns>Rotated vector</returns>
-		public void RotateAxisAngle(Vector3D axis, float theta)
+		public void RotateAxisAngle(Vector3D axis, double theta)
 		{
 			this.Direction = Matrix4D.GetRotationAxisAngle(axis, theta) * Direction;
 		}		

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Library.Vector;
 
 namespace Library
 {
@@ -27,8 +28,8 @@ namespace Library
 		/// <summary>
 		/// Calculates the area of the triangle
 		/// </summary>
-		/// <returns>Float</returns>
-		public float GetArea()
+		/// <returns>double</returns>
+		public double GetArea()
 		{
             // Calculate line segments
             LineSegment3D line1 = new LineSegment3D(v0, v1);
@@ -36,19 +37,19 @@ namespace Library
             LineSegment3D line3 = new LineSegment3D(v2, v0);
 
             // Calculate lengths
-            float l1sq = line1.Length(); l1sq *= l1sq;
-            float l2sq = line2.Length(); l2sq *= l2sq;
-            float l3sq = line3.Length(); l3sq *= l3sq;
+            double l1sq = line1.Length(); l1sq *= l1sq;
+            double l2sq = line2.Length(); l2sq *= l2sq;
+            double l3sq = line3.Length(); l3sq *= l3sq;
 
             // 16A² = (a²+b²+c²) - 2(a^4+b^4+c^4)
-            float area = l1sq + l2sq + l3sq;
+            double area = l1sq + l2sq + l3sq;
             l1sq *= l1sq;
             l2sq *= l2sq;
             l3sq *= l3sq;
             area -= 2 * (l1sq + l2sq + l3sq);
             area *= 0.0625f;
             
-            return (float)Math.Sqrt(area);
+            return (double)Math.Sqrt(area);
 		}
 
         /// <summary>
@@ -89,7 +90,7 @@ namespace Library
         /// <param name="value1">Value at point 1</param>
         /// <param name="value2">Value at point 2</param>
         /// <returns></returns>
-        public float Interpolate(Vector3D point, float value0, float value1, float value2)
+        public double Interpolate(Vector3D point, double value0, double value1, double value2)
         {
             LineSegment3D bottom = new LineSegment3D(v1, v2);
 
@@ -118,11 +119,11 @@ namespace Library
             Vector3D intersection = plane.GetIntersection(line);
 
             // Get scaling factor of intersection point on bottom line
-            float distance = bottom.Start.GetDistance(intersection);
-            float scale = distance / bottom.Length();
+            double distance = bottom.Start.GetDistance(intersection);
+            double scale = distance / bottom.Length();
 
             // interpolate colors on bottom line
-            float final = value1 + scale * (value2 - value1);
+            double final = value1 + scale * (value2 - value1);
 
             // Get scaling factor of intersection point on intersection line
             LineSegment3D intersectionLine = new LineSegment3D(top, intersection);
@@ -170,8 +171,8 @@ namespace Library
             Vector3D intersection = plane.GetIntersection(line);
 
             // Get scaling factor of intersection point on bottom line
-            float distance = bottom.Start.GetDistance(intersection);
-            float scale = distance / bottom.Length();
+            double distance = bottom.Start.GetDistance(intersection);
+            double scale = distance / bottom.Length();
 
             // interpolate colors on bottom line
             Vector3D final = value1 + scale * (value2 - value1);
@@ -222,8 +223,8 @@ namespace Library
             Vector3D intersection = plane.GetIntersection(line);
 
             // Get scaling factor of intersection point on bottom line
-            float distance = bottom.Start.GetDistance(intersection);
-            float scale = distance / bottom.Length();
+            double distance = bottom.Start.GetDistance(intersection);
+            double scale = distance / bottom.Length();
 
             // interpolate colors on bottom line
             Vector4D final = value1 + scale * (value2 - value1);

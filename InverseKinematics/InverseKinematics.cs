@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using Library;
 using Library.InverseKinematics;
+using Library.Vector;
 
 namespace InverseKinematics
 {

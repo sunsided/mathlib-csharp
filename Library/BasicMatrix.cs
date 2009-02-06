@@ -1,8 +1,14 @@
 namespace Library
 {
+	/// <summary>
+	/// A matrix base class
+	/// </summary>
 	public abstract class BasicMatrix
 	{
-		internal float[,] Cell;
+		/// <summary>
+		/// The cell array
+		/// </summary>
+		internal double[,] Cell;
 
 		/// <summary>
 		/// Sets the matrix to an identity matrix
@@ -13,6 +19,6 @@ namespace Library
 		/// Assigns matrix values
 		/// </summary>
 		/// <param name="value">Value to fill in</param>
-		public abstract void Fill(float value);
+		public abstract void Fill(double value);
 	}
 }

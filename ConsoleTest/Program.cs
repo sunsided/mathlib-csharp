@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Matrix4D=Library.Matrix.Matrix4D;
+using Vector4D=Library.Vector.Vector4D;
 
 namespace ConsoleTest
 {
@@ -8,12 +10,12 @@ namespace ConsoleTest
 	{
 		static void Main(string[] args)
 		{
-			Library.Matrix4D mat = new Library.Matrix4D();
-			Library.Vector4D vector = new Library.Vector4D(1f, 0f, 20f, 1f);
+			Matrix4D mat = new Matrix4D();
+			Vector4D vector = new Vector4D(1f, 0f, 20f, 1f);
 
 			mat.ToScale(0.25f, 1f, 1f);
 
-			Library.Vector4D nv = mat * vector;
+			Vector4D nv = mat * vector;
 
 			;
 		}

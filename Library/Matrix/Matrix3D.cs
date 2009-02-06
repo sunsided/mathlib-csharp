@@ -1,6 +1,7 @@
 ﻿using System;
+using Library.Vector;
 
-namespace Library
+namespace Library.Matrix
 {
 	/// <summary>
 	/// 3-dimensional row-major matrix
@@ -19,14 +20,14 @@ namespace Library
 
 		public Matrix3D()
 		{
-			Cell = new float[3, 3];
+			Cell = new double[3, 3];
 		}
 
 		public Matrix3D(
-			float M11, float M12, float M13,
-			float M21, float M22, float M23,
-			float M31, float M32, float M33)
-		: this()
+			double M11, double M12, double M13,
+			double M21, double M22, double M23,
+			double M31, double M32, double M33)
+			: this()
 		{
 			Cell[0, 0] = M11; Cell[0, 1] = M12; Cell[0, 2] = M13;
 			Cell[1, 0] = M21; Cell[1, 1] = M22; Cell[1, 2] = M23;
@@ -64,7 +65,7 @@ namespace Library
 		/// <param name="x">X factor</param>
 		/// <param name="y">Y factor</param>
 		/// <param name="z">Z factor</param>
-		public virtual void ToScale(float x, float y, float z)
+		public virtual void ToScale(double x, double y, double z)
 		{
 			Cell[0, 0] = x;  Cell[0, 1] = 0f; Cell[0, 2] = 0f;
 			Cell[1, 0] = 0f; Cell[1, 1] = y;  Cell[1, 2] = 0f;
@@ -93,55 +94,55 @@ namespace Library
 
 		#region Specific Fields
 
-		public float M11
+		public double M11
 		{
 			get { return Cell[0, 0]; }
 			set { Cell[0, 0] = value; }
 		}
 
-		public float M12
+		public double M12
 		{
 			get { return Cell[0, 1]; }
 			set { Cell[0, 1] = value; }
 		}
 
-		public float M13
+		public double M13
 		{
 			get { return Cell[0, 2]; }
 			set { Cell[0, 2] = value; }
 		}
 
-		public float M21
+		public double M21
 		{
 			get { return Cell[1, 0]; }
 			set { Cell[1, 0] = value; }
 		}
 
-		public float M22
+		public double M22
 		{
 			get { return Cell[1, 1]; }
 			set { Cell[1, 1] = value; }
 		}
 
-		public float M23
+		public double M23
 		{
 			get { return Cell[1, 2]; }
 			set { Cell[1, 2] = value; }
 		}
 
-		public float M31
+		public double M31
 		{
 			get { return Cell[2, 0]; }
 			set { Cell[2, 0] = value; }
 		}
 
-		public float M32
+		public double M32
 		{
 			get { return Cell[2, 1]; }
 			set { Cell[2, 1] = value; }
 		}
 
-		public float M33
+		public double M33
 		{
 			get { return Cell[2, 2]; }
 			set { Cell[2, 2] = value; }
@@ -209,9 +210,9 @@ namespace Library
 		/// <param name="M32">M32</param>
 		/// <param name="M33">M33</param>
 		public void Assign(
-			float M11, float M12, float M13,
-			float M21, float M22, float M23,
-			float M31, float M32, float M33)
+			double M11, double M12, double M13,
+			double M21, double M22, double M23,
+			double M31, double M32, double M33)
 		{
 			Cell[0, 0] = M11; Cell[0, 1] = M12; Cell[0, 2] = M13;
 			Cell[1, 0] = M21; Cell[1, 1] = M22; Cell[1, 2] = M23;
@@ -222,7 +223,7 @@ namespace Library
 		/// Assigns matrix values
 		/// </summary>
 		/// <param name="value">Value to fill in</param>
-		public override void Fill(float value)
+		public override void Fill(double value)
 		{
 			M11 = value; M12 = value; M13 = value;
 			M21 = value; M22 = value; M23 = value;
@@ -238,10 +239,10 @@ namespace Library
 		/// A 3D rotation matrix for X-axis rotation
 		/// </summary>
 		/// <example>
-		public static Matrix3D GetRotationX(float theta)
+		public static Matrix3D GetRotationX(double theta)
 		{
-			float cos = (float)Math.Cos(theta);
-			float sin = (float)Math.Sin(theta);			
+			double cos = (double)Math.Cos(theta);
+			double sin = (double)Math.Sin(theta);			
 			return new Matrix3D(
 				1.0f, 0.0f, 0.0f,
 				0.0f, cos, sin,
@@ -251,10 +252,10 @@ namespace Library
 		/// <summary>
 		/// A 3D rotation matrix for Y-axis rotation
 		/// </summary>
-		public static Matrix3D GetRotationY(float theta)
+		public static Matrix3D GetRotationY(double theta)
 		{
-			float cos = (float)Math.Cos(theta);
-			float sin = (float)Math.Sin(theta);
+			double cos = (double)Math.Cos(theta);
+			double sin = (double)Math.Sin(theta);
 			return new Matrix3D(
 				cos, 0.0f, -sin,
 				0.0f, 1.0f, 0.0f,
@@ -264,10 +265,10 @@ namespace Library
 		/// <summary>
 		/// A 3D rotation matrix for Y-axis rotation
 		/// </summary>
-		public static Matrix3D GetRotationZ(float theta)
+		public static Matrix3D GetRotationZ(double theta)
 		{
-			float cos = (float)Math.Cos(theta);
-			float sin = (float)Math.Sin(theta);
+			double cos = (double)Math.Cos(theta);
+			double sin = (double)Math.Sin(theta);
 			return new Matrix3D(
 				cos, sin, 0.0f,
 				-sin, cos, 0.0f,
@@ -277,25 +278,25 @@ namespace Library
 		/// <summary>
 		/// A 3D rotation matrix for axis-angle rotation
 		/// </summary>
-		public static Matrix3D GetRotationAxisAngle(Vector3D axis, float theta)
+		public static Matrix3D GetRotationAxisAngle(Vector3D axis, double theta)
 		{
-			float cos = (float)Math.Cos(theta);
-			float sin = (float)Math.Sin(theta);
+			double cos = (double)Math.Cos(theta);
+			double sin = (double)Math.Sin(theta);
 			
 			// pre-calculate squared
-			float xx = axis.X * axis.X;
-			float yy = axis.Y * axis.Y;
-			float zz = axis.Z * axis.Z;
+			double xx = axis.X * axis.X;
+			double yy = axis.Y * axis.Y;
+			double zz = axis.Z * axis.Z;
 			// pre-calculate axis combinations
-			float xy = axis.X * axis.Y;
-			float xz = axis.X * axis.Z;
-			float yz = axis.Y * axis.Z;
+			double xy = axis.X * axis.Y;
+			double xz = axis.X * axis.Z;
+			double yz = axis.Y * axis.Z;
 			// pre-calculate axes and angle functions
-			float xsin = axis.X * sin;
-			float ysin = axis.Y * sin;
-			float zsin = axis.Z * sin;
-			float xcos = axis.X * cos;
-			float ycos = axis.Y * cos;
+			double xsin = axis.X * sin;
+			double ysin = axis.Y * sin;
+			double zsin = axis.Z * sin;
+			double xcos = axis.X * cos;
+			double ycos = axis.Y * cos;
 
 			/*
 			return new Matrix3D(
@@ -314,7 +315,7 @@ namespace Library
 		/// <summary>
 		/// Gets a progressive rotation matrix based on angular speed
 		/// </summary>
-		public static Matrix3D GetProgressiveRotation(float deltaX, float deltaY, float deltaZ)
+		public static Matrix3D GetProgressiveRotation(double deltaX, double deltaY, double deltaZ)
 		{
 			return new Matrix3D(
 				0.0f, -deltaZ, deltaY,
@@ -332,7 +333,7 @@ namespace Library
 		/// <param name="i">The column from which to subtract</param>
 		/// <param name="j">The column to subtract</param>
 		/// <param name="s">The scaling factor of column j</param>
-		private static void colsub(Matrix3D m, int i, int j, float s)
+		private static void colsub(Matrix3D m, int i, int j, double s)
 		{
 			m.Cell[0, i] = m.Cell[0, i] - (s * m.Cell[0, j]);
 			m.Cell[1, i] = m.Cell[1, i] - (s * m.Cell[1, j]);

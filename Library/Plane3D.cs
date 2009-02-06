@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Library.Vector;
 
 namespace Library
 {
@@ -10,7 +11,7 @@ namespace Library
 	public class Plane3D
 	{
         public Vector3D Normal;
-		public float D;
+		public double D;
 
 		/// <summary>
 		/// Creates a plane with the given components
@@ -19,7 +20,7 @@ namespace Library
         /// <param name="y">normal y component</param>
         /// <param name="z">normal z component</param>
         /// <param name="d">distance to origin</param>
-        public Plane3D(float x, float y, float z, float d)
+        public Plane3D(double x, double y, double z, double d)
 		{
             Normal.X = x; Normal.Y = y; Normal.Z = z; this.D = d;
 		}
@@ -29,7 +30,7 @@ namespace Library
         /// </summary>
         /// <param name="normal">the normal vector of the plane</param>
         /// <param name="d">distance to origin</param>
-        public Plane3D(Vector3D normal, float d)
+        public Plane3D(Vector3D normal, double d)
         {
             Normal = normal; this.D = d;
         }
@@ -62,8 +63,8 @@ namespace Library
 		/// Returns the distance to b
 		/// </summary>
 		/// <param name="b">The vector to check</param>
-		/// <returns>Float</returns>
-		public float GetDistance(Vector3D b)
+		/// <returns>double</returns>
+		public double GetDistance(Vector3D b)
 		{
 			return D;
 		}
@@ -75,7 +76,7 @@ namespace Library
         /// <returns>Plane3D.PointLocation</returns>
         public PointLocation TestPoint( Vector3D point )
         {
-            float dp = point.Dot(Normal) + D;
+            double dp = point.Dot(Normal) + D;
             if (dp > 0.0005f) return PointLocation.Front;
             if (dp < -0.0005f) return PointLocation.Back;
             return PointLocation.Coplanar;
@@ -88,9 +89,9 @@ namespace Library
         /// <returns>Intersection point</returns>
         public Vector3D GetIntersection(LineSegment3D line)
         {
-            float aDot = line.Start.Dot(Normal);
-            float bDot = line.End.Dot(Normal);
-            float scale = (-D - aDot) / (bDot - aDot);
+            double aDot = line.Start.Dot(Normal);
+            double bDot = line.End.Dot(Normal);
+            double scale = (-D - aDot) / (bDot - aDot);
             return line.Start + scale * (line.End - line.Start);
         }
 
@@ -101,9 +102,9 @@ namespace Library
         /// <returns>Intersection point</returns>
         public Vector3D GetIntersection(Line3D line)
         {
-            float aDot = Normal.Dot(line.Origin) + D;
-            float bDot = Normal.Dot(line.Direction);
-            float scale = -aDot / bDot;
+            double aDot = Normal.Dot(line.Origin) + D;
+            double bDot = Normal.Dot(line.Direction);
+            double scale = -aDot / bDot;
             return line.Origin + scale * line.Direction;
         }
 

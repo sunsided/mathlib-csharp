@@ -1,11 +1,13 @@
 ﻿using System;
+using Library.Matrix;
+using Library.Vector;
 
-namespace Library
+namespace Library.Matrix
 {
 	/// <summary>
 	/// 4-dimensional row-major matrix
 	/// </summary>
-	public class Matrix4D : BasicMatrix
+	public sealed class Matrix4D : BasicMatrix
 	{
 		/// <summary>
 		/// Gets the unit matrix
@@ -18,17 +20,23 @@ namespace Library
 
 		#region Konstruktor
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="Matrix4D"/> class.
+		/// </summary>
 		public Matrix4D()
 		{
-			Cell = new float[4, 4];
+			Cell = new double[4, 4];
 		}
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="Matrix4D"/> class.
+		/// </summary>
 		public Matrix4D(
-			float M11, float M12, float M13, float M14,
-			float M21, float M22, float M23, float M24,
-			float M31, float M32, float M33, float M34,
-			float M41, float M42, float M43, float M44)
-		: this()
+			double M11, double M12, double M13, double M14,
+			double M21, double M22, double M23, double M24,
+			double M31, double M32, double M33, double M34,
+			double M41, double M42, double M43, double M44)
+			: this()
 		{
 			Cell[0, 0] = M11; Cell[0, 1] = M12; Cell[0, 2] = M13; Cell[0, 3] = M14;
 			Cell[1, 0] = M21; Cell[1, 1] = M22; Cell[1, 2] = M23; Cell[1, 3] = M24;
@@ -72,7 +80,7 @@ namespace Library
 		/// <param name="x">X component</param>
 		/// <param name="y">Y component</param>
 		/// <param name="z">Z component</param>
-		public void ToTranslation(float x, float y, float z)
+		public void ToTranslation(double x, double y, double z)
 		{
 			Cell[0, 0] = 1f; Cell[0, 1] = 0f; Cell[0, 2] = 0f; Cell[0, 3] = 0f;
 			Cell[1, 0] = 0f; Cell[1, 1] = 1f; Cell[1, 2] = 0f; Cell[1, 3] = 0f;
@@ -98,7 +106,7 @@ namespace Library
 		/// <param name="x">X factor</param>
 		/// <param name="y">Y factor</param>
 		/// <param name="z">Z factor</param>
-		public void ToScale(float x, float y, float z)
+		public void ToScale(double x, double y, double z)
 		{
 			Cell[0, 0] = x;  Cell[0, 1] = 0f; Cell[0, 2] = 0f; Cell[0, 3] = 0f;
 			Cell[1, 0] = 0f; Cell[1, 1] = y;  Cell[1, 2] = 0f; Cell[1, 3] = 0f;
@@ -143,97 +151,97 @@ namespace Library
 
 		#region Specific Fields
 
-		public float M11
+		public double M11
 		{
 			get { return Cell[0, 0]; }
 			set { Cell[0, 0] = value; }
 		}
 
-		public float M12
+		public double M12
 		{
 			get { return Cell[0, 1]; }
 			set { Cell[0, 1] = value; }
 		}
 
-		public float M13
+		public double M13
 		{
 			get { return Cell[0, 2]; }
 			set { Cell[0, 2] = value; }
 		}
 
-		public float M14
+		public double M14
 		{
 			get { return Cell[0, 3]; }
 			set { Cell[0, 3] = value; }
 		}
 
-		public float M21
+		public double M21
 		{
 			get { return Cell[1, 0]; }
 			set { Cell[1, 0] = value; }
 		}
 
-		public float M22
+		public double M22
 		{
 			get { return Cell[1, 1]; }
 			set { Cell[1, 1] = value; }
 		}
 
-		public float M23
+		public double M23
 		{
 			get { return Cell[1, 2]; }
 			set { Cell[1, 2] = value; }
 		}
 
-		public float M24
+		public double M24
 		{
 			get { return Cell[1, 3]; }
 			set { Cell[1, 3] = value; }
 		}
 
-		public float M31
+		public double M31
 		{
 			get { return Cell[2, 0]; }
 			set { Cell[2, 0] = value; }
 		}
 
-		public float M32
+		public double M32
 		{
 			get { return Cell[2, 1]; }
 			set { Cell[2, 1] = value; }
 		}
 
-		public float M33
+		public double M33
 		{
 			get { return Cell[2, 2]; }
 			set { Cell[2, 2] = value; }
 		}
 
-		public float M34
+		public double M34
 		{
 			get { return Cell[2, 3]; }
 			set { Cell[2, 3] = value; }
 		}
 
-		public float M41
+		public double M41
 		{
 			get { return Cell[3, 0]; }
 			set { Cell[3, 0] = value; }
 		}
 
-		public float M42
+		public double M42
 		{
 			get { return Cell[3, 1]; }
 			set { Cell[3, 1] = value; }
 		}
 
-		public float M43
+		public double M43
 		{
 			get { return Cell[3, 2]; }
 			set { Cell[3, 2] = value; }
 		}
 
-		public float M44
+		public double M44
 		{
 			get { return Cell[3, 3]; }
 			set { Cell[3, 3] = value; }
@@ -355,10 +363,10 @@ namespace Library
 		/// <param name="M43">M43</param>
 		/// <param name="M44">M44</param>
 		public void Assign(
-			float M11, float M12, float M13, float M14,
-			float M21, float M22, float M23, float M24,
-			float M31, float M32, float M33, float M34,
-			float M41, float M42, float M43, float M44)
+			double M11, double M12, double M13, double M14,
+			double M21, double M22, double M23, double M24,
+			double M31, double M32, double M33, double M34,
+			double M41, double M42, double M43, double M44)
 		{
 			Cell[0, 0] = M11; Cell[0, 1] = M12; Cell[0, 2] = M13; Cell[0, 3] = M14;
 			Cell[1, 0] = M21; Cell[1, 1] = M22; Cell[1, 2] = M23; Cell[1, 3] = M24;
@@ -370,7 +378,7 @@ namespace Library
 		/// Assigns matrix values
 		/// </summary>
 		/// <param name="value">Value to fill in</param>
-		public override void Fill(float value)
+		public override void Fill(double value)
 		{
 			M11 = value; M12 = value; M13 = value; M14 = value;
 			M21 = value; M22 = value; M23 = value; M24 = value;
@@ -387,10 +395,10 @@ namespace Library
 		/// A 3D rotation matrix for X-axis rotation
 		/// </summary>
 		/// <example>
-		public static Matrix4D GetRotationX(float theta)
+		public static Matrix4D GetRotationX(double theta)
 		{
-			float cos = (float)Math.Cos(theta);
-			float sin = (float)Math.Sin(theta);			
+			double cos = (double)Math.Cos(theta);
+			double sin = (double)Math.Sin(theta);			
 			return new Matrix4D(
 				1.0f, 0.0f, 0.0f, 0.0f,
 				0.0f, cos, sin, 0.0f,
@@ -401,10 +409,10 @@ namespace Library
 		/// <summary>
 		/// A 3D rotation matrix for Y-axis rotation
 		/// </summary>
-		public static Matrix4D GetRotationY(float theta)
+		public static Matrix4D GetRotationY(double theta)
 		{
-			float cos = (float)Math.Cos(theta);
-			float sin = (float)Math.Sin(theta);
+			double cos = (double)Math.Cos(theta);
+			double sin = (double)Math.Sin(theta);
 			return new Matrix4D(
 				cos, 0.0f, -sin, 0.0f,
 				0.0f, 1.0f, 0.0f, 0.0f,
@@ -415,10 +423,10 @@ namespace Library
 		/// <summary>
 		/// A 3D rotation matrix for Y-axis rotation
 		/// </summary>
-		public static Matrix4D GetRotationZ(float theta)
+		public static Matrix4D GetRotationZ(double theta)
 		{
-			float cos = (float)Math.Cos(theta);
-			float sin = (float)Math.Sin(theta);
+			double cos = (double)Math.Cos(theta);
+			double sin = (double)Math.Sin(theta);
 			return new Matrix4D(
 				cos, sin, 0.0f, 0.0f,
 				-sin, cos, 0.0f, 0.0f,
@@ -429,25 +437,25 @@ namespace Library
 		/// <summary>
 		/// A 3D rotation matrix for axis-angle rotation
 		/// </summary>
-		public static Matrix4D GetRotationAxisAngle(Vector3D axis, float theta)
+		public static Matrix4D GetRotationAxisAngle(Vector3D axis, double theta)
 		{
-			float cos = (float)Math.Cos(theta);
-			float sin = (float)Math.Sin(theta);
+			double cos = (double)Math.Cos(theta);
+			double sin = (double)Math.Sin(theta);
 			
 			// pre-calculate squared
-			float xx = axis.X * axis.X;
-			float yy = axis.Y * axis.Y;
-			float zz = axis.Z * axis.Z;
+			double xx = axis.X * axis.X;
+			double yy = axis.Y * axis.Y;
+			double zz = axis.Z * axis.Z;
 			// pre-calculate axis combinations
-			float xy = axis.X * axis.Y;
-			float xz = axis.X * axis.Z;
-			float yz = axis.Y * axis.Z;
+			double xy = axis.X * axis.Y;
+			double xz = axis.X * axis.Z;
+			double yz = axis.Y * axis.Z;
 			// pre-calculate axes and angle functions
-			float xsin = axis.X * sin;
-			float ysin = axis.Y * sin;
-			float zsin = axis.Z * sin;
-			float xcos = axis.X * cos;
-			float ycos = axis.Y * cos;
+			double xsin = axis.X * sin;
+			double ysin = axis.Y * sin;
+			double zsin = axis.Z * sin;
+			double xcos = axis.X * cos;
+			double ycos = axis.Y * cos;
 
 			/*
 			return new Matrix4D(
@@ -467,7 +475,7 @@ namespace Library
 		/// <summary>
 		/// Gets a progressive rotation matrix based on angular speed
 		/// </summary>
-		public static Matrix4D GetProgressiveRotation(float deltaX, float deltaY, float deltaZ)
+		public static Matrix4D GetProgressiveRotation(double deltaX, double deltaY, double deltaZ)
 		{
 			return new Matrix4D(
 				0.0f, -deltaZ, deltaY, 0.0f,
@@ -486,7 +494,7 @@ namespace Library
 		/// <param name="i">The column from which to subtract</param>
 		/// <param name="j">The column to subtract</param>
 		/// <param name="s">The scaling factor of column j</param>
-		private static void colsub(Matrix4D m, int i, int j, float s)
+		private static void colsub(Matrix4D m, int i, int j, double s)
 		{
 			m.Cell[0, i] = m.Cell[0, i] - (s * m.Cell[0, j]);
 			m.Cell[1, i] = m.Cell[1, i] - (s * m.Cell[1, j]);

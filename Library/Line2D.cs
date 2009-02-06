@@ -1,4 +1,5 @@
 ﻿using System;
+using Library.Vector;
 
 namespace Library
 {
@@ -24,21 +25,21 @@ namespace Library
 		/// <summary>
 		/// Returns the length of the line
 		/// </summary>
-		/// <returns>Float</returns>
-		public float Length()
+		/// <returns>double</returns>
+		public double Length()
 		{
-			return float.PositiveInfinity;
+			return double.PositiveInfinity;
 		}
 
 		/// <summary>
 		/// Gets the distance of a point to the line
 		/// </summary>
 		/// <param name="point">The point</param>
-		/// <returns>Float</returns>
-		public float GetDistance(Vector2D point)
+		/// <returns>double</returns>
+		public double GetDistance(Vector2D point)
 		{
 			Vector2D difference = point - Origin;
-			float d = difference.Dot(Direction);
+			double d = difference.Dot(Direction);
 			// projected point
 			Vector2D shadow = Origin + d * Direction;
 			// line from projected to point
@@ -55,7 +56,7 @@ namespace Library
 		public Vector2D Project(Vector2D point)
 		{
 			Vector2D difference = point - Origin;
-			float d = difference.Dot(Direction);
+			double d = difference.Dot(Direction);
 			return Origin + Direction * d;
 		}
 	    
@@ -68,22 +69,22 @@ namespace Library
 	    public Vector2D GetIntersection(Line2D b)
 	    {
 	        // Get slopes
-            float slopeA = this.GetSlope();
-            float slopeB = b.GetSlope();
+            double slopeA = this.GetSlope();
+            double slopeB = b.GetSlope();
 
 	        // Pre-check condition
 	        // This handles every case in which both slopes are equal,
-	        // including the Single.PositiveInfinity extreme
+	        // including the Double.PositiveInfinity extreme
             if (slopeA == slopeB) return Vector2D.Invalid;
 	        
 	        // Get Y-intercept
-	        float interceptA = this.GetYIntercept();
-	        float interceptB = b.GetYIntercept();
+	        double interceptA = this.GetYIntercept();
+	        double interceptB = b.GetYIntercept();
 
 
             // Prepare checks
-            bool c1 = (slopeA == Single.PositiveInfinity);
-            bool c2 = (slopeB == Single.PositiveInfinity);	        
+            bool c1 = (slopeA == Double.PositiveInfinity);
+            bool c2 = (slopeB == Double.PositiveInfinity);	        
 	        
 	        // Since a line can be expressed as
 	        // f(x) = y := a*x+b
@@ -99,7 +100,7 @@ namespace Library
 	        // and
             //     y = a1 * x + b1  =  a2 * x + b2
 
-            float x = 0.0f, y = 0.0f;
+            double x = 0.0f, y = 0.0f;
 
             if (!(c1 || c2))
             {
@@ -136,20 +137,20 @@ namespace Library
         /// <summary>
         /// Returns the slope of the line
         /// </summary>
-        /// <returns>Slope or Single.PositiveInfinity if the Line is vertical</returns>
-        public float GetSlope()
+        /// <returns>Slope or Double.PositiveInfinity if the Line is vertical</returns>
+        public double GetSlope()
         {
-            if (Direction.X == 0.0f) return Single.PositiveInfinity;
+            if (Direction.X == 0.0f) return Double.PositiveInfinity;
             return Direction.Y / Direction.X;
         }
 
         /// <summary>
         /// Returns the Y-intercept of the line
         /// </summary>
-        /// <returns>Y-intercept or Single.PositiveInfinity if the Line is vertical</returns>	    
-	    public float GetYIntercept()
+        /// <returns>Y-intercept or Double.PositiveInfinity if the Line is vertical</returns>	    
+	    public double GetYIntercept()
 	    {
-            if (Direction.X == 0.0f) return Single.PositiveInfinity;
+            if (Direction.X == 0.0f) return Double.PositiveInfinity;
             
             // Since the line can be described as
             // y := a*x + b

@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Library")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("defx studio")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Library")]
-[assembly: AssemblyCopyright("Copyright  defx studio 2005")]
+[assembly: AssemblyCopyright("Copyright (c) Markus Mayer 2005-2009")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

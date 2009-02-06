@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Library.Vector;
 
 namespace Library
 {
@@ -36,8 +37,8 @@ namespace Library
 		/// <summary>
 		/// Returns the length of the line
 		/// </summary>
-		/// <returns>Float</returns>
-		public float Length()
+		/// <returns>double</returns>
+		public double Length()
 		{
 			Vector2D difference = End - Start;
 			return difference.Magnitude();
@@ -47,17 +48,17 @@ namespace Library
 		/// Gets the distance of a point to the line
 		/// </summary>
 		/// <param name="point">The point</param>
-		/// <returns>Float</returns>
-		public float GetDistance(Vector2D point)
+		/// <returns>double</returns>
+		public double GetDistance(Vector2D point)
 		{
 			// calculate direction, get length, normalise
 			Vector2D direction = End - Start;
-			float length = direction.Magnitude();
+			double length = direction.Magnitude();
 			direction.Scale(1f / length);	// normalise
 
 			// calculate t-value
 			Vector2D difference = point - Start;
-			float d = difference.Dot(direction);
+			double d = difference.Dot(direction);
 
 			// test edge points
 			if (d <= 0f)
@@ -83,12 +84,12 @@ namespace Library
 		{
 			// calculate direction, get length, normalise
 			Vector2D direction = End - Start;
-			float length = direction.Magnitude();
+			double length = direction.Magnitude();
 			direction.Scale(1f / length);	// normalise
 
 			// calculate t-value
 			Vector2D difference = point - Start;
-			float d = difference.Dot(direction);
+			double d = difference.Dot(direction);
 
 			// test edge points
 			if (d <= 0f) return Start;
