@@ -148,7 +148,7 @@ namespace Library.Vector
 		/// </summary>
 		/// <param name="vector">vector to copy</param>
 		public Vector4D(Vector4D vector)
-			: this(vector.X, vector.Y, vector.Z, vector.Z)
+			: this(vector.X, vector.Y, vector.Z, vector.W)
 		{
 		}	
 
@@ -247,6 +247,16 @@ namespace Library.Vector
 		#endregion
 
 		/// <summary>
+		/// Returns the distance to b
+		/// </summary>
+		/// <param name="b">The vector to check</param>
+		/// <returns>double</returns>
+		public double GetDistance(Vector4D b)
+		{
+			return (b - this).Magnitude();
+		}
+
+		/// <summary>
 		/// Returns the magnitude (length) of the vector
 		/// </summary>
 		/// <returns>double</returns>
@@ -342,6 +352,29 @@ namespace Library.Vector
 		{
 			Vector4D t = new Vector4D(a);
 			return t.Scale(s);
+		}
+
+		/// <summary>
+		/// Returns the scaled vector
+		/// </summary>
+		/// <param name="a">Vector</param>
+		/// <param name="s">Scalar</param>
+		/// <returns>Vector3D</returns>
+		public static Vector4D operator /(Vector4D a, double s)
+		{
+			return a * (1.0 / s);
+		}
+
+		/// <summary>
+		/// Returns the dot product
+		/// </summary>
+		/// <param name="a">Vector</param>
+		/// <param name="b">Vector</param>
+		/// <returns>double</returns>
+		public static double operator *(Vector4D a, Vector4D b)
+		{
+			Vector4D t = new Vector4D(a);
+			return t.Dot(b);
 		}
 
 		/// <summary>
@@ -564,7 +597,7 @@ namespace Library.Vector
 			if (vector == null) throw new ArgumentNullException("vector", "Input must not be null");
 			if (vector.Equals(String.Empty)) throw new ArgumentException("Input must not be empty", "vector");
 
-			Regex regex = new Regex(@"^\{(?'X'.*?);(?'Y'.*?);(?'Z'.*?)\}|(?'X'.*?);(?'Y'.*?);(?'Z'.*?);(?'W'.*?)$", RegexOptions.IgnorePatternWhitespace | RegexOptions.CultureInvariant | RegexOptions.IgnoreCase | RegexOptions.Compiled);
+			Regex regex = new Regex(@"^\{(?'X'.*?);(?'Y'.*?);(?'Z'.*?);(?'W'.*?)\}|(?'X'.*?);(?'Y'.*?);(?'Z'.*?);(?'W'.*?)$", RegexOptions.IgnorePatternWhitespace | RegexOptions.CultureInvariant | RegexOptions.IgnoreCase | RegexOptions.Compiled);
 			Match match = regex.Match(vector.Trim());
 
 			Group groupX = match.Groups["X"];	
