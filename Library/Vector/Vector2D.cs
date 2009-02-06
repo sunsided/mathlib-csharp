@@ -291,6 +291,18 @@ namespace Library.Vector
 			Vector2D t = new Vector2D(a);
 			return t.Scale(s);
 		}
+		
+		/// <summary>
+		/// Returns the scaled vector
+		/// </summary>
+		/// <param name="a">Vector</param>
+		/// <param name="s">Scalar</param>
+		/// <returns>Vector2D</returns>
+		public static Vector2D operator /(Vector2D a, double s)
+		{
+			Vector2D t = new Vector2D(a);
+			return t.Scale(1.0D/s);
+		}
 
 		/// <summary>
 		/// Returns the scaled vector
@@ -302,6 +314,18 @@ namespace Library.Vector
 		{
 			Vector2D t = new Vector2D(a);
 			return t.Scale(s);
+		}
+
+		/// <summary>
+		/// Returns the dot product
+		/// </summary>
+		/// <param name="a">Vector a</param>
+		/// <param name="b">Vector b</param>
+		/// <returns>the dot product</returns>
+		public static double operator *(Vector2D a, Vector2D b)
+		{
+			Vector2D t = new Vector2D(a);
+			return t.Dot(b);
 		}
 
 		/// <summary>

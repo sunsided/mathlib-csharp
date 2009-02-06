@@ -65,6 +65,7 @@
     <Compile Include="InverseKinematics\Joint.cs" />
     <Compile Include="LineSegment2D.cs" />
     <Compile Include="Line2D.cs" />
+    <Compile Include="Vector\Vector2DTests.cs" />
     <Compile Include="Vector\Vector4DTests.cs" />
     <Compile Include="Vector\IVector.cs" />
     <Compile Include="Vector\Vector2D.cs" />
