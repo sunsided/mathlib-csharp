@@ -524,7 +524,9 @@ namespace Library.Matrix
 		/// <returns></returns>
 		public Vector3D GetRowVector(int row)
 		{
+#if DEBUG
 			if (row < 0 || row > 3) throw new ArgumentOutOfRangeException("row", row, "row must be in range 0..2");
+#endif
 			return new Vector3D(Cell[row, 0], Cell[row, 1], Cell[row, 2]);
 		}
 
@@ -535,7 +537,9 @@ namespace Library.Matrix
 		/// <returns></returns>
 		public Vector3D GetColumnVector(int column)
 		{
+#if DEBUG
 			if (column < 0 || column > 3) throw new ArgumentOutOfRangeException("column", column, "column must be in range 0..2");
+#endif
 			return new Vector3D(Cell[0, column], Cell[1, column], Cell[2, column]);
 		}
 		

@@ -9,7 +9,7 @@ namespace Library.Vector
 	/// <summary>
 	/// Structure for a 3D vector
 	/// </summary>
-	public struct Vector4D : IEquatable<Vector4D>, IVector
+	public sealed class Vector4D : IEquatable<Vector4D>, IVector
 	{
 		#region Members
 
@@ -127,6 +127,14 @@ namespace Library.Vector
 		#endregion
 
 		#region ctors
+
+		/// <summary>
+		/// Creates a vector with the given components
+		/// </summary>
+		public Vector4D()
+		{
+			_field = new double[4];
+		}	
 
 		/// <summary>
 		/// Creates a vector with the given components
@@ -417,6 +425,7 @@ namespace Library.Vector
 		/// <returns>The result of the operator.</returns>
 		public static bool operator == (Vector4D a, Vector4D b)
 		{
+			if (ReferenceEquals(a, null)) return ReferenceEquals(b, null);
 			return a.X == b.X && a.Y == b.Y && a.Z == b.Z && a.W == b.W;
 		}
 

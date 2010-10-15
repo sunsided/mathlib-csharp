@@ -10,7 +10,7 @@ namespace Library.Vector
 	/// <summary>
 	/// Structure for a 3D vector
 	/// </summary>
-	public struct Vector3D : IEquatable<Vector3D>, IVector
+	public sealed class Vector3D : IEquatable<Vector3D>, IVector
 	{
 		#region Members
 
@@ -114,6 +114,14 @@ namespace Library.Vector
 		#endregion
 
 		#region ctors
+
+		/// <summary>
+		/// Creates a vector with the given components
+		/// </summary>
+		public Vector3D()
+		{
+			_field = new double[3];
+		}
 
 		/// <summary>
 		/// Creates a vector with the given components
@@ -388,6 +396,7 @@ namespace Library.Vector
 		/// <returns>The result of the operator.</returns>
 		public static bool operator == (Vector3D a, Vector3D b)
 		{
+			if (ReferenceEquals(a, null)) return ReferenceEquals(b, null);
 			return a.Equals(b);
 		}
 

@@ -31,7 +31,7 @@ namespace CircleCircleIntersection
 		#region Points
 
 		protected Sphere3D fixSphere;
-		protected Sphere3D testSphere;
+		protected Sphere3D testSphere = new Sphere3D(Vector3D.Zero, 10f);
 
 		#endregion
 

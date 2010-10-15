@@ -12,6 +12,7 @@ namespace LinePointIntersection
 		[STAThread]
 		static void Main()
 		{
+			Application.SetCompatibleTextRenderingDefault(true);
 			Application.EnableVisualStyles();
 			Application.Run(new LinePointIntersection());
 		}

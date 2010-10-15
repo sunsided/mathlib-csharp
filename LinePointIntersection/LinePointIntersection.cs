@@ -29,6 +29,8 @@ namespace LinePointIntersection
 			linePoint1 = new Vector3D(50f, 20f, 0f);
 			linePoint2 = new Vector3D(panelCanvas.ClientSize.Width - 50, panelCanvas.ClientSize.Height - 80, 0f);
 			line3D = new Line3D(linePoint1, linePoint2);
+
+			testPoint = new Vector3D();
 		}
 
 		#region Points
