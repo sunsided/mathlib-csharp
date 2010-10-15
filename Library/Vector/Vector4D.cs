@@ -1,7 +1,8 @@
-﻿using System;
+﻿// $Id$
+
+using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
-using Library.Vector;
 
 namespace Library.Vector
 {
@@ -35,7 +36,7 @@ namespace Library.Vector
 		/// <summary>
 		/// The vector array
 		/// </summary>
-		private readonly double[] m_fields;
+		private readonly double[] _field;
 
 		/// <summary>
 		/// The Number of dimensions
@@ -45,15 +46,15 @@ namespace Library.Vector
 		/// <summary>
 		/// The field array
 		/// </summary>
-		public double[] Fields { get { return m_fields; } }
+		public double[] Fields { get { return _field; } }
 
 		/// <summary>
 		/// The X component
 		/// </summary>
 		public double X
 		{
-			get { return m_fields[FieldXIndex]; }
-			set { m_fields[FieldXIndex] = value; }
+			get { return _field[FieldXIndex]; }
+			set { _field[FieldXIndex] = value; }
 		}
 
 		/// <summary>
@@ -61,8 +62,8 @@ namespace Library.Vector
 		/// </summary>
 		public double Y
 		{
-			get { return m_fields[FieldYIndex]; }
-			set { m_fields[FieldYIndex] = value; }
+			get { return _field[FieldYIndex]; }
+			set { _field[FieldYIndex] = value; }
 		}
 
 		/// <summary>
@@ -70,8 +71,8 @@ namespace Library.Vector
 		/// </summary>
 		public double Z
 		{
-			get { return m_fields[FieldZIndex]; }
-			set { m_fields[FieldZIndex] = value; }
+			get { return _field[FieldZIndex]; }
+			set { _field[FieldZIndex] = value; }
 		}
 
 		/// <summary>
@@ -79,8 +80,8 @@ namespace Library.Vector
 		/// </summary>
 		public double W
 		{
-			get { return m_fields[FieldWIndex]; }
-			set { m_fields[FieldWIndex] = value; }
+			get { return _field[FieldWIndex]; }
+			set { _field[FieldWIndex] = value; }
 		}
 
 		#endregion
@@ -136,11 +137,11 @@ namespace Library.Vector
 		/// <param name="w">w component</param>
 		public Vector4D(double x, double y, double z, double w)
 		{
-			m_fields = new double[4];
-			m_fields[FieldXIndex] = x;
-			m_fields[FieldYIndex] = y;
-			m_fields[FieldZIndex] = z;
-			m_fields[FieldWIndex] = w;
+			_field = new double[4];
+			_field[FieldXIndex] = x;
+			_field[FieldYIndex] = y;
+			_field[FieldZIndex] = z;
+			_field[FieldWIndex] = w;
 		}
 		
 		/// <summary>
@@ -171,11 +172,11 @@ namespace Library.Vector
 		{
 			if (array == null) throw new ArgumentNullException("array", "value must not be null");
 			if (array.Length != 4) throw new ArgumentException("The value must be an array of size 4", "array");
-			m_fields = new double[4];
-			m_fields[0] = array[0];
-			m_fields[1] = array[1];
-			m_fields[2] = array[2];
-			m_fields[3] = array[3];
+			_field = new double[4];
+			_field[0] = array[0];
+			_field[1] = array[1];
+			_field[2] = array[2];
+			_field[3] = array[3];
 		}
 
 		/// <summary>
@@ -395,7 +396,7 @@ namespace Library.Vector
 		/// <returns>Casted item</returns>
 		public static implicit operator double[](Vector4D vector)
 		{
-			return vector.m_fields;
+			return vector._field;
 		}
 
 		/// <summary>
@@ -536,10 +537,10 @@ namespace Library.Vector
 		{
 			if (vector == null) throw new ArgumentNullException("vector", "The value must not be null");
 			if (vector.Length != 4) throw new ArgumentException("The value must be an array of size 4", "vector");
-			m_fields[FieldXIndex] = vector[FieldXIndex];
-			m_fields[FieldYIndex] = vector[FieldYIndex];
-			m_fields[FieldZIndex] = vector[FieldZIndex];
-			m_fields[FieldWIndex] = vector[FieldWIndex];
+			_field[FieldXIndex] = vector[FieldXIndex];
+			_field[FieldYIndex] = vector[FieldYIndex];
+			_field[FieldZIndex] = vector[FieldZIndex];
+			_field[FieldWIndex] = vector[FieldWIndex];
 		}
 
 		#region Parsing

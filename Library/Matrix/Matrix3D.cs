@@ -1,4 +1,6 @@
-﻿using System;
+﻿// $Id$
+
+using System;
 using Library.Vector;
 
 namespace Library.Matrix
@@ -6,32 +8,69 @@ namespace Library.Matrix
 	/// <summary>
 	/// 3-dimensional row-major matrix
 	/// </summary>
-	public sealed class Matrix3D : BaseMatrix
+	public sealed class Matrix3D : IEquatable<Matrix3D>, ICloneable
 	{
+		/// <summary>
+		/// The cell values;
+		/// </summary>
+		internal double[,] Cell;
+
 		/// <summary>
 		/// Gets the unit matrix
 		/// </summary>
 		public static readonly Matrix3D Unit = new Matrix3D(
-			1.0f, 0.0f, 0.0f,
-			0.0f, 1.0f, 0.0f,
-			0.0f, 0.0f, 1.0f);
+			1.0d, 0.0d, 0.0d,
+			0.0d, 1.0d, 0.0d,
+			0.0d, 0.0d, 1.0d);
+
+		/// <summary>
+		/// Gets a test matrix
+		/// </summary>
+		public static readonly Matrix3D Test = new Matrix3D(
+			0.0d, 1.0d, 2.0d,
+			0.1d, 1.1d, 2.1d,
+			0.2d, 1.2d, 2.2d);
 
 		#region Konstruktor
 
+		/// <summary>
+		/// Creates a new instance of the <see cref="Matrix3D"/> class.
+		/// </summary>
 		public Matrix3D()
 		{
 			Cell = new double[3, 3];
 		}
 
-		public Matrix3D(
-			double M11, double M12, double M13,
-			double M21, double M22, double M23,
-			double M31, double M32, double M33)
+		/// <summary>
+		/// Creates a new instance of the <see cref="Matrix3D"/> class.
+		/// </summary>
+		public Matrix3D(Matrix3D matrix)
 			: this()
 		{
-			Cell[0, 0] = M11; Cell[0, 1] = M12; Cell[0, 2] = M13;
-			Cell[1, 0] = M21; Cell[1, 1] = M22; Cell[1, 2] = M23;
-			Cell[2, 0] = M31; Cell[2, 1] = M32; Cell[2, 2] = M33;
+			Assign(matrix);
+		}
+
+		/// <summary>
+		/// Creates a new instance of the <see cref="Matrix3D"/> class and assigns values.
+		/// </summary>
+		/// <param name="m11">The field (1,1)</param>
+		/// <param name="m12">The field (1,2)</param>
+		/// <param name="m13">The field (1,3)</param>
+		/// <param name="m21">The field (2,1)</param>
+		/// <param name="m22">The field (2,2)</param>
+		/// <param name="m23">The field (2,3)</param>
+		/// <param name="m31">The field (3,1)</param>
+		/// <param name="m32">The field (3,2)</param>
+		/// <param name="m33">The field (3,3)</param>
+		public Matrix3D(
+			double m11, double m12, double m13,
+			double m21, double m22, double m23,
+			double m31, double m32, double m33)
+		: this()
+		{
+			Cell[0, 0] = m11; Cell[0, 1] = m12; Cell[0, 2] = m13;
+			Cell[1, 0] = m21; Cell[1, 1] = m22; Cell[1, 2] = m23;
+			Cell[2, 0] = m31; Cell[2, 1] = m32; Cell[2, 2] = m33;
 		}
 
 		#endregion
@@ -41,22 +80,22 @@ namespace Library.Matrix
 		/// <summary>
 		/// Sets the matrix to an identity matrix
 		/// </summary>
-		public override void ToIdentity()
+		public void ToIdentity()
 		{
-			Cell[0, 0] = 1f; Cell[0, 1] = 0f; Cell[0, 2] = 0f;
-			Cell[1, 0] = 0f; Cell[1, 1] = 1f; Cell[1, 2] = 0f;
-			Cell[2, 0] = 0f; Cell[2, 1] = 0f; Cell[2, 2] = 1f;
+			Cell[0, 0] = 1d; Cell[0, 1] = 0d; Cell[0, 2] = 0d;
+			Cell[1, 0] = 0d; Cell[1, 1] = 1d; Cell[1, 2] = 0d;
+			Cell[2, 0] = 0d; Cell[2, 1] = 0d; Cell[2, 2] = 1d;
 		}
 
 		/// <summary>
 		/// Sets the matrix to a scale matrix
 		/// </summary>
 		/// <param name="factors">Vector of scaling factors</param>
-		public void ToScale(Vector3D factors)
+		public void ToScaling(Vector3D factors)
 		{
-			Cell[0, 0] = factors.X; Cell[0, 1] = 0f;		Cell[0, 2] = 0f;	
-			Cell[1, 0] = 0f;		Cell[1, 1] = factors.Y; Cell[1, 2] = 0f;	
-			Cell[2, 0] = 0f;		Cell[2, 1] = 0f;		Cell[2, 2] = factors.Z;
+			Cell[0, 0] = factors.X; Cell[0, 1] = 0d;		Cell[0, 2] = 0d;	
+			Cell[1, 0] = 0d;		Cell[1, 1] = factors.Y; Cell[1, 2] = 0d;	
+			Cell[2, 0] = 0d;		Cell[2, 1] = 0d;		Cell[2, 2] = factors.Z;
 		}
 
 		/// <summary>
@@ -65,11 +104,11 @@ namespace Library.Matrix
 		/// <param name="x">X factor</param>
 		/// <param name="y">Y factor</param>
 		/// <param name="z">Z factor</param>
-		public void ToScale(double x, double y, double z)
+		public void ToScaling(double x, double y, double z)
 		{
-			Cell[0, 0] = x;  Cell[0, 1] = 0f; Cell[0, 2] = 0f;
-			Cell[1, 0] = 0f; Cell[1, 1] = y;  Cell[1, 2] = 0f;
-			Cell[2, 0] = 0f; Cell[2, 1] = 0f; Cell[2, 2] = z;
+			Cell[0, 0] = x;  Cell[0, 1] = 0d; Cell[0, 2] = 0d;
+			Cell[1, 0] = 0d; Cell[1, 1] = y;  Cell[1, 2] = 0d;
+			Cell[2, 0] = 0d; Cell[2, 1] = 0d; Cell[2, 2] = z;
 		}
 
 		#endregion
@@ -90,58 +129,109 @@ namespace Library.Matrix
 				(matrix.Cell[0,2] * vector.X) + (matrix.Cell[1,2] * vector.Y) + (matrix.Cell[2,2] * vector.Z) );
 		}
 
+		/// <summary>
+		/// Tests if two matrices are identical
+		/// </summary>
+		/// <param name="a"></param>
+		/// <param name="b"></param>
+		/// <returns></returns>
+		public static bool operator ==(Matrix3D a, Matrix3D b)
+		{
+			if (ReferenceEquals(a, null)) return ReferenceEquals(b, null);
+			return a.Equals(b);
+		}
+
+		/// <summary>
+		/// Tests if two matrices are different
+		/// </summary>
+		/// <param name="a"></param>
+		/// <param name="b"></param>
+		/// <returns></returns>
+		public static bool operator !=(Matrix3D a, Matrix3D b)
+		{
+			if (ReferenceEquals(a, null)) return !ReferenceEquals(b, null);
+			return !a.Equals(b);
+		}
+
 		#endregion
 
 		#region Specific Fields
 
+		/// <summary>
+		/// Gets or sets field M(1,1)
+		/// </summary>
 		public double M11
 		{
 			get { return Cell[0, 0]; }
 			set { Cell[0, 0] = value; }
 		}
 
+		/// <summary>
+		/// Gets or sets field M(1,2)
+		/// </summary>
 		public double M12
 		{
 			get { return Cell[0, 1]; }
 			set { Cell[0, 1] = value; }
 		}
 
+		/// <summary>
+		/// Gets or sets field M(1,3)
+		/// </summary>
 		public double M13
 		{
 			get { return Cell[0, 2]; }
 			set { Cell[0, 2] = value; }
 		}
 
+		/// <summary>
+		/// Gets or sets field M(2,1)
+		/// </summary>
 		public double M21
 		{
 			get { return Cell[1, 0]; }
 			set { Cell[1, 0] = value; }
 		}
 
+		/// <summary>
+		/// Gets or sets field M(2,2)
+		/// </summary>
 		public double M22
 		{
 			get { return Cell[1, 1]; }
 			set { Cell[1, 1] = value; }
 		}
 
+		/// <summary>
+		/// Gets or sets field M(2,3)
+		/// </summary>
 		public double M23
 		{
 			get { return Cell[1, 2]; }
 			set { Cell[1, 2] = value; }
 		}
 
+		/// <summary>
+		/// Gets or sets field M(3,1)
+		/// </summary>
 		public double M31
 		{
 			get { return Cell[2, 0]; }
 			set { Cell[2, 0] = value; }
 		}
 
+		/// <summary>
+		/// Gets or sets field M(3,2)
+		/// </summary>
 		public double M32
 		{
 			get { return Cell[2, 1]; }
 			set { Cell[2, 1] = value; }
 		}
 
+		/// <summary>
+		/// Gets or sets field M(3,3)
+		/// </summary>
 		public double M33
 		{
 			get { return Cell[2, 2]; }
@@ -192,42 +282,42 @@ namespace Library.Matrix
 		/// <param name="b">Matrix to copy</param>
 		public void Assign(Matrix3D b)
 		{
-			M11 = b.Cell[0, 0]; M12 = b.Cell[0, 1]; M13 = b.Cell[0, 2];
-			M21 = b.Cell[1, 0]; M22 = b.Cell[1, 1]; M23 = b.Cell[1, 2];
-			M11 = b.Cell[2, 0]; M32 = b.Cell[2, 1]; M33 = b.Cell[2, 2];
+			Cell[0, 0] = b.Cell[0, 0]; Cell[0, 1] = b.Cell[0, 1]; Cell[0, 2] = b.Cell[0, 2];
+			Cell[1, 0] = b.Cell[1, 0]; Cell[1, 1] = b.Cell[1, 1]; Cell[1, 2] = b.Cell[1, 2];
+			Cell[2, 0] = b.Cell[2, 0]; Cell[2, 1] = b.Cell[2, 1]; Cell[2, 2] = b.Cell[2, 2];
 		}
 
 		/// <summary>
 		/// Assigns matrix values
 		/// </summary>
-		/// <param name="M11">M11</param>
-		/// <param name="M12">M12</param>
-		/// <param name="M13">M13</param>
-		/// <param name="M21">M21</param>
-		/// <param name="M22">M22</param>
-		/// <param name="M23">M23</param>
-		/// <param name="M31">M31</param>
-		/// <param name="M32">M32</param>
-		/// <param name="M33">M33</param>
+		/// <param name="m11">The field (1,1)</param>
+		/// <param name="m12">The field (1,2)</param>
+		/// <param name="m13">The field (1,3)</param>
+		/// <param name="m21">The field (2,1)</param>
+		/// <param name="m22">The field (2,2)</param>
+		/// <param name="m23">The field (2,3)</param>
+		/// <param name="m31">The field (3,1)</param>
+		/// <param name="m32">The field (3,2)</param>
+		/// <param name="m33">The field (3,3)</param>
 		public void Assign(
-			double M11, double M12, double M13,
-			double M21, double M22, double M23,
-			double M31, double M32, double M33)
+			double m11, double m12, double m13,
+			double m21, double m22, double m23,
+			double m31, double m32, double m33)
 		{
-			Cell[0, 0] = M11; Cell[0, 1] = M12; Cell[0, 2] = M13;
-			Cell[1, 0] = M21; Cell[1, 1] = M22; Cell[1, 2] = M23;
-			Cell[2, 0] = M31; Cell[2, 1] = M32; Cell[2, 2] = M33;
-		}		
-		
+			Cell[0, 0] = m11; Cell[0, 1] = m12; Cell[0, 2] = m13;
+			Cell[1, 0] = m21; Cell[1, 1] = m22; Cell[1, 2] = m23;
+			Cell[2, 0] = m31; Cell[2, 1] = m32; Cell[2, 2] = m33;
+		}
+
 		/// <summary>
 		/// Assigns matrix values
 		/// </summary>
 		/// <param name="value">Value to fill in</param>
-		public override void Fill(double value)
+		public void Fill(double value)
 		{
-			M11 = value; M12 = value; M13 = value;
-			M21 = value; M22 = value; M23 = value;
-			M11 = value; M32 = value; M33 = value;
+			Cell[0, 0] = value; Cell[0, 1] = value; Cell[0, 2] = value;
+			Cell[1, 0] = value; Cell[1, 1] = value; Cell[1, 2] = value;
+			Cell[2, 0] = value; Cell[2, 1] = value; Cell[2, 2] = value;
 		}
 
 
@@ -238,59 +328,117 @@ namespace Library.Matrix
 		/// <summary>
 		/// A 3D rotation matrix for X-axis rotation
 		/// </summary>
-		/// <example>
+		/// <param name="theta">The rotation angle</param>
 		public static Matrix3D GetRotationX(double theta)
 		{
-			double cos = (double)Math.Cos(theta);
-			double sin = (double)Math.Sin(theta);			
+			double cos = Math.Cos(theta);
+			double sin = Math.Sin(theta);			
 			return new Matrix3D(
-				1.0f, 0.0f, 0.0f,
-				0.0f, cos, sin,
-				0.0f, -sin, cos);
+				1.0d, 0.0d, 0.0d,
+				0.0d, cos, sin,
+				0.0d, -sin, cos);
+		}
+
+		/// <summary>
+		/// A 3D rotation matrix for X-axis rotation
+		/// </summary>
+		/// <param name="cosTheta">The cosine of the rotation angle</param>
+		/// <param name="sinTheta">The sine of the rotation angle</param>
+		public static Matrix3D GetRotationX(double cosTheta, double sinTheta)
+		{
+			return new Matrix3D(
+				1.0d, 0.0d, 0.0d,
+				0.0d, cosTheta, sinTheta,
+				0.0d, -sinTheta, cosTheta);
 		}
 
 		/// <summary>
 		/// A 3D rotation matrix for Y-axis rotation
 		/// </summary>
+		/// <param name="theta">The rotation angle</param>
 		public static Matrix3D GetRotationY(double theta)
 		{
-			double cos = (double)Math.Cos(theta);
-			double sin = (double)Math.Sin(theta);
+			double cos = Math.Cos(theta);
+			double sin = Math.Sin(theta);
 			return new Matrix3D(
-				cos, 0.0f, -sin,
-				0.0f, 1.0f, 0.0f,
-				-sin, 0.0f, cos);
+				cos, 0.0d, -sin,
+				0.0d, 1.0d, 0.0d,
+				-sin, 0.0d, cos);
 		}
 
 		/// <summary>
 		/// A 3D rotation matrix for Y-axis rotation
 		/// </summary>
+		/// <param name="cosTheta">The cosine of the rotation angle</param>
+		/// <param name="sinTheta">The sine of the rotation angle</param>
+		public static Matrix3D GetRotationY(double cosTheta, double sinTheta)
+		{
+			return new Matrix3D(
+				cosTheta, 0.0d, -sinTheta,
+				0.0d, 1.0d, 0.0d,
+				-sinTheta, 0.0d, cosTheta);
+		}
+
+		/// <summary>
+		/// A 3D rotation matrix for Y-axis rotation
+		/// </summary>
+		/// <param name="theta">The rotation angle</param>
 		public static Matrix3D GetRotationZ(double theta)
 		{
-			double cos = (double)Math.Cos(theta);
-			double sin = (double)Math.Sin(theta);
+			double cos = Math.Cos(theta);
+			double sin = Math.Sin(theta);
 			return new Matrix3D(
-				cos, sin, 0.0f,
-				-sin, cos, 0.0f,
-				0.0f, 0.0f, 1.0f);
+				cos, sin, 0.0d,
+				-sin, cos, 0.0d,
+				0.0d, 0.0d, 1.0d);
+		}
+
+		/// <summary>
+		/// A 3D rotation matrix for Y-axis rotation
+		/// </summary>
+		/// <param name="cosTheta">The cosine of the rotation angle</param>
+		/// <param name="sinTheta">The sine of the rotation angle</param>
+		public static Matrix3D GetRotationZ(double cosTheta, double sinTheta)
+		{
+			return new Matrix3D(
+				cosTheta, sinTheta, 0.0d,
+				-sinTheta, cosTheta, 0.0d,
+				0.0d, 0.0d, 1.0d);
 		}
 		
 		/// <summary>
 		/// A 3D rotation matrix for axis-angle rotation
 		/// </summary>
+		/// <param name="axis">The axis to rotate around</param>
+		/// <param name="theta">The rotation angle</param>
 		public static Matrix3D GetRotationAxisAngle(Vector3D axis, double theta)
 		{
-			double cos = (double)Math.Cos(theta);
-			double sin = (double)Math.Sin(theta);
-			
+			double cos = Math.Cos(theta);
+			double sin = Math.Sin(theta);
+			return GetRotationAxisAngle(axis, cos, sin);
+		}
+
+		/// <summary>
+		/// A 3D rotation matrix for axis-angle rotation
+		/// </summary>
+		/// <param name="axis">The axis to rotate around</param>
+		/// <param name="cosTheta">The cosine of the rotation angle</param>
+		/// <param name="sinTheta">The sine of the rotation angle</param>
+		public static Matrix3D GetRotationAxisAngle(Vector3D axis, double cosTheta, double sinTheta)
+		{
+			double cos = cosTheta;
+			double sin = sinTheta;
+
 			// pre-calculate squared
 			double xx = axis.X * axis.X;
 			double yy = axis.Y * axis.Y;
 			double zz = axis.Z * axis.Z;
+
 			// pre-calculate axis combinations
 			double xy = axis.X * axis.Y;
 			double xz = axis.X * axis.Z;
 			double yz = axis.Y * axis.Z;
+
 			// pre-calculate axes and angle functions
 			double xsin = axis.X * sin;
 			double ysin = axis.Y * sin;
@@ -300,10 +448,10 @@ namespace Library.Matrix
 
 			/*
 			return new Matrix3D(
-				xx * (1 - cos) + cos, xy * (1 - cos) + zsin, xz * (1 - cos) - ysin, 0.0f,
-				xy * (1 - cos) - zsin, yy * (1 - cos) + cos, yz * (1 - cos) + xsin, 0.0f,
-				xz * (1 - cos) + ysin, yz * (1 - cos) + xsin, zz * (1 - cos) + cos, 0.0f,
-				0.0f, 0.0f, 0.0f, 1.0f);
+				xx * (1 - cos) + cos, xy * (1 - cos) + zsin, xz * (1 - cos) - ysin, 0.0d,
+				xy * (1 - cos) - zsin, yy * (1 - cos) + cos, yz * (1 - cos) + xsin, 0.0d,
+				xz * (1 - cos) + ysin, yz * (1 - cos) + xsin, zz * (1 - cos) + cos, 0.0d,
+				0.0d, 0.0d, 0.0d, 1.0d);
 			*/
 
 			return new Matrix3D(
@@ -315,12 +463,15 @@ namespace Library.Matrix
 		/// <summary>
 		/// Gets a progressive rotation matrix based on angular speed
 		/// </summary>
+		/// <param name="deltaX">X rotation delta angle</param>
+		/// <param name="deltaY">Y rotation delta angle</param>
+		/// <param name="deltaZ">Z rotation delta angle</param>
 		public static Matrix3D GetProgressiveRotation(double deltaX, double deltaY, double deltaZ)
 		{
 			return new Matrix3D(
-				0.0f, -deltaZ, deltaY,
-				deltaZ, 0.0f, -deltaX,
-				-deltaY, deltaX, 0.0f);
+				0.0d, -deltaZ, deltaY,
+				deltaZ, 0.0d, -deltaX,
+				-deltaY, deltaX, 0.0d);
 		}
 		
 		#endregion
@@ -330,30 +481,134 @@ namespace Library.Matrix
 		/// <summary>
 		/// Subtracts column <para>j</para>*<para>s</para> from column <para>i</para>
 		/// </summary>
-		/// <param name="i">The column from which to subtract</param>
-		/// <param name="j">The column to subtract</param>
+		/// <param name="i">Index of the column from which to subtract</param>
+		/// <param name="j">Index of the column to subtract</param>
 		/// <param name="s">The scaling factor of column j</param>
-		private static void colsub(Matrix3D m, int i, int j, double s)
+		public void SubtractFromColumn(int i, int j, double s)
 		{
-			m.Cell[0, i] = m.Cell[0, i] - (s * m.Cell[0, j]);
-			m.Cell[1, i] = m.Cell[1, i] - (s * m.Cell[1, j]);
-			m.Cell[2, i] = m.Cell[2, i] - (s * m.Cell[2, j]);
+#if DEBUG
+			if (i < 0 || i > 2) throw new ArgumentOutOfRangeException("i", i, "i must be in range 0..2");
+			if (j < 0 || j > 2) throw new ArgumentOutOfRangeException("j", j, "j must be in range 0..2");
+#endif
+
+			Cell[0, i] = Cell[0, i] - (s * Cell[0, j]);
+			Cell[1, i] = Cell[1, i] - (s * Cell[1, j]);
+			Cell[2, i] = Cell[2, i] - (s * Cell[2, j]);
 		}
 
 		/// <summary>
-		/// Transposes a given matrix
+		/// Returnes the transposed matrix
 		/// </summary>
-		/// <param name="m">Matrix to transpose</param>
 		/// <returns>Matrix3D</returns>
-		private static Matrix3D transpose(Matrix3D m)
+		public Matrix3D GetTransposed()
 		{
 			return new Matrix3D(
-				m.Cell[0, 0], m.Cell[1, 0], m.Cell[2, 0],
-				m.Cell[0, 1], m.Cell[1, 1], m.Cell[2, 1],
-				m.Cell[0, 2], m.Cell[1, 2], m.Cell[2, 2]);
+				Cell[0, 0], Cell[1, 0], Cell[2, 0],
+				Cell[0, 1], Cell[1, 1], Cell[2, 1],
+				Cell[0, 2], Cell[1, 2], Cell[2, 2]);
+		}
+
+		/// <summary>
+		/// Transposes this matrix in place
+		/// </summary>
+		public void Transpose()
+		{
+			Matrix3D t = GetTransposed();
+			Cell = t.Cell;
+		}
+
+		/// <summary>
+		/// Gets a row vector
+		/// </summary>
+		/// <param name="row">The row index</param>
+		/// <returns></returns>
+		public Vector3D GetRowVector(int row)
+		{
+			if (row < 0 || row > 3) throw new ArgumentOutOfRangeException("row", row, "row must be in range 0..2");
+			return new Vector3D(Cell[row, 0], Cell[row, 1], Cell[row, 2]);
+		}
+
+		/// <summary>
+		/// Gets a column vector
+		/// </summary>
+		/// <param name="column">The column index</param>
+		/// <returns></returns>
+		public Vector3D GetColumnVector(int column)
+		{
+			if (column < 0 || column > 3) throw new ArgumentOutOfRangeException("column", column, "column must be in range 0..2");
+			return new Vector3D(Cell[0, column], Cell[1, column], Cell[2, column]);
 		}
 		
 		#endregion
+
+		#region Cast operators
+
+		/// <summary>
+		/// Converts a matrix to a <see cref="double"/>[]
+		/// </summary>
+		/// <param name="matrix"></param>
+		/// <returns></returns>
+		public static implicit operator double[,](Matrix3D matrix)
+		{
+			return matrix.Cell;
+		}
+
+		#endregion
+
+		/// <summary>
+		/// Creates a copy of this matrix
+		/// </summary>
+		/// <returns></returns>
+		public Matrix3D Clone()
+		{
+			return new Matrix3D(this);
+		}
+
+		/// <summary>
+		/// Creates a copy of this matrix
+		/// </summary>
+		/// <returns></returns>
+		object ICloneable.Clone()
+		{
+			return Clone();
+		}
+
+		/// <summary>
+		/// Determines if this matrix equals another one
+		/// </summary>
+		/// <param name="obj"></param>
+		/// <returns></returns>
+		public override bool Equals(object obj)
+		{
+			if (obj is Matrix3D) return Equals((Matrix3D)obj);
+			return base.Equals(obj);
+		}
+
+		/// <summary>
+		/// Determines if this matrix equals another one
+		/// </summary>
+		/// <param name="other"></param>
+		/// <returns></returns>
+		public bool Equals(Matrix3D other)
+		{
+			return
+				Cell[0, 0] == other.Cell[0, 0] &&
+				Cell[0, 1] == other.Cell[0, 1] &&
+				Cell[0, 2] == other.Cell[0, 2] &&
+
+				Cell[1, 0] == other.Cell[1, 0] &&
+				Cell[1, 1] == other.Cell[1, 1] &&
+				Cell[1, 2] == other.Cell[1, 2] &&
+
+				Cell[2, 0] == other.Cell[2, 0] &&
+				Cell[2, 1] == other.Cell[2, 1] &&
+				Cell[2, 2] == other.Cell[2, 2];
+		}
+
+		public override int GetHashCode()
+		{
+			return (Cell != null ? Cell.GetHashCode() : 0);
+		}
 
 	}
 }

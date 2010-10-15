@@ -35,11 +35,11 @@ namespace Library
 
 			// Get Scaling matrix
 			Matrix4D scale = new Matrix4D();
-			scale.ToScale(Radius.X, Radius.Y, Radius.Z);
+			scale.ToScaling(Radius.X, Radius.Y, Radius.Z);
 
 			// Matrizen verbinden
 			Matrix4D final = scale * world;
-			final = scale.Invert();
+			final = scale.GetInverted();
 
 			Vector3D center = final * Center;
 			Vector3D newPoint = final * point;

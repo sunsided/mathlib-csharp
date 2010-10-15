@@ -1,8 +1,9 @@
-﻿using System;
+﻿// $Id$
+
+using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
 using Library.Matrix;
-using Library.Vector;
 
 namespace Library.Vector
 {
@@ -31,7 +32,7 @@ namespace Library.Vector
 		/// <summary>
 		/// The vector array
 		/// </summary>
-		private readonly double[] m_fields;
+		private readonly double[] _field;
 
 		/// <summary>
 		/// The Number of dimensions
@@ -41,15 +42,15 @@ namespace Library.Vector
 		/// <summary>
 		/// The field array
 		/// </summary>
-		public double[] Fields { get { return m_fields; } }
+		public double[] Fields { get { return _field; } }
 
 		/// <summary>
 		/// The X component
 		/// </summary>
 		public double X
 		{
-			get { return m_fields[FieldXIndex]; }
-			set { m_fields[FieldXIndex] = value; }
+			get { return _field[FieldXIndex]; }
+			set { _field[FieldXIndex] = value; }
 		}
 
 		/// <summary>
@@ -57,8 +58,8 @@ namespace Library.Vector
 		/// </summary>
 		public double Y
 		{
-			get { return m_fields[FieldYIndex]; }
-			set { m_fields[FieldYIndex] = value; }
+			get { return _field[FieldYIndex]; }
+			set { _field[FieldYIndex] = value; }
 		}
 
 		/// <summary>
@@ -66,8 +67,8 @@ namespace Library.Vector
 		/// </summary>
 		public double Z
 		{
-			get { return m_fields[FieldZIndex]; }
-			set { m_fields[FieldZIndex] = value; }
+			get { return _field[FieldZIndex]; }
+			set { _field[FieldZIndex] = value; }
 		}
 
 		#endregion
@@ -122,10 +123,10 @@ namespace Library.Vector
 		/// <param name="z">z component</param>
 		public Vector3D(double x, double y, double z)
 		{
-			m_fields = new double[3];
-			m_fields[FieldXIndex] = x;
-			m_fields[FieldYIndex] = y;
-			m_fields[FieldZIndex] = z;
+			_field = new double[3];
+			_field[FieldXIndex] = x;
+			_field[FieldYIndex] = y;
+			_field[FieldZIndex] = z;
 		}
 
 		/// <summary>
@@ -155,10 +156,10 @@ namespace Library.Vector
 		{
 			if (array == null) throw new ArgumentNullException("array", "value must not be null");
 			if (array.Length != 3) throw new ArgumentException("The value must be an array of size 3", "array");
-			m_fields = new double[3];
-			m_fields[0] = array[0];
-			m_fields[1] = array[1];
-			m_fields[2] = array[2];
+			_field = new double[3];
+			_field[0] = array[0];
+			_field[1] = array[1];
+			_field[2] = array[2];
 		}
 
 		#endregion
@@ -408,7 +409,7 @@ namespace Library.Vector
 		/// <returns>The result of the conversion.</returns>
 		public static implicit operator double[] (Vector3D a)
 		{
-			return a.m_fields;
+			return a._field;
 		}
 
 		/// <summary>
@@ -566,9 +567,9 @@ namespace Library.Vector
 		{
 			if (vector == null) throw new ArgumentNullException("vector", "The value must not be null");
 			if (vector.Length != 3) throw new ArgumentException("The value must be an array of size 3", "vector");
-			m_fields[FieldXIndex] = vector[FieldXIndex];
-			m_fields[FieldYIndex] = vector[FieldYIndex];
-			m_fields[FieldZIndex] = vector[FieldZIndex];
+			_field[FieldXIndex] = vector[FieldXIndex];
+			_field[FieldYIndex] = vector[FieldYIndex];
+			_field[FieldZIndex] = vector[FieldZIndex];
 		}
 
 		/// <summary>
