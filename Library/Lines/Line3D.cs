@@ -1,4 +1,5 @@
-﻿using System;
+﻿// $Id$
+
 using Library.Matrix;
 using Library.Vector;
 
@@ -7,7 +8,7 @@ namespace Library.Lines
 	/// <summary>
 	/// Structure for a 3D line segment
 	/// </summary>
-	public class Line3D
+	public struct Line3D
 	{
 		public Vector3D Origin, Direction;
 

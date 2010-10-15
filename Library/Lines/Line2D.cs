@@ -1,4 +1,6 @@
-﻿using System;
+﻿// $Id$
+
+using System;
 using Library.Vector;
 
 namespace Library.Lines
@@ -6,7 +8,7 @@ namespace Library.Lines
 	/// <summary>
 	/// Structure for a 2D line segment
 	/// </summary>
-	public class Line2D
+	public struct Line2D
 	{
 		public Vector2D Origin, Direction;
 
