@@ -908,11 +908,45 @@ namespace Library.Matrix
 		/// <returns></returns>
 		public double GetDeterminant()
 		{
+#if NO_UNROLL
 			return
 				Cell[0, 0]*GetSubDeterminant(0, 0) -
 				Cell[0, 1]*GetSubDeterminant(0, 1) +
 				Cell[0, 2]*GetSubDeterminant(0, 2) -
 				Cell[0, 3]*GetSubDeterminant(0, 3);
+#else
+
+			double value1 = Cell[0, 0]*(Cell[1, 1]*Cell[2, 2]*Cell[3, 3] +
+			                            Cell[1, 2]*Cell[2, 3]*Cell[3, 1] +
+			                            Cell[1, 3]*Cell[2, 1]*Cell[3, 2] -
+			                            Cell[1, 3]*Cell[2, 2]*Cell[3, 1] -
+			                            Cell[1, 1]*Cell[2, 3]*Cell[3, 2] -
+			                            Cell[1, 2]*Cell[2, 1]*Cell[3, 3]);
+
+			double value2 = Cell[0, 1]*(Cell[1, 0]*Cell[2, 2]*Cell[3, 3] +
+			                            Cell[1, 2]*Cell[2, 3]*Cell[3, 0] +
+			                            Cell[1, 3]*Cell[2, 0]*Cell[3, 2] -
+			                            Cell[1, 3]*Cell[2, 2]*Cell[3, 0] -
+			                            Cell[1, 0]*Cell[2, 3]*Cell[3, 2] -
+			                            Cell[1, 2]*Cell[2, 0]*Cell[3, 3]);
+
+			double value3 = Cell[0, 2]*(Cell[1, 0]*Cell[2, 1]*Cell[3, 3] +
+			                            Cell[1, 1]*Cell[2, 3]*Cell[3, 0] +
+			                            Cell[1, 3]*Cell[2, 0]*Cell[3, 1] -
+			                            Cell[1, 3]*Cell[2, 1]*Cell[3, 0] -
+			                            Cell[1, 0]*Cell[2, 3]*Cell[3, 1] -
+			                            Cell[1, 1]*Cell[2, 0]*Cell[3, 3]);
+
+			double value4 = Cell[0, 3]*(Cell[1, 0]*Cell[2, 1]*Cell[3, 2] +
+			                            Cell[1, 1]*Cell[2, 2]*Cell[3, 0] +
+			                            Cell[1, 2]*Cell[2, 0]*Cell[3, 1] -
+			                            Cell[1, 2]*Cell[2, 1]*Cell[3, 0] -
+			                            Cell[1, 0]*Cell[2, 2]*Cell[3, 1] -
+			                            Cell[1, 1]*Cell[2, 0]*Cell[3, 2]);
+
+			return value1 - value2 + value3 - value4;
+
+#endif
 		}
 
 		/// <summary>
