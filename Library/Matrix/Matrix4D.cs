@@ -915,34 +915,74 @@ namespace Library.Matrix
 				Cell[0, 2]*GetSubDeterminant(0, 2) -
 				Cell[0, 3]*GetSubDeterminant(0, 3);
 #else
+			//double value1 = Cell[0, 0]*(Cell[1, 1]*Cell[2, 2]*Cell[3, 3] +
+			//                            Cell[1, 2]*Cell[2, 3]*Cell[3, 1] +
+			//                            Cell[1, 3]*Cell[2, 1]*Cell[3, 2] -
+			//                            Cell[1, 3]*Cell[2, 2]*Cell[3, 1] -
+			//                            Cell[1, 1]*Cell[2, 3]*Cell[3, 2] -
+			//                            Cell[1, 2]*Cell[2, 1]*Cell[3, 3]);
 
-			double value1 = Cell[0, 0]*(Cell[1, 1]*Cell[2, 2]*Cell[3, 3] +
-			                            Cell[1, 2]*Cell[2, 3]*Cell[3, 1] +
-			                            Cell[1, 3]*Cell[2, 1]*Cell[3, 2] -
-			                            Cell[1, 3]*Cell[2, 2]*Cell[3, 1] -
-			                            Cell[1, 1]*Cell[2, 3]*Cell[3, 2] -
-			                            Cell[1, 2]*Cell[2, 1]*Cell[3, 3]);
+			//double value2 = Cell[0, 1]*(Cell[1, 0]*Cell[2, 2]*Cell[3, 3] +
+			//                            Cell[1, 2]*Cell[2, 3]*Cell[3, 0] +
+			//                            Cell[1, 3]*Cell[2, 0]*Cell[3, 2] -
+			//                            Cell[1, 3]*Cell[2, 2]*Cell[3, 0] -
+			//                            Cell[1, 0]*Cell[2, 3]*Cell[3, 2] -
+			//                            Cell[1, 2]*Cell[2, 0]*Cell[3, 3]);
 
-			double value2 = Cell[0, 1]*(Cell[1, 0]*Cell[2, 2]*Cell[3, 3] +
-			                            Cell[1, 2]*Cell[2, 3]*Cell[3, 0] +
-			                            Cell[1, 3]*Cell[2, 0]*Cell[3, 2] -
-			                            Cell[1, 3]*Cell[2, 2]*Cell[3, 0] -
-			                            Cell[1, 0]*Cell[2, 3]*Cell[3, 2] -
-			                            Cell[1, 2]*Cell[2, 0]*Cell[3, 3]);
+			//double value3 = Cell[0, 2]*(Cell[1, 0]*Cell[2, 1]*Cell[3, 3] +
+			//                            Cell[1, 1]*Cell[2, 3]*Cell[3, 0] +
+			//                            Cell[1, 3]*Cell[2, 0]*Cell[3, 1] -
+			//                            Cell[1, 3]*Cell[2, 1]*Cell[3, 0] -
+			//                            Cell[1, 0]*Cell[2, 3]*Cell[3, 1] -
+			//                            Cell[1, 1]*Cell[2, 0]*Cell[3, 3]);
 
-			double value3 = Cell[0, 2]*(Cell[1, 0]*Cell[2, 1]*Cell[3, 3] +
-			                            Cell[1, 1]*Cell[2, 3]*Cell[3, 0] +
-			                            Cell[1, 3]*Cell[2, 0]*Cell[3, 1] -
-			                            Cell[1, 3]*Cell[2, 1]*Cell[3, 0] -
-			                            Cell[1, 0]*Cell[2, 3]*Cell[3, 1] -
-			                            Cell[1, 1]*Cell[2, 0]*Cell[3, 3]);
+			//double value4 = Cell[0, 3]*(Cell[1, 0]*Cell[2, 1]*Cell[3, 2] +
+			//                            Cell[1, 1]*Cell[2, 2]*Cell[3, 0] +
+			//                            Cell[1, 2]*Cell[2, 0]*Cell[3, 1] -
+			//                            Cell[1, 2]*Cell[2, 1]*Cell[3, 0] -
+			//                            Cell[1, 0]*Cell[2, 2]*Cell[3, 1] -
+			//                            Cell[1, 1]*Cell[2, 0]*Cell[3, 2]);
 
-			double value4 = Cell[0, 3]*(Cell[1, 0]*Cell[2, 1]*Cell[3, 2] +
-			                            Cell[1, 1]*Cell[2, 2]*Cell[3, 0] +
-			                            Cell[1, 2]*Cell[2, 0]*Cell[3, 1] -
-			                            Cell[1, 2]*Cell[2, 1]*Cell[3, 0] -
-			                            Cell[1, 0]*Cell[2, 2]*Cell[3, 1] -
-			                            Cell[1, 1]*Cell[2, 0]*Cell[3, 2]);
+			double c1122 = Cell[1, 1]*Cell[2, 2];
+			double c1223 = Cell[1, 2]*Cell[2, 3];
+			double c1233 = Cell[1, 2]*Cell[3, 3];
+			double c1332 = Cell[1, 3]*Cell[3, 2];
+			double c1322 = Cell[1, 3]*Cell[2, 2];
+			double c1123 = Cell[1, 1]*Cell[2, 3];
+			double c1021 = Cell[1, 0]*Cell[2, 1];
+			double c1022 = Cell[1, 0]*Cell[2, 2];
+			double c1023 = Cell[1, 0]*Cell[2, 3];
+			double c1120 = Cell[1, 1]*Cell[2, 0];
+			double c2031 = Cell[2, 0]*Cell[3, 1];
+			double c2130 = Cell[2, 1]*Cell[3, 0];
+
+			double value1 = Cell[0, 0]*(c1122*Cell[3, 3] +
+			                            c1223*Cell[3, 1] +
+			                            c1332*Cell[2, 1] -
+			                            c1322*Cell[3, 1] -
+			                            c1123*Cell[3, 2] -
+			                            c1233*Cell[2, 1]);
+
+			double value2 = Cell[0, 1]*(c1022*Cell[3, 3] +
+			                            c1223*Cell[3, 0] +
+			                            c1332*Cell[2, 0] -
+			                            c1322*Cell[3, 0] -
+			                            c1023*Cell[3, 2] -
+			                            c1233*Cell[2, 0]);
+
+			double value3 = Cell[0, 2]*(c1021*Cell[3, 3] +
+			                            c1123*Cell[3, 0] +
+			                            Cell[1, 3]*c2031 -
+			                            Cell[1, 3]*c2130 -
+			                            c1023*Cell[3, 1] -
+			                            c1120*Cell[3, 3]);
+
+			double value4 = Cell[0, 3]*(c1021*Cell[3, 2] +
+			                            c1122*Cell[3, 0] +
+			                            Cell[1, 2]*c2031 -
+			                            Cell[1, 2]*c2130 -
+			                            c1022*Cell[3, 1] -
+			                            c1120*Cell[3, 2]);
 
 			return value1 - value2 + value3 - value4;
 
@@ -957,10 +997,8 @@ namespace Library.Matrix
 		/// <returns></returns>
 		public static double GetAdjoint(int row, int column)
 		{
-			double adjoint = 1;
-			if ((row & 1) == 1) adjoint *= -1.0D; // Flip sign for every even row
-			if ((column & 1) == 1) adjoint *= -1.0D; // Flip sign for every even column
-			return adjoint;
+			// if both are even or both are odd, the result is positive
+			return (row & 1) == (column & 1) ? 1 : -1;
 		}
 
 		/// <summary>

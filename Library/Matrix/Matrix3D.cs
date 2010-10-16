@@ -583,10 +583,8 @@ namespace Library.Matrix
 		/// <returns></returns>
 		public static double GetAdjoint(int row, int column)
 		{
-			double adjoint = 1;
-			if ((row & 1) == 1) adjoint *= -1.0D; // Flip sign for every even row
-			if ((column & 1) == 1) adjoint *= -1.0D; // Flip sign for every even column
-			return adjoint;
+			// if both are even or both are odd, the result is positive
+			return (row & 1) == (column & 1) ? 1 : -1;
 		}
 
 		#endregion

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Library.Vector;
+﻿using Library.Vector;
 using NUnit.Framework;
 
 namespace Library.Matrix
