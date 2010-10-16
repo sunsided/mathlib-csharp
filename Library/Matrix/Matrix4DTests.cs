@@ -1,4 +1,5 @@
-﻿using Library.Vector;
+﻿using System.Text;
+using Library.Vector;
 using NUnit.Framework;
 
 namespace Library.Matrix
@@ -234,6 +235,28 @@ namespace Library.Matrix
 				);
 
 			Assert.AreEqual(expected, inv);
+		}
+
+		/// <summary>
+		/// For optimizing purposes; Not a real test.
+		/// </summary>
+		[Test]
+		public void GetSubDeterminantCode()
+		{
+			StringBuilder builder  = new StringBuilder();
+			for (int i=0; i<4; ++i)
+			{
+				for(int j=0; j<4; ++j)
+				{
+					string det = Matrix4D.GetSubDeterminantCode(i, j);
+					builder.AppendFormat("// Determinant row {0}, cell {1}", i, j);
+					builder.AppendLine();
+					builder.AppendLine(det);
+					builder.AppendLine();
+				}
+			}
+
+			string code = builder.ToString();
 		}
 	}
 }

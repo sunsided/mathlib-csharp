@@ -1226,5 +1226,52 @@ namespace Library.Matrix
 			builder.Append("]");
 			return builder.ToString();
 		}
+
+		#region Programming helper
+
+		/// <summary>
+		/// Gets the 3x3 sub-determinant by ignoring a given row and column.
+		/// This is a memory efficient alternative to getting the submatrix and then calculate it's determinant.
+		/// </summary>
+		/// <param name="row">The row to skip</param>
+		/// <param name="column">The column to skip</param>
+		/// <returns></returns>
+		internal static string GetSubDeterminantCode(int row, int column)
+		{
+			// get target row indices
+			int row0 = 0;
+			int row1 = 1;
+			int row2 = 2;
+
+			// get target column indices
+			int col0 = 0;
+			int col1 = 1;
+			int col2 = 2;
+
+			// adjust for skipped rows
+			if (row == 0) { ++row0; ++row1; ++row2; }
+			else if (row == 1) { ++row1; ++row2; }
+			else if (row == 2) { ++row2; }
+
+			// adjust for skipped columns
+			if (column == 0) { ++col0; ++col1; ++col2; }
+			else if (column == 1) { ++col1; ++col2; }
+			else if (column == 2) { ++col2; }
+
+			// Regel von Sarrus
+			// gem. Mathematische Formelsammlung, col9. Auflage, Papula, S. 201
+
+			StringBuilder builder = new StringBuilder();
+			builder.AppendFormat(@"string det = Cell[{0}, {3}] * Cell[{1}, {4}] * Cell[{2}, {5}] +
+             Cell[{0}, {4}] * Cell[{1}, {5}] * Cell[{2}, {3}] +
+             Cell[{0}, {5}] * Cell[{1}, {3}] * Cell[{2}, {4}] -
+             Cell[{0}, {5}] * Cell[{1}, {4}] * Cell[{2}, {3}] -
+             Cell[{0}, {3}] * Cell[{1}, {5}] * Cell[{2}, {4}] -
+             Cell[{0}, {4}] * Cell[{1}, {3}] * Cell[{2}, {5}];", row0, row1, row2, col0, col1, col2);
+
+			return builder.ToString();
+		}
+
+		#endregion
 	}
 }
