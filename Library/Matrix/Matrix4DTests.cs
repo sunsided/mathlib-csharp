@@ -1,4 +1,7 @@
-﻿using System.Text;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Text.RegularExpressions;
 using Library.Vector;
 using NUnit.Framework;
 
@@ -239,10 +242,12 @@ namespace Library.Matrix
 
 		/// <summary>
 		/// For optimizing purposes; Not a real test.
+		/// This is for unrolling / precalculating the adjoint code.
 		/// </summary>
 		[Test]
 		public void GetSubDeterminantCode()
 		{
+			// Code generieren
 			StringBuilder builder  = new StringBuilder();
 			for (int i=0; i<4; ++i)
 			{
@@ -257,6 +262,71 @@ namespace Library.Matrix
 			}
 
 			string code = builder.ToString();
+
+			// Paare extrahieren
+			MatchCollection c = Regex.Matches(code,
+											  @"Cell\[(?<a1>\d), (?<a2>\d)\] \* Cell\[(?<b1>\d), (?<b2>\d)\] \* Cell\[(?<c1>\d), (?<c2>\d)\]",
+			                                  RegexOptions.ExplicitCapture | RegexOptions.Multiline);
+
+			Dictionary<string, int> matches = new Dictionary<string, int>();
+			foreach (Match m in c)
+			{
+				string match1 = m.Groups["a1"].Value + m.Groups["a2"].Value + m.Groups["b1"].Value + m.Groups["b2"].Value;
+				string match2 = m.Groups["a1"].Value + m.Groups["a2"].Value + m.Groups["c1"].Value + m.Groups["c2"].Value;
+				string match3 = m.Groups["b1"].Value + m.Groups["b2"].Value + m.Groups["c1"].Value + m.Groups["c2"].Value;
+
+				if (matches.ContainsKey(match1)) ++matches[match1];
+				else matches.Add(match1, 1);
+
+				if (matches.ContainsKey(match2)) ++matches[match2];
+				else matches.Add(match2, 1);
+
+				if (matches.ContainsKey(match3)) ++matches[match3];
+				else matches.Add(match3, 1);
+			}
+
+			// Ersetzungen
+			string refactored = code;
+			foreach (KeyValuePair<string, int> pair in matches)
+			{
+				char a1 = pair.Key[0];
+				char a2 = pair.Key[1];
+				char b1 = pair.Key[2];
+				char b2 = pair.Key[3];
+
+				string option = String.Format(@"Cell\[{0}, {1}\] \* Cell\[{2}, {3}]", a1, a2, b1, b2);
+				string replacement = String.Format("c{0}{1}{2}{3}", a1, a2, b1, b2);
+
+				//string option2 = String.Format(@"Cell\[{0}, {1}\] \* Cell\[\d, \d] \* Cell\[{2}, {3}\]", a1, a2, b1, b2);
+				refactored = Regex.Replace(refactored, option, replacement, RegexOptions.Multiline);
+			}
+
+			// Paare vorberechnen
+			StringBuilder precalculations = new StringBuilder();
+			foreach (KeyValuePair<string, int> pair in matches)
+			{
+				char a1 = pair.Key[0];
+				char a2 = pair.Key[1];
+				char b1 = pair.Key[2];
+				char b2 = pair.Key[3];
+
+				// Test if variable exists
+				string variableName = String.Format("c{0}{1}{2}{3}", a1, a2, b1, b2);
+				if (!refactored.Contains(variableName)) continue;
+
+				// Add precalculation
+				precalculations.AppendFormat("double {4} = Cell[{0}, {1}] * Cell[{2}, {3}];", a1, a2, b1, b2, variableName);
+				precalculations.AppendLine();
+			}
+			string precode = precalculations.ToString();
+
+			// Combine
+			StringBuilder combinedCode = new StringBuilder();
+			combinedCode.AppendLine(precode);
+			combinedCode.AppendLine();
+			combinedCode.AppendLine(refactored);
+			combinedCode.AppendLine();
+			string optimizedCalculation = combinedCode.ToString();
 		}
 	}
 }

@@ -1000,25 +1000,170 @@ namespace Library.Matrix
 				-GetSubDeterminant(3, 0), +GetSubDeterminant(3, 1), -GetSubDeterminant(3, 2), +GetSubDeterminant(3, 3)).GetTransposed();
 #else
 
-			double m11 = GetSubDeterminant(0, 0);
-			double m12 = GetSubDeterminant(0, 1);
-			double m13 = GetSubDeterminant(0, 2);
-			double m14 = GetSubDeterminant(0, 3);
+			double c1122 = Cell[1, 1]*Cell[2, 2];
+			double c1133 = Cell[1, 1]*Cell[3, 3];
+			double c2233 = Cell[2, 2]*Cell[3, 3];
+			double c1223 = Cell[1, 2]*Cell[2, 3];
+			double c1231 = Cell[1, 2]*Cell[3, 1];
+			double c2331 = Cell[2, 3]*Cell[3, 1];
+			double c1321 = Cell[1, 3]*Cell[2, 1];
+			double c1332 = Cell[1, 3]*Cell[3, 2];
+			double c2132 = Cell[2, 1]*Cell[3, 2];
+			double c1322 = Cell[1, 3]*Cell[2, 2];
+			double c1331 = Cell[1, 3]*Cell[3, 1];
+			double c2231 = Cell[2, 2]*Cell[3, 1];
+			double c1123 = Cell[1, 1]*Cell[2, 3];
+			double c1132 = Cell[1, 1]*Cell[3, 2];
+			double c2332 = Cell[2, 3]*Cell[3, 2];
+			double c1221 = Cell[1, 2]*Cell[2, 1];
+			double c1233 = Cell[1, 2]*Cell[3, 3];
+			double c2133 = Cell[2, 1]*Cell[3, 3];
+			double c1022 = Cell[1, 0]*Cell[2, 2];
+			double c1033 = Cell[1, 0]*Cell[3, 3];
+			double c1230 = Cell[1, 2]*Cell[3, 0];
+			double c2330 = Cell[2, 3]*Cell[3, 0];
+			double c1320 = Cell[1, 3]*Cell[2, 0];
+			double c2032 = Cell[2, 0]*Cell[3, 2];
+			double c1330 = Cell[1, 3]*Cell[3, 0];
+			double c2230 = Cell[2, 2]*Cell[3, 0];
+			double c1023 = Cell[1, 0]*Cell[2, 3];
+			double c1032 = Cell[1, 0]*Cell[3, 2];
+			double c1220 = Cell[1, 2]*Cell[2, 0];
+			double c2033 = Cell[2, 0]*Cell[3, 3];
+			double c1021 = Cell[1, 0]*Cell[2, 1];
+			double c1130 = Cell[1, 1]*Cell[3, 0];
+			double c2031 = Cell[2, 0]*Cell[3, 1];
+			double c2130 = Cell[2, 1]*Cell[3, 0];
+			double c1031 = Cell[1, 0]*Cell[3, 1];
+			double c1120 = Cell[1, 1]*Cell[2, 0];
 
-			double m21 = GetSubDeterminant(1, 0);
-			double m22 = GetSubDeterminant(1, 1);
-			double m23 = GetSubDeterminant(1, 2);
-			double m24 = GetSubDeterminant(1, 3);
+			// Determinant row 0, cell 0
+			double m11 = c1122*Cell[3, 3] +
+			             c1223*Cell[3, 1] +
+			             c1321*Cell[3, 2] -
+			             c1322*Cell[3, 1] -
+			             c1123*Cell[3, 2] -
+			             c1221*Cell[3, 3];
 
-			double m31 = GetSubDeterminant(2, 0);
-			double m32 = GetSubDeterminant(2, 1);
-			double m33 = GetSubDeterminant(2, 2);
-			double m34 = GetSubDeterminant(2, 3);
+			// Determinant row 0, cell 1
+			double m12 = Cell[1, 0]*c2233 +
+			             c1223*Cell[3, 0] +
+			             c1320*Cell[3, 2] -
+			             c1322*Cell[3, 0] -
+			             Cell[1, 0]*c2332 -
+			             c1220*Cell[3, 3];
 
-			double m41 = GetSubDeterminant(3, 0);
-			double m42 = GetSubDeterminant(3, 1);
-			double m43 = GetSubDeterminant(3, 2);
-			double m44 = GetSubDeterminant(3, 3);
+			// Determinant row 0, cell 2
+			double m13 = Cell[1, 0]*c2133 +
+			             c1123*Cell[3, 0] +
+			             c1320*Cell[3, 1] -
+			             c1321*Cell[3, 0] -
+			             Cell[1, 0]*c2331 -
+			             Cell[1, 1]*c2033;
+
+			// Determinant row 0, cell 3
+			double m14 = Cell[1, 0]*c2132 +
+			             c1122*Cell[3, 0] +
+			             c1220*Cell[3, 1] -
+			             c1221*Cell[3, 0] -
+			             Cell[1, 0]*c2231 -
+			             Cell[1, 1]*c2032;
+
+			// Determinant row 1, cell 0
+			double m21 = Cell[0, 1]*c2233 +
+			             Cell[0, 2]*c2331 +
+			             Cell[0, 3]*c2132 -
+			             Cell[0, 3]*c2231 -
+			             Cell[0, 1]*c2332 -
+			             Cell[0, 2]*c2133;
+
+			// Determinant row 1, cell 1
+			double m22 = Cell[0, 0]*c2233 +
+			             Cell[0, 2]*c2330 +
+			             Cell[0, 3]*c2032 -
+			             Cell[0, 3]*c2230 -
+			             Cell[0, 0]*c2332 -
+			             Cell[0, 2]*c2033;
+
+			// Determinant row 1, cell 2
+			double m23 = Cell[0, 0]*c2133 +
+			             Cell[0, 1]*c2330 +
+			             Cell[0, 3]*c2031 -
+			             Cell[0, 3]*c2130 -
+			             Cell[0, 0]*c2331 -
+			             Cell[0, 1]*c2033;
+
+			// Determinant row 1, cell 3
+			double m24 = Cell[0, 0]*c2132 +
+			             Cell[0, 1]*c2230 +
+			             Cell[0, 2]*c2031 -
+			             Cell[0, 2]*c2130 -
+			             Cell[0, 0]*c2231 -
+			             Cell[0, 1]*c2032;
+
+			// Determinant row 2, cell 0
+			double m31 = Cell[0, 1]*c1233 +
+			             Cell[0, 2]*c1331 +
+			             Cell[0, 3]*c1132 -
+			             Cell[0, 3]*c1231 -
+			             Cell[0, 1]*c1332 -
+			             Cell[0, 2]*c1133;
+
+			// Determinant row 2, cell 1
+			double m32 = Cell[0, 0]*c1233 +
+			             Cell[0, 2]*c1330 +
+			             Cell[0, 3]*c1032 -
+			             Cell[0, 3]*c1230 -
+			             Cell[0, 0]*c1332 -
+			             Cell[0, 2]*c1033;
+
+			// Determinant row 2, cell 2
+			double m33 = Cell[0, 0]*c1133 +
+			             Cell[0, 1]*c1330 +
+			             Cell[0, 3]*c1031 -
+			             Cell[0, 3]*c1130 -
+			             Cell[0, 0]*c1331 -
+			             Cell[0, 1]*c1033;
+
+			// Determinant row 2, cell 3
+			double m34 = Cell[0, 0]*c1132 +
+			             Cell[0, 1]*c1230 +
+			             Cell[0, 2]*c1031 -
+			             Cell[0, 2]*c1130 -
+			             Cell[0, 0]*c1231 -
+			             Cell[0, 1]*c1032;
+
+			// Determinant row 3, cell 0
+			double m41 = Cell[0, 1]*c1223 +
+			             Cell[0, 2]*c1321 +
+			             Cell[0, 3]*c1122 -
+			             Cell[0, 3]*c1221 -
+			             Cell[0, 1]*c1322 -
+			             Cell[0, 2]*c1123;
+
+			// Determinant row 3, cell 1
+			double m42 = Cell[0, 0]*c1223 +
+			             Cell[0, 2]*c1320 +
+			             Cell[0, 3]*c1022 -
+			             Cell[0, 3]*c1220 -
+			             Cell[0, 0]*c1322 -
+			             Cell[0, 2]*c1023;
+
+			// Determinant row 3, cell 2
+			double m43 = Cell[0, 0]*c1123 +
+			             Cell[0, 1]*c1320 +
+			             Cell[0, 3]*c1021 -
+			             Cell[0, 3]*c1120 -
+			             Cell[0, 0]*c1321 -
+			             Cell[0, 1]*c1023;
+
+			// Determinant row 3, cell 3
+			double m44 = Cell[0, 0]*c1122 +
+			             Cell[0, 1]*c1220 +
+			             Cell[0, 2]*c1021 -
+			             Cell[0, 2]*c1120 -
+			             Cell[0, 0]*c1221 -
+			             Cell[0, 1]*c1022;
 
 			//return new Matrix4D(
 			//    +m11, -m12, +m13, -m14,
@@ -1045,7 +1190,7 @@ namespace Library.Matrix
 			double invDeterminant = 1.0D/GetDeterminant();
 			if (Double.IsInfinity(invDeterminant)) throw new InvalidOperationException("Matrix cannot be inverted.");
 
-			return invDeterminant * GetAdjoint();
+			return invDeterminant*GetAdjoint();
 		}
 
 		/// <summary>
@@ -1262,12 +1407,12 @@ namespace Library.Matrix
 			// gem. Mathematische Formelsammlung, col9. Auflage, Papula, S. 201
 
 			StringBuilder builder = new StringBuilder();
-			builder.AppendFormat(@"string det = Cell[{0}, {3}] * Cell[{1}, {4}] * Cell[{2}, {5}] +
-             Cell[{0}, {4}] * Cell[{1}, {5}] * Cell[{2}, {3}] +
-             Cell[{0}, {5}] * Cell[{1}, {3}] * Cell[{2}, {4}] -
-             Cell[{0}, {5}] * Cell[{1}, {4}] * Cell[{2}, {3}] -
-             Cell[{0}, {3}] * Cell[{1}, {5}] * Cell[{2}, {4}] -
-             Cell[{0}, {4}] * Cell[{1}, {3}] * Cell[{2}, {5}];", row0, row1, row2, col0, col1, col2);
+			builder.AppendFormat(@"double m{6}{7} = Cell[{0}, {3}] * Cell[{1}, {4}] * Cell[{2}, {5}] +
+               Cell[{0}, {4}] * Cell[{1}, {5}] * Cell[{2}, {3}] +
+               Cell[{0}, {5}] * Cell[{1}, {3}] * Cell[{2}, {4}] -
+               Cell[{0}, {5}] * Cell[{1}, {4}] * Cell[{2}, {3}] -
+               Cell[{0}, {3}] * Cell[{1}, {5}] * Cell[{2}, {4}] -
+               Cell[{0}, {4}] * Cell[{1}, {3}] * Cell[{2}, {5}];", row0, row1, row2, col0, col1, col2, row+1, column+1);
 
 			return builder.ToString();
 		}
