@@ -581,7 +581,7 @@ namespace Library.Matrix
 		/// <param name="row">The row index 0..3</param>
 		/// <param name="column">The column index 0..3</param>
 		/// <returns></returns>
-		public static double GetAdjoint(int row, int column)
+		public static double GetAdjointFactor(int row, int column)
 		{
 			// if both are even or both are odd, the result is positive
 			return (row & 1) == (column & 1) ? 1 : -1;

@@ -13,14 +13,14 @@ namespace Library.Matrix
 		/// Tests the GetAdjoint() method
 		/// </summary>
 		[Test]
-		public void TestAdjoint()
+		public void TestAdjointFactor()
 		{
-			Assert.AreEqual(1, Matrix4D.GetAdjoint(0, 0));
-			Assert.AreEqual(-1, Matrix4D.GetAdjoint(1, 0));
-			Assert.AreEqual(-1, Matrix4D.GetAdjoint(0, 1));
-			Assert.AreEqual(1, Matrix4D.GetAdjoint(1, 1));
-			Assert.AreEqual(1, Matrix4D.GetAdjoint(2, 2));
-			Assert.AreEqual(-1, Matrix4D.GetAdjoint(2, 3));
+			Assert.AreEqual(1, Matrix4D.GetAdjointFactor(0, 0));
+			Assert.AreEqual(-1, Matrix4D.GetAdjointFactor(1, 0));
+			Assert.AreEqual(-1, Matrix4D.GetAdjointFactor(0, 1));
+			Assert.AreEqual(1, Matrix4D.GetAdjointFactor(1, 1));
+			Assert.AreEqual(1, Matrix4D.GetAdjointFactor(2, 2));
+			Assert.AreEqual(-1, Matrix4D.GetAdjointFactor(2, 3));
 		}
 
 		/// <summary>
@@ -210,6 +210,29 @@ namespace Library.Matrix
 
 			Matrix4D mat2 = Matrix4D.FromColumnVectors(new[] { col1, col2, col3, col4 });
 			Assert.AreEqual(mat, mat2);
+		}
+
+		/// <summary>
+		/// Tests the inversion of the matrix
+		/// </summary>
+		[Test]
+		public void TestInversion()
+		{
+			Matrix4D mat = new Matrix4D(
+				1, 0, 3, 0,
+				0, 1, 0, 0,
+				0, 0, 1, 0,
+				12, 0, 0, 1
+				);
+			Matrix4D inv = mat.GetInverted();
+			Matrix4D expected = new Matrix4D(
+				1, 0, -3, 0,
+				0, 1, 0, 0,
+				0, 0, 1, 0,
+				-12, 0, 36, 1
+				);
+
+			Assert.AreEqual(expected, inv);
 		}
 	}
 }

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
+using System.Windows.Forms;
 using Library.Vector;
 
 namespace Library.Matrix
@@ -451,6 +452,22 @@ namespace Library.Matrix
 		}
 
 		/// <summary>
+		/// Multiplies a matrix by a scalar
+		/// </summary>
+		public static Matrix4D operator *(Matrix4D a, double b)
+		{
+			return a.Multiply(b);
+		}
+		
+		/// <summary>
+		/// Multiplies a matrix by a scalar
+		/// </summary>
+		public static Matrix4D operator *(double b, Matrix4D a)
+		{
+			return a.Multiply(b);
+		}
+
+		/// <summary>
 		/// Multiplies the matrix with another one
 		/// </summary>
 		/// <param name="b">Matrix to concatenate</param>
@@ -484,6 +501,20 @@ namespace Library.Matrix
 		}
 
 		/// <summary>
+		/// Multiplies the matrix with another one
+		/// </summary>
+		/// <param name="b">Matrix to concatenate</param>
+		/// <returns>Matrix4D</returns>
+		public Matrix4D Multiply(double b)
+		{
+			Cell[0, 0] *= b; Cell[0, 1] *= b; Cell[0, 2] *= b; Cell[0, 3] *= b;
+			Cell[1, 0] *= b; Cell[1, 1] *= b; Cell[1, 2] *= b; Cell[1, 3] *= b;
+			Cell[2, 0] *= b; Cell[2, 1] *= b; Cell[2, 2] *= b; Cell[2, 3] *= b;
+			Cell[3, 0] *= b; Cell[3, 1] *= b; Cell[3, 2] *= b; Cell[3, 3] *= b;
+			return this;
+		}
+		/*
+		/// <summary>
 		/// Inverts the matrix
 		/// </summary>
 		/// <returns>Matrix4D</returns>
@@ -516,6 +547,7 @@ namespace Library.Matrix
 			
 			return mat;
 		}
+		*/
 
 		#endregion
 
@@ -990,12 +1022,37 @@ namespace Library.Matrix
 		}
 
 		/// <summary>
+		/// Gets the adjoint matrix
+		/// </summary>
+		/// <returns></returns>
+		public Matrix4D GetAdjoint()
+		{
+			return new Matrix4D(
+				+GetSubDeterminant(0, 0), -GetSubDeterminant(0, 1), +GetSubDeterminant(0, 2), -GetSubDeterminant(0, 3),
+				-GetSubDeterminant(1, 0), +GetSubDeterminant(1, 1), -GetSubDeterminant(1, 2), +GetSubDeterminant(1, 3),
+				+GetSubDeterminant(2, 0), -GetSubDeterminant(2, 1), +GetSubDeterminant(2, 2), -GetSubDeterminant(2, 3),
+				-GetSubDeterminant(3, 0), +GetSubDeterminant(3, 1), -GetSubDeterminant(3, 2), +GetSubDeterminant(3, 3)).GetTransposed();
+		}
+
+		/// <summary>
+		/// Gets the adjoint matrix
+		/// </summary>
+		/// <returns></returns>
+		public Matrix4D GetInverted()
+		{
+			double invDeterminant = 1.0D/GetDeterminant();
+			if (Double.IsInfinity(invDeterminant)) throw new InvalidOperationException("Matrix cannot be inverted.");
+
+			return invDeterminant * GetAdjoint();
+		}
+
+		/// <summary>
 		/// Gets the adjoint for a given row and column
 		/// </summary>
 		/// <param name="row">The row index 0..3</param>
 		/// <param name="column">The column index 0..3</param>
 		/// <returns></returns>
-		public static double GetAdjoint(int row, int column)
+		public static double GetAdjointFactor(int row, int column)
 		{
 			// if both are even or both are odd, the result is positive
 			return (row & 1) == (column & 1) ? 1 : -1;
@@ -1155,12 +1212,12 @@ namespace Library.Matrix
 		{
 			StringBuilder builder = new StringBuilder();
 			builder.Append("[");
-			for (int j=0; j<4; ++j)
+			for (int i=0; i<4; ++i)
 			{
-				if (j > 0) builder.Append("; ");
-				for(int i=0; i<4; ++i)
+				if (i > 0) builder.Append("; ");
+				for(int j=0; j<4; ++j)
 				{
-					if (i > 0) builder.Append(", ");
+					if (j > 0) builder.Append(", ");
 					builder.AppendFormat(CultureInfo.InvariantCulture, "{0}", Cell[i, j]);
 				}
 			}
