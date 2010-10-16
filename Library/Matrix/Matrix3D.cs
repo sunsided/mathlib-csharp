@@ -24,12 +24,28 @@ namespace Library.Matrix
 			0.0d, 0.0d, 1.0d);
 
 		/// <summary>
+		/// Gets the unit matrix
+		/// </summary>
+		public static readonly Matrix3D Zero = new Matrix3D(
+			0.0d, 0.0d, 0.0d,
+			0.0d, 0.0d, 0.0d,
+			0.0d, 0.0d, 0.0d);
+
+		/// <summary>
 		/// Gets a test matrix
 		/// </summary>
 		public static readonly Matrix3D Test = new Matrix3D(
 			0.0d, 1.0d, 2.0d,
 			0.1d, 1.1d, 2.1d,
 			0.2d, 1.2d, 2.2d);
+
+		/// <summary>
+		/// Magic values
+		/// </summary>
+		public static readonly Matrix3D Magic = new Matrix3D(
+			8, 1, 6,
+			3, 5, 7,
+			4, 9, 2);
 
 		#region Konstruktor
 
@@ -257,7 +273,7 @@ namespace Library.Matrix
 		/// <returns>Matrix3D</returns>
 		public Matrix3D Multiply(Matrix3D b)
 		{
-			Matrix3D mat = new Matrix3D(
+			Matrix3D mat = new Matrix3D( // TODO: Optimize by using cell access
 				M11 * b.M11 + M12 * b.M21 + M13 * b.M31,
 				M11 * b.M12 + M12 * b.M22 + M13 * b.M32,
 				M11 * b.M13 + M12 * b.M23 + M13 * b.M33,
@@ -543,6 +559,36 @@ namespace Library.Matrix
 			return new Vector3D(Cell[0, column], Cell[1, column], Cell[2, column]);
 		}
 		
+		/// <summary>
+		/// Gets the determinant
+		/// </summary>
+		/// <returns></returns>
+		public double GetDeterminant()
+		{
+			// Regel von Sarrus
+			// gem. Mathematische Formelsammlung, 9. Auflage, Papula, S. 201
+			return Cell[0, 0]*Cell[1, 1]*Cell[2, 2] +
+			       Cell[0, 1]*Cell[1, 2]*Cell[2, 0] +
+			       Cell[0, 2]*Cell[1, 0]*Cell[2, 1] -
+			       Cell[0, 2]*Cell[1, 1]*Cell[2, 0] -
+			       Cell[0, 0]*Cell[1, 2]*Cell[2, 1] -
+			       Cell[0, 1]*Cell[1, 0]*Cell[2, 2];
+		}
+
+		/// <summary>
+		/// Gets the adjoint for a given row and column
+		/// </summary>
+		/// <param name="row">The row index 0..3</param>
+		/// <param name="column">The column index 0..3</param>
+		/// <returns></returns>
+		public static double GetAdjoint(int row, int column)
+		{
+			double adjoint = 1;
+			if ((row & 1) == 1) adjoint *= -1.0D; // Flip sign for every even row
+			if ((column & 1) == 1) adjoint *= -1.0D; // Flip sign for every even column
+			return adjoint;
+		}
+
 		#endregion
 
 		#region Cast operators
@@ -595,6 +641,7 @@ namespace Library.Matrix
 		/// <returns></returns>
 		public bool Equals(Matrix3D other)
 		{
+			if (ReferenceEquals(null, other)) return false;
 			return
 				Cell[0, 0] == other.Cell[0, 0] &&
 				Cell[0, 1] == other.Cell[0, 1] &&

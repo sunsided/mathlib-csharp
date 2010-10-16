@@ -18,6 +18,17 @@ namespace ConsoleTest
 			}
 
 			{
+				Matrix4D mat = new Matrix4D(0, -7, -7, -5, 0, 14, 11, 4, 0, -1, -1, 3, -3, 4, 3, 2);
+				double det = mat.GetDeterminant();
+			}
+			
+			{
+				double det = Matrix3D.Magic.GetDeterminant();
+				
+				det = new Matrix4D(Matrix3D.Magic).GetSubDeterminant(0, 0);
+			}
+
+			{
 				Matrix4D mat3 = Matrix4D.Test;
 				mat3[2, 3] = 19;
 				mat3[0, 0] = 2;

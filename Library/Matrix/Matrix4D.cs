@@ -1,6 +1,7 @@
 ﻿// $Id$
 
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 using Library.Vector;
@@ -40,6 +41,15 @@ namespace Library.Matrix
 			0.0d, 0.0d, 0.0d, 1.0d);
 
 		/// <summary>
+		/// Gets the zero matrix
+		/// </summary>
+		public static readonly Matrix4D Zero = new Matrix4D(
+			0.0d, 0.0d, 0.0d, 0.0d,
+			0.0d, 0.0d, 0.0d, 0.0d,
+			0.0d, 0.0d, 0.0d, 0.0d,
+			0.0d, 0.0d, 0.0d, 0.0d);
+
+		/// <summary>
 		/// Gets a test matrix
 		/// </summary>
 		public static readonly Matrix4D Test = new Matrix4D(
@@ -48,7 +58,49 @@ namespace Library.Matrix
 			0.2d, 1.2d, 2.2d, 3.2d,
 			0.3d, 1.3d, 2.3d, 3.3d);
 
+		/// <summary>
+		/// Gets the magic matrix
+		/// </summary>
+		public static readonly Matrix4D Magic = new Matrix4D(
+			16.0d,  2.0d,  3.0d, 13.0d,
+			 5.0d, 11.0d, 10.0d,  8.0d,
+			 9.0d,  7.0d,  6.0d, 12.0d,
+			 4.0d, 14.0d, 15.0d,  1.0d
+			);
+
 		#region Konstruktor
+
+		/// <summary>
+		/// Constructs a matrix from row vectors
+		/// </summary>
+		/// <param name="rows"></param>
+		/// <returns></returns>
+		public static Matrix4D FromRowVectors(IList<Vector4D> rows)
+		{
+			if (rows == null) throw new ArgumentNullException("rows");
+			if (rows.Count != 4) throw new ArgumentOutOfRangeException("rows", "4 rows expected");
+			return new Matrix4D(
+				rows[0].X, rows[0].Y, rows[0].Z, rows[0].W,
+				rows[1].X, rows[1].Y, rows[1].Z, rows[1].W,
+				rows[2].X, rows[2].Y, rows[2].Z, rows[2].W,
+				rows[3].X, rows[3].Y, rows[3].Z, rows[3].W);
+		}
+
+		/// <summary>
+		/// Constructs a matrix from column vectors
+		/// </summary>
+		/// <param name="columns"></param>
+		/// <returns></returns>
+		public static Matrix4D FromColumnVectors(IList<Vector4D> columns)
+		{
+			if (columns == null) throw new ArgumentNullException("columns");
+			if (columns.Count != 4) throw new ArgumentOutOfRangeException("columns", "4 columns expected");
+			return new Matrix4D(
+				columns[0].X, columns[1].X, columns[2].X, columns[3].X,
+				columns[0].Y, columns[1].Y, columns[2].Y, columns[3].Y,
+				columns[0].Z, columns[1].Z, columns[2].Z, columns[3].Z,
+				columns[0].W, columns[1].W, columns[2].W, columns[3].W);
+		}
 
 		/// <summary>
 		/// Creates a new instance of the <see cref="Matrix3D"/> class.
@@ -475,10 +527,26 @@ namespace Library.Matrix
 		/// <param name="b">Matrix to copy</param>
 		public void Assign(Matrix3D b)
 		{
+			if (b == null) throw new ArgumentNullException("b");
 			Cell[0, 0] = b.Cell[0, 0]; Cell[0, 1] = b.Cell[0, 1]; Cell[0, 2] = b.Cell[0, 2]; Cell[0, 3] = 0;
 			Cell[1, 0] = b.Cell[1, 0]; Cell[1, 1] = b.Cell[1, 1]; Cell[1, 2] = b.Cell[1, 2]; Cell[1, 3] = 0;
 			Cell[2, 0] = b.Cell[2, 0]; Cell[2, 1] = b.Cell[2, 1]; Cell[2, 2] = b.Cell[2, 2]; Cell[2, 3] = 0;
-			Cell[3, 0] = b.Cell[3, 0]; Cell[3, 1] = b.Cell[3, 1]; Cell[3, 2] = b.Cell[3, 2]; Cell[3, 3] = 1;
+			Cell[3, 0] =            0; Cell[3, 1] =            0; Cell[3, 2] =            0; Cell[3, 3] = 1;
+		}
+
+		/// <summary>
+		/// Assigns matrix values
+		/// </summary>
+		/// <param name="b">Matrix to copy</param>
+		/// <param name="lastRow">The last row</param>
+		public void Assign(Matrix3D b, Vector4D lastRow)
+		{
+			if (b == null) throw new ArgumentNullException("b");
+			if (lastRow == null) throw new ArgumentNullException("lastRow");
+			Cell[0, 0] = b.Cell[0, 0]; Cell[0, 1] = b.Cell[0, 1]; Cell[0, 2] = b.Cell[0, 2]; Cell[0, 3] = 0;
+			Cell[1, 0] = b.Cell[1, 0]; Cell[1, 1] = b.Cell[1, 1]; Cell[1, 2] = b.Cell[1, 2]; Cell[1, 3] = 0;
+			Cell[2, 0] = b.Cell[2, 0]; Cell[2, 1] = b.Cell[2, 1]; Cell[2, 2] = b.Cell[2, 2]; Cell[2, 3] = 0;
+			Cell[3, 0] = lastRow.X; Cell[3, 1] = lastRow.Y; Cell[3, 2] = lastRow.Z; Cell[3, 3] = lastRow.W;
 		}
 
 		/// <summary>
@@ -487,6 +555,7 @@ namespace Library.Matrix
 		/// <param name="b">Matrix to copy</param>
 		public void Assign(Matrix4D b)
 		{
+			if (b == null) throw new ArgumentNullException("b");
 			Cell[0, 0] = b.Cell[0, 0]; Cell[0, 1] = b.Cell[0, 1]; Cell[0, 2] = b.Cell[0, 2]; Cell[0, 3] = b.Cell[0, 3];
 			Cell[1, 0] = b.Cell[1, 0]; Cell[1, 1] = b.Cell[1, 1]; Cell[1, 2] = b.Cell[1, 2]; Cell[1, 3] = b.Cell[1, 3];
 			Cell[2, 0] = b.Cell[2, 0]; Cell[2, 1] = b.Cell[2, 1]; Cell[2, 2] = b.Cell[2, 2]; Cell[2, 3] = b.Cell[2, 3];
@@ -717,6 +786,52 @@ namespace Library.Matrix
 		}
 
 		/// <summary>
+		/// Swaps two rows
+		/// </summary>
+		/// <param name="row1">The first row</param>
+		/// <param name="row2">The second row</param>
+		public void SwapRows(int row1, int row2)
+		{
+			var a = Cell[row1, 0];
+			var b = Cell[row1, 1];
+			var c = Cell[row1, 2];
+			var d = Cell[row1, 3];
+			
+			Cell[row1, 0] = Cell[row2, 0];
+			Cell[row1, 1] = Cell[row2, 1];
+			Cell[row1, 2] = Cell[row2, 2];
+			Cell[row1, 3] = Cell[row2, 3];
+
+			Cell[row2, 0] = a; 
+			Cell[row2, 1] = b; 
+			Cell[row2, 2] = c; 
+			Cell[row2, 3] = d;
+		}
+
+		/// <summary>
+		/// Swaps two columns
+		/// </summary>
+		/// <param name="col1">The first column</param>
+		/// <param name="col2">The second column</param>
+		public void SwapColumns(int col1, int col2)
+		{
+			var a = Cell[0, col1];
+			var b = Cell[1, col1];
+			var c = Cell[2, col1];
+			var d = Cell[3, col1];
+
+			Cell[0, col1] = Cell[0, col2];
+			Cell[1, col1] = Cell[1, col2];
+			Cell[2, col1] = Cell[2, col2];
+			Cell[3, col1] = Cell[3, col2];
+
+			Cell[0, col2] = a;
+			Cell[1, col2] = b;
+			Cell[2, col2] = c;
+			Cell[3, col2] = d;
+		}
+		
+		/// <summary>
 		/// Returns a transposed matrix
 		/// </summary>
 		/// <returns>Matrix4D</returns>
@@ -785,6 +900,104 @@ namespace Library.Matrix
 		{
 			if (column < 0 || column > 3) throw new ArgumentOutOfRangeException("column", column, "column must be in range 0..3");
 			return new Vector4D(Cell[0, column], Cell[1, column], Cell[2, column], Cell[3, column]);
+		}
+
+		/// <summary>
+		/// Gets the determinant
+		/// </summary>
+		/// <returns></returns>
+		public double GetDeterminant()
+		{
+			return
+				Cell[0, 0]*GetSubDeterminant(0, 0) -
+				Cell[0, 1]*GetSubDeterminant(0, 1) +
+				Cell[0, 2]*GetSubDeterminant(0, 2) -
+				Cell[0, 3]*GetSubDeterminant(0, 3);
+		}
+
+		/// <summary>
+		/// Gets the adjoint for a given row and column
+		/// </summary>
+		/// <param name="row">The row index 0..3</param>
+		/// <param name="column">The column index 0..3</param>
+		/// <returns></returns>
+		public static double GetAdjoint(int row, int column)
+		{
+			double adjoint = 1;
+			if ((row & 1) == 1) adjoint *= -1.0D; // Flip sign for every even row
+			if ((column & 1) == 1) adjoint *= -1.0D; // Flip sign for every even column
+			return adjoint;
+		}
+
+		/// <summary>
+		/// Gets the 3x3 sub-determinant by ignoring a given row and column.
+		/// This is a memory efficient alternative to getting the submatrix and then calculate it's determinant.
+		/// </summary>
+		/// <param name="row">The row to skip</param>
+		/// <param name="column">The column to skip</param>
+		/// <returns></returns>
+		public double GetSubDeterminant(int row, int column)
+		{
+			// get target row indices
+			int row0 = 0;
+			int row1 = 1;
+			int row2 = 2;
+
+			// get target column indices
+			int col0 = 0;
+			int col1 = 1;
+			int col2 = 2;
+
+			// adjust for skipped rows
+			if (row == 0) { ++row0; ++row1; ++row2; }
+			else if (row == 1) { ++row1; ++row2; }
+			else if (row == 2) { ++row2; }
+
+			// adjust for skipped columns
+			if (column == 0) { ++col0; ++col1; ++col2; }
+			else if (column == 1) { ++col1; ++col2; }
+			else if (column == 2) { ++col2; }
+
+			// Regel von Sarrus
+			// gem. Mathematische Formelsammlung, col9. Auflage, Papula, S. 201
+			return Cell[row0, col0] * Cell[row1, col1] * Cell[row2, col2] +
+				   Cell[row0, col1] * Cell[row1, col2] * Cell[row2, col0] +
+				   Cell[row0, col2] * Cell[row1, col0] * Cell[row2, col1] -
+				   Cell[row0, col2] * Cell[row1, col1] * Cell[row2, col0] -
+				   Cell[row0, col0] * Cell[row1, col2] * Cell[row2, col1] -
+				   Cell[row0, col1] * Cell[row1, col0] * Cell[row2, col2];
+		}
+
+		/// <summary>
+		/// Returns the matrix sorted by row values
+		/// </summary>
+		/// <param name="column">The column to sort along</param>
+		/// <returns></returns>
+		public Matrix4D GetRowSorted(int column)
+		{
+			List<Vector4D> rows = new List<Vector4D>(4);
+			rows.Add(GetRowVector(0));
+			rows.Add(GetRowVector(1));
+			rows.Add(GetRowVector(2));
+			rows.Add(GetRowVector(3));
+			rows.Sort((a, b) => a.Fields[column].CompareTo(b.Fields[column]));
+			return FromRowVectors(rows);
+		}
+		
+		/// <summary>
+		/// Returns the matrix sorted by column values
+		/// </summary>
+		/// <param name="row">The row to sort along</param>
+		/// <returns></returns>
+		public Matrix4D GetColumnSorted(int row)
+		{
+			List<Vector4D> columns = new List<Vector4D>(4);
+			columns.Add(GetColumnVector(0));
+			columns.Add(GetColumnVector(1));
+			columns.Add(GetColumnVector(2));
+			columns.Add(GetColumnVector(3));
+			columns.Sort((a, b) => a.Fields[row].CompareTo(b.Fields[row]));
+			return FromColumnVectors(columns);
 		}
 
 		#endregion
