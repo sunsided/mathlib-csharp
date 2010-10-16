@@ -1,6 +1,8 @@
 ﻿// $Id$
 
 using System;
+using System.Globalization;
+using System.Text;
 using Library.Vector;
 
 namespace Library.Matrix
@@ -659,5 +661,21 @@ namespace Library.Matrix
 			return (Cell != null ? Cell.GetHashCode() : 0);
 		}
 
+		public override string ToString()
+		{
+			StringBuilder builder = new StringBuilder();
+			builder.Append("[");
+			for (int i = 0; i < 3; ++i)
+			{
+				if (i > 0) builder.Append("; ");
+				for (int j = 0; j < 3; ++j)
+				{
+					if (j > 0) builder.Append(", ");
+					builder.AppendFormat(CultureInfo.InvariantCulture, "{0}", Cell[i, j]);
+				}
+			}
+			builder.Append("]");
+			return builder.ToString();
+		}
 	}
 }

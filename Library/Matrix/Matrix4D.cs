@@ -513,42 +513,7 @@ namespace Library.Matrix
 			Cell[3, 0] *= b; Cell[3, 1] *= b; Cell[3, 2] *= b; Cell[3, 3] *= b;
 			return this;
 		}
-		/*
-		/// <summary>
-		/// Inverts the matrix
-		/// </summary>
-		/// <returns>Matrix4D</returns>
-		public Matrix4D GetInverted()
-		{
-			Matrix4D mat = new Matrix4D();
-
-			// transpose rotation matrix
-			mat.Cell[0, 0] = Cell[0, 0];
-			mat.Cell[0, 1] = Cell[1, 0];
-			mat.Cell[0, 2] = Cell[2, 0];
-			mat.Cell[1, 0] = Cell[0, 1];
-			mat.Cell[1, 1] = Cell[1, 1];
-			mat.Cell[1, 2] = Cell[2, 1];
-			mat.Cell[2, 0] = Cell[0, 2];
-			mat.Cell[2, 1] = Cell[1, 2];
-			mat.Cell[2, 2] = Cell[2, 2];
-
-			// set fourth column
-			mat.Cell[0, 3] = 0d;
-			mat.Cell[1, 3] = 0d;
-			mat.Cell[2, 3] = 0d;
-			mat.Cell[3, 3] = 1d;
-
-			// Retrieve new translation vector
-			Vector3D loc = new Vector3D(Cell[3, 0], Cell[3, 1], Cell[3, 2]);
-			mat.Cell[3, 0] = -(loc.X * Cell[0, 0] + loc.Y * Cell[0, 1] + loc.Z * Cell[0, 2]);
-			mat.Cell[3, 1] = -(loc.X * Cell[1, 0] + loc.Y * Cell[1, 1] + loc.Z * Cell[1, 2]);
-			mat.Cell[3, 2] = -(loc.X * Cell[2, 0] + loc.Y * Cell[2, 1] + loc.Z * Cell[2, 2]);
-			
-			return mat;
-		}
-		*/
-
+		
 		#endregion
 
 		#region Assign
@@ -1027,11 +992,48 @@ namespace Library.Matrix
 		/// <returns></returns>
 		public Matrix4D GetAdjoint()
 		{
+#if NO_UNROLL
 			return new Matrix4D(
 				+GetSubDeterminant(0, 0), -GetSubDeterminant(0, 1), +GetSubDeterminant(0, 2), -GetSubDeterminant(0, 3),
 				-GetSubDeterminant(1, 0), +GetSubDeterminant(1, 1), -GetSubDeterminant(1, 2), +GetSubDeterminant(1, 3),
 				+GetSubDeterminant(2, 0), -GetSubDeterminant(2, 1), +GetSubDeterminant(2, 2), -GetSubDeterminant(2, 3),
 				-GetSubDeterminant(3, 0), +GetSubDeterminant(3, 1), -GetSubDeterminant(3, 2), +GetSubDeterminant(3, 3)).GetTransposed();
+#else
+
+			double m11 = GetSubDeterminant(0, 0);
+			double m12 = GetSubDeterminant(0, 1);
+			double m13 = GetSubDeterminant(0, 2);
+			double m14 = GetSubDeterminant(0, 3);
+
+			double m21 = GetSubDeterminant(1, 0);
+			double m22 = GetSubDeterminant(1, 1);
+			double m23 = GetSubDeterminant(1, 2);
+			double m24 = GetSubDeterminant(1, 3);
+
+			double m31 = GetSubDeterminant(2, 0);
+			double m32 = GetSubDeterminant(2, 1);
+			double m33 = GetSubDeterminant(2, 2);
+			double m34 = GetSubDeterminant(2, 3);
+
+			double m41 = GetSubDeterminant(3, 0);
+			double m42 = GetSubDeterminant(3, 1);
+			double m43 = GetSubDeterminant(3, 2);
+			double m44 = GetSubDeterminant(3, 3);
+
+			//return new Matrix4D(
+			//    +m11, -m12, +m13, -m14,
+			//    -m21, +m22, -m23, +m24,
+			//    +m31, -m32, +m33, -m34,
+			//    -m41, +m42, -m43, +m44).GetTransposed();
+
+			// Directly transpose the matrix by swapping the field indices
+			return new Matrix4D(
+				+m11, -m21, +m31, -m41,
+				-m12, +m22, -m32, +m42,
+				+m13, -m23, +m33, -m43,
+				-m14, +m24, -m34, +m44);
+
+#endif
 		}
 
 		/// <summary>

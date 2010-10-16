@@ -225,6 +225,7 @@ namespace Library.Matrix
 				12, 0, 0, 1
 				);
 			Matrix4D inv = mat.GetInverted();
+
 			Matrix4D expected = new Matrix4D(
 				1, 0, -3, 0,
 				0, 1, 0, 0,
