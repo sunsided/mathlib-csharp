@@ -88,6 +88,7 @@ namespace Library
 		//{
 		//    // Get difference vector
 		//    Vector3D difference = sphere.Center - this.Center;
+
 		//    // Get value
 		//    double distance = difference.Magnitude() - sphere.Radius - this.Radius;
 		//    // Return distance

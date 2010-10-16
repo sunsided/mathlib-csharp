@@ -33,7 +33,7 @@ namespace LineCircleIntersection
 			line3D = new Line3D(linePoint1, linePoint2);
 
 			// Sphere
-			testSphere.Radius = 40f;
+			testSphere = new Sphere3D(Vector3D.Zero, 40f);
 		}
 
 		#region Points

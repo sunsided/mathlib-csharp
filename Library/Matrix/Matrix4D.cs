@@ -1,6 +1,8 @@
 ﻿// $Id$
 
 using System;
+using System.Globalization;
+using System.Text;
 using Library.Vector;
 
 namespace Library.Matrix
@@ -15,6 +17,18 @@ namespace Library.Matrix
 		/// The first dimension is the row, the second is the column.
 		/// </summary>
 		internal double[,] Cell;
+
+		/// <summary>
+		/// Accessor
+		/// </summary>
+		/// <param name="i">Zeile</param>
+		/// <param name="j">Spalte</param>
+		/// <returns></returns>
+		public double this[int i, int j]
+		{
+			get { return Cell[i, j]; }
+			set { Cell[i, j] = value; }
+		}
 
 		/// <summary>
 		/// Gets the unit matrix
@@ -850,6 +864,23 @@ namespace Library.Matrix
 		public override int GetHashCode()
 		{
 			return (Cell != null ? Cell.GetHashCode() : 0);
+		}
+
+		public override string ToString()
+		{
+			StringBuilder builder = new StringBuilder();
+			builder.Append("[");
+			for (int j=0; j<4; ++j)
+			{
+				if (j > 0) builder.Append("; ");
+				for(int i=0; i<4; ++i)
+				{
+					if (i > 0) builder.Append(", ");
+					builder.AppendFormat(CultureInfo.InvariantCulture, "{0}", Cell[i, j]);
+				}
+			}
+			builder.Append("]");
+			return builder.ToString();
 		}
 	}
 }

@@ -27,7 +27,7 @@ namespace EllipseCircleIntersection
 			ellipse = new Ellipse3D(center, radius);
 
 			// Test Sphere
-			testSphere.Radius = 40f;
+			testSphere = new Sphere3D(Vector3D.Zero, 40f);
 		}
 
 		#region Points
@@ -77,13 +77,13 @@ namespace EllipseCircleIntersection
 			e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
 
 			//// Set color based on distance
-			// float distanceBlue = (float)Math.Round(ellipse.GetDistance(testSphere), 0);
+			//float distanceBlue = (float)Math.Round(ellipse.GetDistance(testSphere), 0);
 
 			// Draw fix sphere
 			DrawEllipse(ellipse, e.Graphics, Color.CornflowerBlue);
 
 			// Post distance
-			// labelDistBlue.Text = distanceBlue.ToString();
+			//labelDistBlue.Text = distanceBlue.ToString();
 
 			// Draw Test Sphere
 			//Color color = (distanceBlue == 0f) ? Color.FromArgb(200, Color.LightGreen) : Color.Crimson;

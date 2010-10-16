@@ -286,6 +286,15 @@ namespace Library.Vector
 			W *= magInverted;
 		}
 
+		/// <summary>
+		/// Normalises the vector
+		/// </summary>
+		public Vector4D GetNormalised()
+		{
+			double magInverted = 1d / Magnitude();
+			return new Vector4D(X * magInverted, Y * magInverted, Z * magInverted, W * magInverted);
+		}
+
 		#region operator overloads
 
 		/// <summary>

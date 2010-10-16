@@ -271,10 +271,19 @@ namespace Library.Vector
 		/// </summary>
 		public void Normalise()
 		{
-			double magInverted = 1f / Magnitude();
+			double magInverted = 1d / Magnitude();
 			X *= magInverted;
 			Y *= magInverted;
 			Z *= magInverted;
+		}
+
+		/// <summary>
+		/// Normalises the vector
+		/// </summary>
+		public Vector3D GetNormalised()
+		{
+			double magInverted = 1d / Magnitude();
+			return new Vector3D(X * magInverted, Y * magInverted, Z*magInverted);
 		}
 
 		#region operator overloads
