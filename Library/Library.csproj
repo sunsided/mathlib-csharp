@@ -73,6 +73,7 @@
     <Compile Include="Matrix\Matrix3D.cs" />
     <Compile Include="Matrix\Matrix4D.cs" />
     <Compile Include="Matrix\Matrix4DTests.cs" />
+    <Compile Include="Robotics\DenavitHartenberg.cs" />
     <Compile Include="Triangle3D.cs" />
     <Compile Include="Plane3D.cs" />
     <Compile Include="Ellipse3D.cs" />
