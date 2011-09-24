@@ -31,7 +31,7 @@ namespace MathLib
         /// <param name="d">distance to origin</param>
         public Plane3D(Vector3D normal, double d)
         {
-            Normal = normal; this.D = d;
+            Normal = normal; D = d;
         }
 
         /// <summary>
