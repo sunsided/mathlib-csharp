@@ -1,8 +1,7 @@
 using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace LineLineIntersection2D
+namespace MathLib.Tests.Visual.Intersection.LineLineIntersection2D
 {
     static class Program
     {
@@ -14,7 +13,7 @@ namespace LineLineIntersection2D
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LineLineIntersection2D());
+            Application.Run(new MathLib.Tests.Visual.Intersection.LineLineIntersection2D.LineLineIntersection2D());
         }
     }
 }

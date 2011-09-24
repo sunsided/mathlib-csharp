@@ -1,4 +1,6 @@
-﻿namespace LineCircleIntersection
+﻿using MathLib.Visual;
+
+namespace MathLib.Tests.Visual.Intersection.LineCircleIntersection
 {
 	partial class LineCircleIntersection
 	{
@@ -28,7 +30,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.panelCanvas = new Library.FlickerFreePanel();
+			this.panelCanvas = new FlickerFreePanel();
 			this.labelInfoBlue = new System.Windows.Forms.Label();
 			this.labelDistBlue = new System.Windows.Forms.Label();
 			this.labelDistRed = new System.Windows.Forms.Label();
@@ -106,7 +108,7 @@
 
 		#endregion
 
-		private Library.FlickerFreePanel panelCanvas;
+		private FlickerFreePanel panelCanvas;
 		private System.Windows.Forms.Label labelInfoBlue;
 		private System.Windows.Forms.Label labelDistBlue;
 		private System.Windows.Forms.Label labelDistRed;

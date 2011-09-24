@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Library.InverseKinematics
+namespace MathLib.InverseKinematics
 {
 	public class Chain : IEnumerable
 	{

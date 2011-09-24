@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace InverseKinematics.Properties {
+namespace MathLib.Tests.Visual.Intersection.InverseKinematics.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

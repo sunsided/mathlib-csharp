@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
+using MathLib.Vector;
 
-using Library;
-using Library.Vector;
-
-namespace CircleCircleIntersection
+namespace MathLib.Tests.Visual.Intersection.CircleCircleIntersection
 {
 	public partial class CircleCircleIntersection : Form
 	{

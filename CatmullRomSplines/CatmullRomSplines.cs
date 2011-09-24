@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
+using MathLib.Vector;
 
-using Library;
-using Library.Vector;
-
-namespace CatmullRomSplines
+namespace MathLib.Tests.Visual.Interpolation.CatmullRomSplines
 {
 	public partial class CatmullRomSplines : Form
 	{
@@ -79,7 +73,7 @@ namespace CatmullRomSplines
 			for (int i = 1; i < arr.Length; ++i)
 			{
 				// Berechnen
-				arr[i] = Interpolation.CatmullRom(point0, point1, point2, point3, (float)i / arr.Length);
+				arr[i] = MathLib.Interpolation.CatmullRom(point0, point1, point2, point3, (float)i / arr.Length);
 				// Zeigen
 				if( i > 1 ) DrawLineSegment(arr[i-1], arr[i], graphics, color, width);
 			}

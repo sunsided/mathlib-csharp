@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CatmullRomSplines.Properties {
+namespace MathLib.Tests.Visual.Interpolation.CatmullRomSplines.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

@@ -1,7 +1,8 @@
 ﻿using System;
+using MathLib.Vector;
 using NUnit.Framework;
 
-namespace Library.Vector.Tests
+namespace MathLib.Tests.Vector
 {
 	/// <summary>
 	/// Unit tests for the Vector3D class

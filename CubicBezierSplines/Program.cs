@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace CubicBezierSplines
+namespace MathLib.Tests.Visual.Interpolation.CubicBezierSplines
 {
 	static class Program
 	{
@@ -13,7 +12,7 @@ namespace CubicBezierSplines
 		static void Main()
 		{
 			Application.EnableVisualStyles();
-			Application.Run(new CubicBezierSplines());
+			Application.Run(new global::MathLib.Tests.Visual.Interpolation.CubicBezierSplines.CubicBezierSplines());
 		}
 	}
 }

@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace LineCircleIntersection
+namespace MathLib.Tests.Visual.Intersection.LineCircleIntersection
 {
 	static class Program
 	{
@@ -13,7 +12,7 @@ namespace LineCircleIntersection
 		static void Main()
 		{
 			Application.EnableVisualStyles();
-			Application.Run(new LineCircleIntersection());
+			Application.Run(new MathLib.Tests.Visual.Intersection.LineCircleIntersection.LineCircleIntersection());
 		}
 	}
 }

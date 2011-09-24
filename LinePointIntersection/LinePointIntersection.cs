@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
-using Library.Lines;
-using Library.Vector;
+using MathLib.Lines;
+using MathLib.Vector;
 
-namespace LinePointIntersection
+namespace MathLib.Tests.Visual.Intersection.LinePointIntersection
 {
 	public partial class LinePointIntersection : Form
 	{

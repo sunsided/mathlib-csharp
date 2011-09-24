@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
-using Library.Vector;
+using MathLib.Matrix;
+using MathLib.Vector;
 using NUnit.Framework;
 
-namespace Library.Matrix
+namespace MathLib.Tests.Matrix
 {
 	/// <summary>
 	/// Unit tests for the Matrix4D class
@@ -244,7 +245,7 @@ namespace Library.Matrix
 		/// For optimizing purposes; Not a real test.
 		/// This is for unrolling / precalculating the adjoint code.
 		/// </summary>
-		[Test]
+		[Test, Explicit]
 		public void GetSubDeterminantCode()
 		{
 			// Code generieren

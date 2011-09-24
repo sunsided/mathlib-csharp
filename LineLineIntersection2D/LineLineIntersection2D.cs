@@ -2,10 +2,10 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
-using Library.Lines;
-using Library.Vector;
+using MathLib.Lines;
+using MathLib.Vector;
 
-namespace LineLineIntersection2D
+namespace MathLib.Tests.Visual.Intersection.LineLineIntersection2D
 {
     public partial class LineLineIntersection2D : Form
     {

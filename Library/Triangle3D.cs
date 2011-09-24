@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Library.Lines;
-using Library.Vector;
+﻿using MathLib.Lines;
+using MathLib.Vector;
 
-namespace Library
+namespace MathLib
 {
 	/// <summary>
 	/// Structure for a 3D triangle
@@ -50,7 +47,7 @@ namespace Library
             area -= 2 * (l1sq + l2sq + l3sq);
             area *= 0.0625f;
             
-            return (double)Math.Sqrt(area);
+            return (double)System.Math.Sqrt(area);
 		}
 
         /// <summary>
@@ -72,12 +69,12 @@ namespace Library
             _v3.Normalise();
 
             // Add angles
-            angle += Math.Acos(_v1.Dot(_v2));
-            angle += Math.Acos(_v2.Dot(_v3));
-            angle += Math.Acos(_v3.Dot(_v1));
+            angle += System.Math.Acos(_v1.Dot(_v2));
+            angle += System.Math.Acos(_v2.Dot(_v3));
+            angle += System.Math.Acos(_v3.Dot(_v1));
 
             // check condition
-            if (Math.Abs(angle - 2 * Math.PI) <= 0.005) return true;
+            if (System.Math.Abs(angle - 2 * System.Math.PI) <= 0.005) return true;
 
             // return condition fail
             return false;

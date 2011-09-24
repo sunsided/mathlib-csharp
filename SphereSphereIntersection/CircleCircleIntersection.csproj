@@ -8,7 +8,7 @@
     <ProjectGuid>{FF865845-645E-4A9F-A84C-42D6C6CA801F}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SphereSphereIntersection</RootNamespace>
+    <RootNamespace>MathLib.Tests.Visual.Intersection.CircleCircleIntersection</RootNamespace>
     <AssemblyName>SphereSphereIntersection</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileUpgradeFlags>
@@ -36,7 +36,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\bin\Debug\Visual\Intersection\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -45,7 +45,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\bin\Release\Visual\Intersection\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -83,6 +83,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Library.Visual\Library.Visual.csproj">
+      <Project>{E46B094A-37AF-46AB-A5E6-4FCE27A05880}</Project>
+      <Name>Library.Visual</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Library\Library.csproj">
       <Project>{343E02FA-557C-4D74-BD9E-CB76A637C2D4}</Project>
       <Name>Library</Name>

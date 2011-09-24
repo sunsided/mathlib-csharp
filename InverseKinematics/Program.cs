@@ -1,7 +1,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace InverseKinematics
+namespace MathLib.Tests.Visual.Intersection.InverseKinematics
 {
     static class Program
     {
@@ -13,7 +13,7 @@ namespace InverseKinematics
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new InverseKinematics());
+            Application.Run(new global::MathLib.Tests.Visual.Intersection.InverseKinematics.InverseKinematics());
         }
     }
 }

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SphereSphereIntersection.Properties {
+namespace MathLib.Tests.Visual.Intersection.CircleCircleIntersection.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace SphereSphereIntersection.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SphereSphereIntersection.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MathLib.Tests.Visual.Intersection.CircleCircleIntersection.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

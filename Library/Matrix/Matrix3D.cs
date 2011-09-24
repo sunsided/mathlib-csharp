@@ -1,11 +1,9 @@
-﻿// $Id$
-
-using System;
+﻿using System;
 using System.Globalization;
 using System.Text;
-using Library.Vector;
+using MathLib.Vector;
 
-namespace Library.Matrix
+namespace MathLib.Matrix
 {
 	/// <summary>
 	/// 3-dimensional row-major matrix

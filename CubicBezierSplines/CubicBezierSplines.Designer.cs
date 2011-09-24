@@ -1,4 +1,6 @@
-﻿namespace CubicBezierSplines
+﻿using MathLib.Visual;
+
+namespace MathLib.Tests.Visual.Interpolation.CubicBezierSplines
 {
 	partial class CubicBezierSplines
 	{
@@ -29,7 +31,7 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			this.panelCanvas = new Library.FlickerFreePanel();
+			this.panelCanvas = new FlickerFreePanel();
 			this.timerSinus = new System.Windows.Forms.Timer(this.components);
 			this.SuspendLayout();
 			// 
@@ -64,7 +66,7 @@
 
 		#endregion
 
-		private Library.FlickerFreePanel panelCanvas;
+		private FlickerFreePanel panelCanvas;
 		private System.Windows.Forms.Timer timerSinus;
 	}
 }

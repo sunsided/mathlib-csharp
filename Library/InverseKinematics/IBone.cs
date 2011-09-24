@@ -1,6 +1,6 @@
-using Library.Vector;
+using MathLib.Vector;
 
-namespace Library.InverseKinematics
+namespace MathLib.InverseKinematics
 {
 	public interface IBone : IJoint
 	{

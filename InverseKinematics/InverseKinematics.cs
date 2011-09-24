@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using Library.InverseKinematics;
-using Library.Lines;
-using Library.Vector;
+using MathLib.InverseKinematics;
+using MathLib.Lines;
+using MathLib.Vector;
 
-namespace InverseKinematics
+namespace MathLib.Tests.Visual.Intersection.InverseKinematics
 {
 	public partial class InverseKinematics : Form
 	{

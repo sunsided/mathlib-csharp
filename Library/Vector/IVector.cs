@@ -1,7 +1,10 @@
 using System;
 
-namespace Library.Vector
+namespace MathLib.Vector
 {
+	/// <summary>
+	/// Interface for generic vectors
+	/// </summary>
 	public interface IVector : ICloneable
 	{
 		/// <summary>

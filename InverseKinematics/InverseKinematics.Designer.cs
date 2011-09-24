@@ -1,4 +1,4 @@
-﻿namespace InverseKinematics
+﻿namespace MathLib.Tests.Visual.Intersection.InverseKinematics
 {
 	partial class InverseKinematics
 	{
@@ -29,7 +29,7 @@
 		private void InitializeComponent()
 		{
             this.components = new System.ComponentModel.Container();
-            this.panelCanvas = new Library.FlickerFreePanel();
+			this.panelCanvas = new MathLib.Visual.FlickerFreePanel();
             this.timerSinus = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
@@ -64,7 +64,7 @@
 
 		#endregion
 
-		private Library.FlickerFreePanel panelCanvas;
+		private MathLib.Visual.FlickerFreePanel panelCanvas;
 		private System.Windows.Forms.Timer timerSinus;
 	}
 }

@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace CatmullRomSplines
+namespace MathLib.Tests.Visual.Interpolation.CatmullRomSplines
 {
 	static class Program
 	{
@@ -13,7 +12,7 @@ namespace CatmullRomSplines
 		static void Main()
 		{
 			Application.EnableVisualStyles();
-			Application.Run(new CatmullRomSplines());
+			Application.Run(new global::MathLib.Tests.Visual.Interpolation.CatmullRomSplines.CatmullRomSplines());
 		}
 	}
 }

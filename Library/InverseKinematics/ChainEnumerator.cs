@@ -1,9 +1,7 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 
-namespace Library.InverseKinematics
+namespace MathLib.InverseKinematics
 {
 	/// <summary>
 	/// Enumerates the bones in a kinematics chain

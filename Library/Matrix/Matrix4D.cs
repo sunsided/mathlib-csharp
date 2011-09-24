@@ -1,13 +1,10 @@
-﻿// $Id$
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
-using System.Windows.Forms;
-using Library.Vector;
+using MathLib.Vector;
 
-namespace Library.Matrix
+namespace MathLib.Matrix
 {
 	/// <summary>
 	/// 4-dimensional row-major matrix

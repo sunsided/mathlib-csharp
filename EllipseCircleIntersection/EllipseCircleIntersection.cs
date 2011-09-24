@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
+﻿using System.Drawing;
 using System.Windows.Forms;
+using MathLib.Vector;
 
-using Library;
-using Library.Vector;
-
-namespace EllipseCircleIntersection
+namespace MathLib.Tests.Visual.Intersection.EllipseCircleIntersection
 {
 	public partial class EllipseCircleIntersection : Form
 	{

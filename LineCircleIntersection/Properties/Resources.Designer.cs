@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LineCircleIntersection.Properties {
+namespace MathLib.Tests.Visual.Intersection.LineCircleIntersection.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace LineCircleIntersection.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LineCircleIntersection.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MathLib.Tests.Visual.Intersection.LineCircleIntersection.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

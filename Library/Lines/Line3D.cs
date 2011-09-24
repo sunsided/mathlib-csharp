@@ -1,9 +1,7 @@
-﻿// $Id$
+﻿using MathLib.Matrix;
+using MathLib.Vector;
 
-using Library.Matrix;
-using Library.Vector;
-
-namespace Library.Lines
+namespace MathLib.Lines
 {
 	/// <summary>
 	/// Structure for a 3D line segment

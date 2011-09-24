@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LineLineIntersection2D.Properties {
+namespace MathLib.Tests.Visual.Intersection.LineLineIntersection2D.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

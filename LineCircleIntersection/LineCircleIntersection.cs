@@ -1,16 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
+using MathLib.Lines;
+using MathLib.Vector;
 
-using Library;
-using Library.Lines;
-using Library.Vector;
-
-namespace LineCircleIntersection
+namespace MathLib.Tests.Visual.Intersection.LineCircleIntersection
 {
 	public partial class LineCircleIntersection : Form
 	{

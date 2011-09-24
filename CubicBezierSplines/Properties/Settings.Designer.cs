@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CubicBezierSplines.Properties {
+namespace MathLib.Tests.Visual.Interpolation.CubicBezierSplines.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

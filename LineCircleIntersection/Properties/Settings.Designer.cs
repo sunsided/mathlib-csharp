@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LineCircleIntersection.Properties {
+namespace MathLib.Tests.Visual.Intersection.LineCircleIntersection.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

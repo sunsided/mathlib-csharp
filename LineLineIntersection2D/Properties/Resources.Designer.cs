@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LineLineIntersection2D.Properties {
+namespace MathLib.Tests.Visual.Intersection.LineLineIntersection2D.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace LineLineIntersection2D.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LineLineIntersection2D.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MathLib.Tests.Visual.Intersection.LineLineIntersection2D.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

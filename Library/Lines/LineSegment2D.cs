@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Library.Vector;
+﻿using MathLib.Vector;
 
-namespace Library.Lines
+namespace MathLib.Lines
 {
 	/// <summary>
 	/// Structure for a 2D line segment

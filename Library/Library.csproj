@@ -8,7 +8,7 @@
     <ProjectGuid>{343E02FA-557C-4D74-BD9E-CB76A637C2D4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Library</RootNamespace>
+    <RootNamespace>MathLib</RootNamespace>
     <AssemblyName>Library</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileUpgradeFlags>
@@ -36,7 +36,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -45,7 +45,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -72,24 +72,17 @@
     <Compile Include="InverseKinematics\Joint.cs" />
     <Compile Include="Matrix\Matrix3D.cs" />
     <Compile Include="Matrix\Matrix4D.cs" />
-    <Compile Include="Matrix\Matrix4DTests.cs" />
     <Compile Include="Robotics\DenavitHartenberg.cs" />
     <Compile Include="Triangle3D.cs" />
     <Compile Include="Plane3D.cs" />
     <Compile Include="Ellipse3D.cs" />
     <Compile Include="Interpolation.cs" />
-    <Compile Include="FlickerFreePanel.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sphere3D.cs" />
     <Compile Include="Vector\IVector.cs" />
     <Compile Include="Vector\Vector2D.cs" />
-    <Compile Include="Vector\Vector2DTests.cs" />
     <Compile Include="Vector\Vector3D.cs" />
-    <Compile Include="Vector\Vector3DTests.cs" />
     <Compile Include="Vector\Vector4D.cs" />
-    <Compile Include="Vector\Vector4DTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

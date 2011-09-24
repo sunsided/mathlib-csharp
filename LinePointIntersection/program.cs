@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace LinePointIntersection
+namespace MathLib.Tests.Visual.Intersection.LinePointIntersection
 {
 	static class Program
 	{
@@ -14,7 +13,7 @@ namespace LinePointIntersection
 		{
 			Application.SetCompatibleTextRenderingDefault(true);
 			Application.EnableVisualStyles();
-			Application.Run(new LinePointIntersection());
+			Application.Run(new global::MathLib.Tests.Visual.Intersection.LinePointIntersection.LinePointIntersection());
 		}
 	}
 }

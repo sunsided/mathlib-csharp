@@ -1,5 +1,5 @@
-﻿using Library.Matrix;
-using Library.Vector;
+﻿using MathLib.Matrix;
+using MathLib.Vector;
 
 namespace ConsoleTest
 {

@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Forms;
 
-namespace EllipseCircleIntersection
+namespace MathLib.Tests.Visual.Intersection.EllipseCircleIntersection
 {
 	static class Program
 	{
@@ -11,7 +9,7 @@ namespace EllipseCircleIntersection
 		static void Main()
 		{
 			Application.EnableVisualStyles();
-			Application.Run(new EllipseCircleIntersection());
+			Application.Run(new MathLib.Tests.Visual.Intersection.EllipseCircleIntersection.EllipseCircleIntersection());
 		}
 	}
 }
