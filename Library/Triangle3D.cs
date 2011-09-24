@@ -1,4 +1,5 @@
-﻿using MathLib.Lines;
+﻿using System;
+using MathLib.Lines;
 using MathLib.Vector;
 
 namespace MathLib
@@ -8,7 +9,20 @@ namespace MathLib
 	/// </summary>
 	public struct Triangle3D
 	{
-        public Vector3D v0, v1, v2;
+		/// <summary>
+		/// First vertex
+		/// </summary>
+		public Vector3D V0;
+
+		/// <summary>
+		/// Second vertex
+		/// </summary>
+		public Vector3D V1;
+
+		/// <summary>
+		/// Third vertex
+		/// </summary>
+		public Vector3D V2;
 
 		/// <summary>
 		/// Creates a triangle with the given components
@@ -18,9 +32,9 @@ namespace MathLib
         /// <param name="p2">Third point</param>
         public Triangle3D(Vector3D p0, Vector3D p1, Vector3D p2)
 		{
-            v0 = p0; 
-            v1 = p1;
-            v2 = p2;
+            V0 = p0; 
+            V1 = p1;
+            V2 = p2;
 		}
 
 		/// <summary>
@@ -30,24 +44,24 @@ namespace MathLib
 		public double GetArea()
 		{
             // Calculate line segments
-            LineSegment3D line1 = new LineSegment3D(v0, v1);
-            LineSegment3D line2 = new LineSegment3D(v1, v2);
-            LineSegment3D line3 = new LineSegment3D(v2, v0);
+            LineSegment3D line1 = new LineSegment3D(V0, V1);
+            LineSegment3D line2 = new LineSegment3D(V1, V2);
+            LineSegment3D line3 = new LineSegment3D(V2, V0);
 
             // Calculate lengths
-            double l1sq = line1.Length(); l1sq *= l1sq;
-            double l2sq = line2.Length(); l2sq *= l2sq;
-            double l3sq = line3.Length(); l3sq *= l3sq;
+            double l1Sq = line1.Length(); l1Sq *= l1Sq;
+            double l2Sq = line2.Length(); l2Sq *= l2Sq;
+            double l3Sq = line3.Length(); l3Sq *= l3Sq;
 
             // 16A² = (a²+b²+c²) - 2(a^4+b^4+c^4)
-            double area = l1sq + l2sq + l3sq;
-            l1sq *= l1sq;
-            l2sq *= l2sq;
-            l3sq *= l3sq;
-            area -= 2 * (l1sq + l2sq + l3sq);
-            area *= 0.0625f;
+            double area = l1Sq + l2Sq + l3Sq;
+            l1Sq *= l1Sq;
+            l2Sq *= l2Sq;
+            l3Sq *= l3Sq;
+            area -= 2 * (l1Sq + l2Sq + l3Sq);
+            area *= 0.0625; // division by 16
             
-            return (double)System.Math.Sqrt(area);
+            return Math.Sqrt(area);
 		}
 
         /// <summary>
@@ -61,23 +75,20 @@ namespace MathLib
             double angle = 0.0;
 
             // Calculate
-            Vector3D _v1 = v0 - point;
-            Vector3D _v2 = v1 - point;
-            Vector3D _v3 = v2 - point;
-            _v1.Normalise();
-            _v2.Normalise();
-            _v3.Normalise();
+            Vector3D v1 = V0 - point;
+            Vector3D v2 = V1 - point;
+            Vector3D v3 = V2 - point;
+            v1.Normalise();
+            v2.Normalise();
+            v3.Normalise();
 
             // Add angles
-            angle += System.Math.Acos(_v1.Dot(_v2));
-            angle += System.Math.Acos(_v2.Dot(_v3));
-            angle += System.Math.Acos(_v3.Dot(_v1));
+            angle += Math.Acos(v1.Dot(v2));
+            angle += Math.Acos(v2.Dot(v3));
+            angle += Math.Acos(v3.Dot(v1));
 
             // check condition
-            if (System.Math.Abs(angle - 2 * System.Math.PI) <= 0.005) return true;
-
-            // return condition fail
-            return false;
+            return Math.Abs(angle - 2 * Math.PI) <= 0.005;
         }
 
         /// <summary>
@@ -90,24 +101,24 @@ namespace MathLib
         /// <returns></returns>
         public double Interpolate(Vector3D point, double value0, double value1, double value2)
         {
-            LineSegment3D bottom = new LineSegment3D(v1, v2);
+            LineSegment3D bottom = new LineSegment3D(V1, V2);
 
             // Shortcut points
-            Vector3D top = v0;
-            Vector3D left = v1;
-            Vector3D right = v2;
+            Vector3D top = V0;
+            Vector3D left = V1;
+            Vector3D right = V2;
 
             // Create line from top point through p
             Line3D line = new Line3D(top, point);
 
             // Create 'up' vector
-            Vector3D _v0 = right - left; _v0.Normalise();
-            Vector3D _v1 = top - left; _v1.Normalise();
-            Vector3D _up = _v0.Cross(v1);
-            _up.Normalise();
+            Vector3D v0 = right - left; v0.Normalise();
+            Vector3D v1 = top - left; v1.Normalise();
+            Vector3D up = v0.Cross(V1);
+            up.Normalise();
 
             // Create normal for "bottom" plane
-            Vector3D normal = _up.Cross(_v0);
+            Vector3D normal = up.Cross(v0);
             normal.Normalise();
 
             // Create plane for bottom line
@@ -142,24 +153,24 @@ namespace MathLib
         /// <returns></returns>
         public Vector3D Interpolate(Vector3D point, Vector3D value0, Vector3D value1, Vector3D value2)
         {
-            LineSegment3D bottom = new LineSegment3D(v1, v2);
+            LineSegment3D bottom = new LineSegment3D(V1, V2);
 
             // Shortcut points
-            Vector3D top = v0;
-            Vector3D left = v1;
-            Vector3D right = v2;
+            Vector3D top = V0;
+            Vector3D left = V1;
+            Vector3D right = V2;
 
             // Create line from top point through p
             Line3D line = new Line3D(top, point);
 
             // Create 'up' vector
-            Vector3D _v0 = right - left; _v0.Normalise();
-            Vector3D _v1 = top - left; _v1.Normalise();
-            Vector3D _up = _v0.Cross(v1);
-            _up.Normalise();
+            Vector3D v0 = right - left; v0.Normalise();
+            Vector3D v1 = top - left; v1.Normalise();
+            Vector3D up = v0.Cross(V1);
+            up.Normalise();
 
             // Create normal for "bottom" plane
-            Vector3D normal = _up.Cross(_v0);
+            Vector3D normal = up.Cross(v0);
             normal.Normalise();
 
             // Create plane for bottom line
@@ -194,24 +205,24 @@ namespace MathLib
         /// <returns></returns>
         public Vector4D Interpolate(Vector3D point, Vector4D value0, Vector4D value1, Vector4D value2)
         {
-            LineSegment3D bottom = new LineSegment3D(v1, v2);
+            LineSegment3D bottom = new LineSegment3D(V1, V2);
 
             // Shortcut points
-            Vector3D top = v0;
-            Vector3D left = v1;
-            Vector3D right = v2;
+            Vector3D top = V0;
+            Vector3D left = V1;
+            Vector3D right = V2;
 
             // Create line from top point through p
             Line3D line = new Line3D(top, point);
 
             // Create 'up' vector
-            Vector3D _v0 = right - left; _v0.Normalise();
-            Vector3D _v1 = top - left; _v1.Normalise();
-            Vector3D _up = _v0.Cross(v1);
-            _up.Normalise();
+            Vector3D v0 = right - left; v0.Normalise();
+            Vector3D v1 = top - left; v1.Normalise();
+            Vector3D up = v0.Cross(V1);
+            up.Normalise();
 
             // Create normal for "bottom" plane
-            Vector3D normal = _up.Cross(_v0);
+            Vector3D normal = up.Cross(v0);
             normal.Normalise();
 
             // Create plane for bottom line
