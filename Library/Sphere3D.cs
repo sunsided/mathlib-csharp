@@ -3,9 +3,19 @@ using MathLib.Vector;
 
 namespace MathLib
 {
-	public class Sphere3D
+	/// <summary>
+	/// A sphere
+	/// </summary>
+	public struct Sphere3D
 	{
+		/// <summary>
+		/// The center point
+		/// </summary>
 		public Vector3D Center;
+
+		/// <summary>
+		/// The radius
+		/// </summary>
 		public double Radius;
 
 		/// <summary>
@@ -55,9 +65,9 @@ namespace MathLib
 		public double GetDistance(Sphere3D sphere)
 		{
 			// Get difference vector
-			Vector3D difference = sphere.Center - this.Center;
+			Vector3D difference = sphere.Center - Center;
 			// Get value
-			double distance = difference.Magnitude() - sphere.Radius - this.Radius;
+			double distance = difference.Magnitude() - sphere.Radius - Radius;
 			// Return distance
 			if (distance < 0f) return 0f;
 			return distance;
