@@ -2,17 +2,21 @@
 
 namespace MathLib
 {
+	/// <summary>
+	/// Interpolation methods
+	/// </summary>
 	public static class Interpolation
     {
         #region 3D Interpolation
 
         /// <summary>
-		/// Performs a Catmull-Rom Spline interpolation through four points
+		/// Performs a three-dimensional Catmull-Rom spline interpolation through four points
+		/// <para>All points will be traversed.</para>
 		/// </summary>
-		/// <param name="p0">p0</param>
-		/// <param name="p1">p1</param>
-		/// <param name="p2">p2</param>
-		/// <param name="p3">p3</param>
+		/// <param name="p0">Start point</param>
+		/// <param name="p1">First vector to move through</param>
+		/// <param name="p2">Second vector to move through</param>
+		/// <param name="p3">End point</param>
 		/// <param name="t">positional weighting factor</param>
 		/// <returns>Interpolated vector</returns>
 		public static Vector3D CatmullRom(Vector3D p0, Vector3D p1, Vector3D p2, Vector3D p3, double t)
@@ -26,12 +30,14 @@ namespace MathLib
 		}
 
 		/// <summary>
-		/// Performs a Cubic Beziér Spline interpolation through four points
+		/// Performs a three-dimensional cubic Beziér spline interpolation through four points.
+		/// <para>Only the first and last vector will be directly reached. The other two vectors <paramref name="p1"/> and <paramref name="p2"/> serve as
+		/// weighting vectors for the interpolation.</para>
 		/// </summary>
-		/// <param name="p0">p0</param>
-		/// <param name="p1">p1</param>
-		/// <param name="p2">p2</param>
-		/// <param name="p3">p3</param>
+		/// <param name="p0">Start point</param>
+		/// <param name="p1">First weighting vector</param>
+		/// <param name="p2">Second weighting vector</param>
+		/// <param name="p3">End point</param>
 		/// <param name="t">positional weighting factor</param>
 		/// <returns>Interpolated vector</returns>
 		public static Vector3D CubicBezier(Vector3D p0, Vector3D p1, Vector3D p2, Vector3D p3, double t)
@@ -46,12 +52,13 @@ namespace MathLib
         #region 2D Interpolation
 
         /// <summary>
-        /// Performs a Catmull-Rom Spline interpolation through four points
+        /// Performs a two-dimensional Catmull-Rom spline interpolation through four points
+		/// <para>All points will be traversed.</para>
         /// </summary>
-        /// <param name="p0">p0</param>
-        /// <param name="p1">p1</param>
-        /// <param name="p2">p2</param>
-        /// <param name="p3">p3</param>
+		/// <param name="p0">Start point</param>
+		/// <param name="p1">First vector to move through</param>
+		/// <param name="p2">Second vector to move through</param>
+		/// <param name="p3">End point</param>
         /// <param name="t">positional weighting factor</param>
         /// <returns>Interpolated vector</returns>
         public static Vector2D CatmullRom(Vector2D p0, Vector2D p1, Vector2D p2, Vector2D p3, double t)
@@ -65,12 +72,14 @@ namespace MathLib
         }
 
         /// <summary>
-        /// Performs a Cubic Beziér Spline interpolation through four points
+        /// Performs a two-dimensional cubic Beziér spline interpolation through four points
+		/// <para>Only the first and last vector will be directly reached. The other two vectors <paramref name="p1"/> and <paramref name="p2"/> serve as
+		/// weighting vectors for the interpolation.</para>
         /// </summary>
-        /// <param name="p0">p0</param>
-        /// <param name="p1">p1</param>
-        /// <param name="p2">p2</param>
-        /// <param name="p3">p3</param>
+		/// <param name="p0">Start point</param>
+		/// <param name="p1">First weighting vector</param>
+		/// <param name="p2">Second weighting vector</param>
+		/// <param name="p3">End point</param>
         /// <param name="t">positional weighting factor</param>
         /// <returns>Interpolated vector</returns>
         public static Vector2D CubicBezier(Vector2D p0, Vector2D p1, Vector2D p2, Vector2D p3, double t)
