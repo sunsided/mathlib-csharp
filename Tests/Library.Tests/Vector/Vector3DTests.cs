@@ -324,15 +324,18 @@ namespace MathLib.Tests.Vector
 		/// Tests the dot operator
 		/// </summary>
 		[Test(Description = "Tests the dot operator")]
-		public void DotOperatorTest()
+		[TestCase(10, 22, 27, 13, 15, 19, Result = 973)]
+		[TestCase(1, 2, 0, 3, 4, 0, Result = 11)]
+		public double DotOperatorTest(double x1, double y1, double z1, double x2, double y2, double z2)
 		{
-			Vector3D vec1 = new Vector3D(10, 22, 27);
-			Vector3D vec2 = new Vector3D(13, 15, 91);
-			double result1 = vec1.Dot(vec2);
-			double result2 = vec1*vec2;
+			Vector3D vec1 = new Vector3D(x1, y1, z1);
+			Vector3D vec2 = new Vector3D(x2, y2, z2);
 
-			Assert.IsTrue(result1 == result2);
-			Assert.AreEqual(2917, result1);
+			double value1 = vec1.Dot(vec2);
+			double value2 = vec1 * vec2;
+
+			Assert.AreEqual(value1, value2, 0.000001d);
+			return value1;
 		}
 
 		/// <summary>

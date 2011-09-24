@@ -325,21 +325,23 @@ namespace MathLib.Tests.Vector
 		{
 			Vector4D.Parse("foo");
 		}
-
+		
 		/// <summary>
 		/// Tests the dot operator
 		/// </summary>
 		[Test(Description = "Tests the dot operator")]
-		public void DotOperatorTest()
+		[TestCase(10, 22, 27, 13, 13, 15, 91, 4, Result = 2969)]
+		[TestCase(1, 2, 0, 0, 3, 4, 0, 0, Result = 11)]
+		public double DotOperatorTest(double x1, double y1, double z1, double w1, double x2, double y2, double z2, double w2)
 		{
-			Vector4D vec1 = new Vector4D(10, 22, 27, 13);
-			Vector4D vec2 = new Vector4D(13, 15, 91, 4);
-			double result1 = vec1.Dot(vec2);
-			double result2 = vec1*vec2;
+			Vector4D vec1 = new Vector4D(x1, y1, z1, w1);
+			Vector4D vec2 = new Vector4D(x2, y2, z2, w2);
 
-			Assert.AreEqual(2969.0D, result1);
-			Assert.AreEqual(2969.0D, result2);
-			Assert.IsTrue(result1 == result2);
+			double value1 = vec1.Dot(vec2);
+			double value2 = vec1 * vec2;
+
+			Assert.AreEqual(value1, value2, 0.000001d);
+			return value1;
 		}
 	}
 }

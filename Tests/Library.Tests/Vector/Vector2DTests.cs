@@ -204,7 +204,7 @@ namespace MathLib.Tests.Vector
 				Assert.AreEqual(result, result2);
 			}
 		}
-
+		
 		/// <summary>
 		/// Tests the parsing functions
 		/// </summary>
@@ -310,15 +310,18 @@ namespace MathLib.Tests.Vector
 		/// Tests the dot operator
 		/// </summary>
 		[Test(Description = "Tests the dot operator")]
-		public void DotOperatorTest()
+		[TestCase(10, 22, 13, 15, Result = 460)]
+		[TestCase(1, 2, 3, 4, Result = 11)]
+		public double DotOperatorTest(double x1, double y1, double x2, double y2)
 		{
-			Vector2D vec1 = new Vector2D(10, 22);
-			Vector2D vec2 = new Vector2D(13, 15);
-			double result1 = vec1.Dot(vec2);
-			double result2 = vec1*vec2;
+			Vector2D vec1 = new Vector2D(x1, y1);
+			Vector2D vec2 = new Vector2D(x2, y2);
 
-			Assert.IsTrue(result1 == result2);
-			Assert.AreEqual(460.0D, result1);
+			double value1 = vec1.Dot(vec2);
+			double value2 = vec1 * vec2;
+
+			Assert.AreEqual(value1, value2, 0.000001d);
+			return value1;
 		}
 	}
 }
