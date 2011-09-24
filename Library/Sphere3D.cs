@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Library.Lines;
-using Library.Vector;
+﻿using MathLib.Lines;
+using MathLib.Vector;
 
-namespace Library
+namespace MathLib
 {
 	public class Sphere3D
 	{

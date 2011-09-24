@@ -1,9 +1,7 @@
-﻿// $Id$
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 
-namespace Library.Convolution
+namespace MathLib.Convolution
 {
 	/// <summary>
 	/// Alter Falter

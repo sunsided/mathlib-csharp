@@ -1,10 +1,8 @@
-﻿// $Id$
-
-using System;
+﻿using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
 
-namespace Library.Vector
+namespace MathLib.Vector
 {
 	/// <summary>
 	/// Structure for a 3D vector
@@ -430,7 +428,7 @@ namespace Library.Vector
 		}
 
 		/// <summary>
-		/// Performs an implicit conversion from <see cref="Library.Vector.Vector2D"/> to <see cref="System.Double"/>[].
+		/// Performs an implicit conversion from <see cref="Vector2D"/> to <see cref="System.Double"/>[].
 		/// </summary>
 		/// <param name="a">A.</param>
 		/// <returns>The result of the conversion.</returns>
@@ -440,7 +438,7 @@ namespace Library.Vector
 		}
 
 		/// <summary>
-		/// Performs an explicit conversion from <see cref="System.Double"/>[] to <see cref="Library.Vector.Vector2D"/>.
+		/// Performs an explicit conversion from <see cref="System.Double"/>[] to <see cref="Vector2D"/>.
 		/// </summary>
 		/// <param name="array">The array.</param>
 		/// <returns>The result of the conversion.</returns>

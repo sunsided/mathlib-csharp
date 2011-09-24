@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Library.Vector;
+﻿using MathLib.Vector;
 
-namespace Library
+namespace MathLib
 {
 	public static class Interpolation
     {

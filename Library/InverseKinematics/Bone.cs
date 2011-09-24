@@ -1,8 +1,8 @@
 using System;
-using Library.Lines;
-using Library.Vector;
+using MathLib.Lines;
+using MathLib.Vector;
 
-namespace Library.InverseKinematics
+namespace MathLib.InverseKinematics
 {
     public class Bone : IBone
     {
@@ -34,7 +34,7 @@ namespace Library.InverseKinematics
 		/// <param name="length">The bone's length</param>
 		public Bone(Vector3D origin, Vector3D direction, double length)
 		{
-			double angle = 0.5f * (double) Math.PI;
+			const double angle = 0.5f * (double) Math.PI;
 			joint = new Joint(-angle, angle, -angle, angle, -angle, angle);
 			this.length = length;
 			this.origin = origin;

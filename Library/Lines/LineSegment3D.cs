@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Library.Matrix;
-using Library.Vector;
+﻿using MathLib.Matrix;
+using MathLib.Vector;
 
-namespace Library.Lines
+namespace MathLib.Lines
 {
 	/// <summary>
 	/// Structure for a 3D line segment

@@ -1,9 +1,7 @@
-﻿// $Id$
+﻿using System;
+using MathLib.Vector;
 
-using System;
-using Library.Vector;
-
-namespace Library.Lines
+namespace MathLib.Lines
 {
 	/// <summary>
 	/// Structure for a 2D line segment

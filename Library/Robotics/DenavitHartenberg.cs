@@ -1,9 +1,7 @@
-﻿// $Id$
+﻿using System;
+using MathLib.Matrix;
 
-using System;
-using Library.Matrix;
-
-namespace Library.Robotics
+namespace MathLib.Robotics
 {
 	/// <summary>
 	/// Denavit-Hartenberg kinematics
